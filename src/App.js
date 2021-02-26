@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from './components/Dashboard';
+import Signin from './components/auth/Signin';
+import Signup from './components/auth/Signup';
+import { AuthContext } from './context/SignInContext';
+import { useContext } from 'react';
 
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 function App() {
+  const context = useContext(AuthContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            {!context.loggedIn ? <Redirect to="/signin" /> : <Dashboard />}
+          </Route>
+          <Route exact path="/signin">
+            {console.log('inside login route')}
+            {console.log('context=>>>>>> ', context.loggedIn)}
+            {context.loggedIn ? <Redirect to="/" /> : <Signin />}
+          </Route>
+          <Route exact path="/signup">
+            {context.loggedIn ? <Redirect to="/" /> : <Signup />}
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
