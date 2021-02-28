@@ -3,12 +3,15 @@ import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
 import { AuthContext } from './context/SignInContext';
 import { useContext } from 'react';
-
+import { Provider } from 'react-redux';
+import store from "./rtk/index";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 function App() {
   const context = useContext(AuthContext);
   return (
+   
+   <Provider store={store}>
     <BrowserRouter>
       <div className="App">
         <Switch>
@@ -26,6 +29,8 @@ function App() {
         </Switch>
       </div>
     </BrowserRouter>
+      
+    </Provider>
   );
 }
 

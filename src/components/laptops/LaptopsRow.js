@@ -5,38 +5,29 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import RemoveCircleSharpIcon from '@material-ui/icons/RemoveCircleSharp';
 import { green } from '@material-ui/core/colors';
-import axios from 'axios';
-import cookie from 'react-cookies';
-const apiUrl = 'https://husam278-api-server.herokuapp.com/api/todo';
-const apiU = 'https://pull-stack-laptoptory.herokuapp.com/';
+import { updateLaptops } from "../../rtk/laptop.store";
+import {connect, useDispatch} from 'react-redux';
 
-export default function TableRows(props) {
+export function TableRows(props) {
   const [state, setState] = useState(false);
   const [record, setRecord] = useState(props.items);
 
+  const dispatch = useDispatch();
   const changeType = () => {
     setState(true);
     setRecord(props.items);
     console.log('state>>>>>>', state);
   };
 
-  const updateChange = async () => {
+  const updateChange = () => {
     setState(false);
-    console.log('record>>>>', record);
-    let data = await axios.put(`${apiUrl}/record._id`, {
-      data: JSON.stringify(record),
-      headers: {
-        'Authorization': `Bearer ${cookie.load('auth')}`,
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Cookie' : `token=${cookie.load('auth')}`
-      },
-    });
-    console.log('data>>>>>', data);
+    dispatch(updateLaptops(record))
   };
 
+  
   const onChangeItem = (e) => {
     setRecord({ ...record, [e.target.name]: e.target.value });
+    console.log("record>>>>>>", record)
   };
 
   console.log('props>>>>', props);
@@ -44,7 +35,6 @@ export default function TableRows(props) {
   return (
     <>
       <Show condition={state}>
-        {/* <form> */}
         <TableRow>
           <TableCell>
             <Button
@@ -58,33 +48,64 @@ export default function TableRows(props) {
           <TableCell>
             <TextField
               onChange={onChangeItem}
-              name="difficulty"
-              defaultValue={props.items.difficulty}
+              name="serial_no"
+              defaultValue={props.items.serial_no}
             />
           </TableCell>
           <TableCell>
             <TextField
-              name="text"
-              defaultValue={props.items.text}
+              name="brand"
+              defaultValue={props.items.brand}
               onChange={onChangeItem}
             />
           </TableCell>
           <TableCell>
             <TextField
-              name="_id"
-              defaultValue={props.items._id}
+              name="cpu"
+              defaultValue={props.items.cpu}
               onChange={onChangeItem}
             />
           </TableCell>
           <TableCell>
             <TextField
-              name="assignee"
-              defaultValue={props.items.assignee}
+              name="ram"
+              defaultValue={props.items.ram}
               onChange={onChangeItem}
             />
           </TableCell>
+          <TableCell>
+            <TextField
+              name="storage"
+              defaultValue={props.items.storage}
+              onChange={onChangeItem}
+            />
+          </TableCell>
+          <TableCell>
+            <TextField
+              name="storage_type"
+              defaultValue={props.items.storage_type}
+              onChange={onChangeItem}
+            />
+          </TableCell>
+          
+          <TableCell>{!props.items.power_cable}</TableCell>
+          
+          <TableCell>
+            <TextField
+              name="display_resolution"
+              defaultValue={props.items.display_resolution}
+              onChange={onChangeItem}
+            />
+          </TableCell>
+          <TableCell>
+            <TextField
+              name="model"
+              defaultValue={props.items.model}
+              onChange={onChangeItem}
+            />
+          </TableCell>
+          <TableCell>{props.items.availability}</TableCell>
         </TableRow>
-        {/* </form> */}
       </Show>
 
       <Show condition={!state}>
@@ -97,19 +118,30 @@ export default function TableRows(props) {
               <RemoveCircleSharpIcon color="error" />
             </Button>
           </TableCell>
-          <TableCell>{props.items.id}</TableCell>
           <TableCell>{props.items.serial_no}</TableCell>
-          <TableCell>{props.items.availability}</TableCell>
-          <TableCell>{props.items.cpu}</TableCell>
           <TableCell>{props.items.brand}</TableCell>
-          <TableCell>{props.items.model}</TableCell>
-          <TableCell>{props.items.display_resolution}</TableCell>
+          <TableCell>{props.items.cpu}</TableCell>
+          <TableCell>{props.items.ram}</TableCell>
           <TableCell>{props.items.storage}</TableCell>
           <TableCell>{props.items.storage_type}</TableCell>
-          <TableCell>{props.items.ram}</TableCell>
-
+          <TableCell>{!props.items.power_cable ? 'not included' : 'included'}</TableCell>
+          <TableCell>{props.items.display_resolution}</TableCell>
+          <TableCell>{props.items.model}</TableCell>
+          <TableCell>{!props.items.availability ? 'false' : 'true'}</TableCell>
+          
         </TableRow>
       </Show>
     </>
   );
 }
+
+
+const mapStateToProps = state => ({
+  
+})
+
+const mapDispatchToProps = {
+  updateLaptops
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableRows);

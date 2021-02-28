@@ -16,8 +16,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SideList from './SideList';
 import LaptopsTable from './laptops/LaptopsTable';
+import UserGrid from './users/UsersGrid';
+
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import cookie from 'react-cookies';
+
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -168,27 +172,30 @@ function Dashboard(props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Route exact path={path} component={LaptopsTable} />
-          {/* </Route> */}
-          <Route exact path={path}>
-            {' '}
-            {console.log('inide Home route')}
-            <p>A route for Home</p>
-          </Route>
-          <Route exact path="students">
-            {console.log('inide Studnets route')}
-            <p>A route for students</p>
-          </Route>
-          <Route exact path="/programs">
-            <p>A route for programs</p>
-          </Route>
-          <Route exact path="/users">
-            <p>A route for users</p>
-          </Route>
+          <Switch>
+            <Route exact path={`${path}`} component={UserGrid} />
+            {/* </Route> */}
+            <Route exact path={path}>
+              {' '}
+              {console.log('inide Home route')}
+              <p>A route for Home</p>
+            </Route>
+            <Route exact path={`${path}students`}>
+              {console.log('inide Studnets route')}
+              <p>A route for students</p>
+            </Route>
+            <Route exact path="programs">
+              <p>A route for programs</p>
+            </Route>
+            <Route exact path="/users">
+              <p>A route for users</p>
+            </Route>
+          </Switch>
           <Box pt={4}>{/* <Copyright /> */}</Box>
         </Container>
       </main>
     </div>
+    
   );
 }
 
