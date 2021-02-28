@@ -24,8 +24,9 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import LaptopsRow from './LaptopsRow';
-import { fetchLaptops, addLaptops } from "../../rtk/laptop.store";
+import { fetchLaptops, addLaptops, fetchAvailability, fetchProgram, fetchBrand } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
+
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -66,6 +67,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function EnhancedTableHead(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [data, setData] = useState(props.myLaptops.laptops)
   const [open, setOpen] = React.useState(false);
   const [laptop, setLaptop] = useState({
     'serial_no':'',
@@ -79,10 +81,20 @@ function EnhancedTableHead(props) {
     'power_cable':false,
     'availability':false,
   })
+  const [filter, setFilter] = useState({
+    'availability': '',
+    'brand': '',
+    'program': ''
+  })
 
   const handleChange = (e) =>{
     setLaptop({...laptop, [e.target.name]: e.target.value})
-  }
+  };
+
+  const handleFilter = (e) =>{
+    setFilter({...filter, [e.target.name]: e.target.value})
+    
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -95,7 +107,7 @@ function EnhancedTableHead(props) {
   const addItem = () =>{
     setOpen(false)
     dispatch(addLaptops(laptop))
-  }
+  };
   
   useEffect(() => {
     addItem();
@@ -125,6 +137,7 @@ function EnhancedTableHead(props) {
               </TableRow>
             </TableHead>
             <TableBody>
+              
               {props.myLaptops.laptops.map((item, indx) => {
                 console.log('item', item);
                 return <LaptopsRow items={item} key={indx} />;
@@ -173,7 +186,7 @@ function EnhancedTableHead(props) {
               fullWidth
               onChange={handleChange}
             />
-
+            
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Brand</InputLabel>
               <Select
@@ -245,11 +258,11 @@ function EnhancedTableHead(props) {
                 name="display_resolution"
                 onChange={handleChange}
               >
-                <MenuItem value={'1280 x 1080'}>1280 x 1080</MenuItem>
-                <MenuItem value={'1366 x 768'}>1366 x 768</MenuItem>
-                <MenuItem value={'1920 x 1080'}>1920 x 1080</MenuItem>
-                <MenuItem value={'2160 x 1440'}>2160 x 1440</MenuItem>
-                <MenuItem value={'3840 x 2160'}>3840 x 2160</MenuItem>
+                <MenuItem value={'1280x1080'}>1280x1080</MenuItem>
+                <MenuItem value={'1366x768'}>1366x768</MenuItem>
+                <MenuItem value={'1920 x1080'}>1920x1080</MenuItem>
+                <MenuItem value={'2160 x 1440'}>2160x1440</MenuItem>
+                <MenuItem value={'3840 x 2160'}>3840x2160</MenuItem>
               </Select>
             </FormControl>
 
@@ -311,7 +324,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchLaptops
+  fetchLaptops,
+  fetchAvailability,
+  fetchBrand,
+  fetchProgram
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhancedTableHead);

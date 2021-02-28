@@ -17,6 +17,42 @@ export const fetchLaptops = createAsyncThunk('laptops/fetchLaptops', async () =>
   return { laptops: laptops.data };
 });
 
+export const fetchBrand = createAsyncThunk('laptops/fetchBrand', async (item) => {
+  const laptops = await axios.get(`${api}/search?brand=${item}`, {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.load('auth')}`,
+    },
+  });
+  console.log("prods>>>>>", laptops.data)
+  return { laptops: laptops.data };
+});
+
+export const fetchAvailability = createAsyncThunk('laptops/fetchAvailability', async (item) => {
+  const laptops = await axios.get(`${api}/search?availability=${item}`, {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.load('auth')}`,
+    },
+  });
+  console.log("prods>>>>>", laptops.data)
+  return { laptops: laptops.data };
+});
+
+export const fetchProgram = createAsyncThunk('laptops/fetchProgram', async (item) => {
+  const laptops = await axios.get(`${api}/search?program=${item}`, {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.load('auth')}`,
+    },
+  });
+  console.log("prods>>>>>", laptops.data)
+  return { laptops: laptops.data };
+});
+
 export const updateLaptops = createAsyncThunk('laptops/updateLaptops', async (item) => {
     console.log("items>>>>>>>", item)
     let record = JSON.stringify(item)
@@ -101,10 +137,26 @@ const laptopSlice = createSlice({
         state = action.payload;
         return state
     },
-    [updateLaptops.pending]: (state, action) => {
+    [fetchBrand.pending]: (state, action) => {
       console.log("actions>>>>>>", state);
     },
-    [updateLaptops.fulfilled]: (state, action) => {
+    [fetchBrand.fulfilled]: (state, action) => {
+        console.log("actions>>>>>>", action);
+        state = action.payload;
+        return state
+    },
+    [fetchProgram.pending]: (state, action) => {
+      console.log("actions>>>>>>", state);
+    },
+    [fetchProgram.fulfilled]: (state, action) => {
+        console.log("actions>>>>>>", action);
+        state = action.payload;
+        return state
+    },
+    [fetchAvailability.pending]: (state, action) => {
+      console.log("actions>>>>>>", state);
+    },
+    [fetchAvailability.fulfilled]: (state, action) => {
         console.log("actions>>>>>>", action);
         state = action.payload;
         return state
