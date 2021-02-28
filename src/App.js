@@ -6,6 +6,9 @@ import { useContext } from 'react';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+
+import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
+
 function App() {
   const context = useContext(AuthContext);
   return (
@@ -13,7 +16,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/">
-            {!context.loggedIn ? <Redirect to="/signin" /> : <Dashboard />}
+            {!context.loggedIn ? <Redirect to="/signin" /> : <> <Dashboard /> </>}
           </Route>
           <Route exact path="/signin">
             {console.log('inside login route')}
@@ -23,6 +26,7 @@ function App() {
           <Route exact path="/signup">
             {context.loggedIn ? <Redirect to="/" /> : <Signup />}
           </Route>
+          <Route exact path="/linkedin" component={LinkedInPopUp} />
         </Switch>
       </div>
     </BrowserRouter>
