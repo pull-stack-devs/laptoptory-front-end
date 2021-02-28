@@ -1,21 +1,23 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/SignInContext';
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Paper,
-  Grid,
-  Typography,
-} from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import axios from 'axios'
+
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
+// import context from 'react-bootstrap/esm/AccordionContext';
+import LinkedInPage from './LinkedIn';
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -24,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'url(https://source.unsplash.com/random)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light'
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -41,30 +41,37 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    padding: (0, 12),
   },
 }));
 
-function SignInSide() {
-  const context = useContext(AuthContext);
+export default function SignInSide() {
+  const context = useContext(AuthContext)
   const classes = useStyles();
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const handleChange = (e) => {
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const [url, setUrl] = useState('')
+  const handleChange = e => {
+
     setPassword(e.target.value);
-  };
-  const handleChangeUserName = (e) => {
+  }
+  const handleChangeUserName = e => {
     setUserName(e.target.value);
-  };
-  const handleSubmit = (e) => {
+  }
+  const handleSubmit = e => {
     e.preventDefault();
     e.target.reset();
-    context.login(userName, password);
-  };
+    context.login(userName, password)
+
+  }
+
+  
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -106,19 +113,26 @@ function SignInSide() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <LinkedInIcon />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+
             >
               Sign In
             </Button>
+
+           
+
+            <LinkedInPage/>
+           
+           
+            
             <Grid container>
               <Grid item>
-                <Link to="/signup">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -129,5 +143,3 @@ function SignInSide() {
     </Grid>
   );
 }
-
-export default SignInSide;

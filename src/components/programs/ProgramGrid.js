@@ -1,5 +1,5 @@
 import React from 'react';
-import LaptopCard from './LaptopCard';
+import ProgramCard from './ProgramCards';
 import { Grid } from '@material-ui/core';
 
 export default function ProgramGrid() {
@@ -7,7 +7,7 @@ export default function ProgramGrid() {
     <Grid container spacing={3}>
       {/* Chart */}
       <Grid item xs={12} md={8} lg={9}>
-        <LaptopCard />
+        <ProgramCard />
       </Grid>
     </Grid>
   );
