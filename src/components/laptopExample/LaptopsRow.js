@@ -419,7 +419,7 @@ export const MyAwesomeTable = (props) => {
                     onClick={(e) => {
                     e.stopPropagation();
                     tableManager.rowEditApi.setEditRowId(null);
-                    }}
+                  }}
                 >
                     {CANCEL_SVG}
                 </button>
@@ -433,7 +433,8 @@ export const MyAwesomeTable = (props) => {
                         (r) => r.id === data.id
                     );
                     rowsClone[updatedRowIndex] = data;
-                    updateChange(rowsClone[rowIndex-1])
+                    console.log("data>>>>", data)
+                    updateChange(data)
                     tableManager.rowEditApi.setEditRowId(null);
                     }}
                 >
