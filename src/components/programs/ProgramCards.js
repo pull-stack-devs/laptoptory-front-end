@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import ProgramItems from './ProgramItems';
 import { connect, useDispatch } from 'react-redux';
-import { getRemoteData, addProgram } from '../../rtk/ProgramsSlicer';
+import { getRemoteData, addProgram, getRequirmentsData } from '../../rtk/ProgramsSlicer';
 import { Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {Fab }from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -19,12 +19,12 @@ import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme) => ({
-     addBtn: {
-      position: 'absolute',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
+    addBtn: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     }
-  }));
+}));
 
 function ProgramCard(props) {
     const classes = useStyles();
@@ -59,6 +59,7 @@ function ProgramCard(props) {
         setIs_active(e.target.value)
     }
     const handleAdd = (e) => {
+        setOpen('');
         let object = {
             name: name,
             department: department,
@@ -71,28 +72,29 @@ function ProgramCard(props) {
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getRemoteData());
+
         };
         fetchData();
     }, [dispatch]);
 
     return (
         <>
-        <Grid container spacing={3}justify="center" >
-        <Grid item xs={10} lg={9}>
-            {props.myPrograms.map((item) => (
-                <ProgramItems items={item} />
-            ))}
-        </Grid>
-        </Grid>
+            <Grid container spacing={3} justify="center" >
+                <Grid item xs={10} lg={9}>
+                    {props.myPrograms.map((item, index) => (
+                        <ProgramItems items={item} key={index} />
+                    ))}
+                </Grid>
+            </Grid>
             {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                ADD Program
           <AddIcon />
         
      </Button> */}
-      <Fab onClick={handleClickOpen} color="primary" aria-label="add" className={classes.addBtn}>
-          <AddIcon />
-        </Fab>
-       
+            <Fab onClick={handleClickOpen} color="primary" aria-label="add" className={classes.addBtn}>
+                <AddIcon />
+            </Fab>
+
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add Program</DialogTitle>
                 <DialogContent>
