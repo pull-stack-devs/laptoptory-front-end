@@ -16,8 +16,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SideList from './SideList';
 // import LaptopsTable from './laptops/LaptopsTable';
-// import StudentsTable from './students/StudentsTable';
-import ProgramsGrid from './programs/ProgramGrid';
+import StudentsTable from './students/StudentsTable';
+// import ProgramsGrid from './programs/ProgramGrid';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import cookie from 'react-cookies';
 const drawerWidth = 240;
@@ -170,7 +170,7 @@ function Dashboard(props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Route exact path={path} component={ProgramsGrid} />
+          <Route exact path={path} component={StudentsTable} />
           {/* </Route> */}
           <Route exact path={path}>
             {' '}

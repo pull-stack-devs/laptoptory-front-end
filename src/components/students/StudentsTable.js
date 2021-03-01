@@ -128,7 +128,7 @@ function EnhancedStudentsTableHead(props) {
   return (
     <TableContainer>
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="simple table">
+        {/* <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
@@ -142,15 +142,14 @@ function EnhancedStudentsTableHead(props) {
               <TableCell align="left">Display Resolution</TableCell>
               <TableCell align="left">Model</TableCell>
               <TableCell align="left">Availability</TableCell> */}
-            </TableRow>
+            {/* </TableRow>
           </TableHead>
-          <TableBody>
-            {props.myStudents.map((item, indx) => {
-              console.log('item', item);
-              return <LaptopsRow items={item} key={indx} />;
-            })}
-          </TableBody>
-        </Table>
+          <TableBody> */} 
+    
+              <LaptopsRow  students={props.myStudents}/>
+            
+          {/* </TableBody>
+        </Table> */}
         <Fab onClick={handleClickOpen} color="primary" aria-label="add" className={classes.addBtn}>
           <AddIcon />
         </Fab>
