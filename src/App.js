@@ -3,14 +3,17 @@ import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
 import { AuthContext } from './context/SignInContext';
 import { useContext } from 'react';
+import HomePage from './components/home/HomePage';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+
+
 function App() {
   const context = useContext(AuthContext);
   return (
     <BrowserRouter>
-      <div className="App">
+      {/* <div className="App">
         <Switch>
           <Route exact path="/">
             {!context.loggedIn ? <Redirect to="/signin" /> : <Dashboard />}
@@ -24,7 +27,8 @@ function App() {
             {context.loggedIn ? <Redirect to="/" /> : <Signup />}
           </Route>
         </Switch>
-      </div>
+      </div> */}
+      <HomePage />
     </BrowserRouter>
   );
 }
