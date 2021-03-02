@@ -24,7 +24,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 import LaptopsRow from './LaptopsRow';
-import { fetchLaptops, addLaptops, fetchAvailability, fetchProgram, fetchBrand } from "../../rtk/laptop.store";
+import { fetchLaptops, addLaptops, fetchProgram } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
 
 
@@ -324,10 +324,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchLaptops,
-  fetchAvailability,
-  fetchBrand,
-  fetchProgram
+  fetchLaptops
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnhancedTableHead);

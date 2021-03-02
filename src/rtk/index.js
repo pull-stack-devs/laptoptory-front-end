@@ -4,7 +4,7 @@ import laptopSlice from './laptop.store.js';
 import userSlice from './user.store.js';
 
 
-const reducer = combineReducers({ laptop: laptopSlice, user: userSlice });
+const reducer = combineReducers({ laptops: laptopSlice, user: userSlice });
 const store = configureStore({ reducer });
 
 export default store;

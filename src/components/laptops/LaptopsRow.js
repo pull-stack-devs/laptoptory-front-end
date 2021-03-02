@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import RemoveCircleSharpIcon from '@material-ui/icons/RemoveCircleSharp';
 import { green } from '@material-ui/core/colors';
-import { updateLaptops } from "../../rtk/laptop.store";
+// import { updateLaptops } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
 
 export function TableRows(props) {
@@ -21,7 +21,7 @@ export function TableRows(props) {
 
   const updateChange = () => {
     setState(false);
-    dispatch(updateLaptops(record))
+    // dispatch(updateLaptops(record))
   };
 
   
@@ -141,7 +141,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  updateLaptops
+  // updateLaptops
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableRows);

@@ -15,9 +15,9 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SideList from './SideList';
-import LaptopsTable from './laptops/LaptopsTable';
 import UserGrid from './users/UsersGrid';
-import MyAwesomeTable from "./laptopExample/LaptopsRow";
+// import MyAwesomeTable from "./laptopExample/LaptopsRow";
+import LaptopsTable from "./laptopExample/LaptopsTable";
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import cookie from 'react-cookies';
 
@@ -173,7 +173,7 @@ function Dashboard(props) {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
-            <Route exact path={`${path}`} component={MyAwesomeTable} />
+            <Route exact path={`${path}`} component={LaptopsTable} />
             {/* </Route> */}
             <Route exact path={path}>
               {' '}

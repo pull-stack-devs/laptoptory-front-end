@@ -17,7 +17,7 @@ import {
   } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-import { fetchLaptops, addLaptops, updateLaptops } from "../../rtk/laptop.store";
+import { fetchLaptops, addLaptops, assignLaptops, returnLaptops, getLaptops } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
 
 const styles = {
@@ -117,14 +117,7 @@ const SAVE_SVG = (
 );
 
 // custom cell component
-const Username = ({ tableManager, value, field, data, column, colIndex, rowIndex }) => {
-    return (
-        <div className='rgt-cell-inner' style={{display: 'flex', alignItems: 'center', overflow: 'hidden'}}>
-            <img src={data.avatar} alt="user avatar" />
-            <span className='rgt-text-truncate' style={{marginLeft: 10}}>{value}</span>
-        </div>
-    )
-}
+
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -164,6 +157,8 @@ const useStyles = makeStyles((theme) => ({
 export const MyAwesomeTable = (props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [state, setState] = useState([])
+    // console.log("props>>>>>>>>>>", props)
     const [laptop, setLaptop] = useState({
         'serial_no':'',
         'model':'',
@@ -194,263 +189,232 @@ export const MyAwesomeTable = (props) => {
         props.addLaptops(laptop)
       };
 
+      // let student_with_laptop = props.myLaptops.laptops.map((item)=>{
+      //   if(item.availability_student) {
+      //     return item.std_lapt_id
+      //   }
+      // })
+  
+      // let availableStudent = props.myLaptops.students.map((item)=>{
+      //   if(item.student_status && !student_with_laptop.includes(item.id)) {
+      //     return item.id
+      //   }
+      // })
+
+      // console.log("availableStudent", availableStudent)
+
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(fetchLaptops());
+        const getData = async ()=>{
+          await dispatch(fetchLaptops());
+        }
+        getData();
+        // dispatch(fetchLaptops());
+        // setState(availableStudent);
     }, [])
 
-    const updateChange = (row) =>{
-        props.updateLaptops(row);
-    }
+    // let availableStudent = props.myLaptops.students.map((item)=>{
+    //   if(item.student_status) {
+    //     return item.id
+    //   }
+    // })
+
+    console.log("state>>>", state)
+
+    // console.log("availableStudent", availableStudent)
+
+    // const updateChange = (row) =>{
+    //     props.updateLaptops(row);
+    // }
+
+    console.log("props>>>>>>>>>", props)
     
     const columns = [
         {
-            id: "checkbox",
-            visible: true,
-            pinned: true,
-            width: "54px"
+          id: "checkbox",
+          visible: true,
+          pinned: true,
+          width: "54px"
         },
         {
-            id: 1, 
+            id: "2", 
             field: 'brand', 
-            label: 'brand',
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-              }) => (
-                <select
-                  style={styles.select}
-                  value={value}
-                  onChange={(e) =>
-                    onChange({ ...data, [column.field]: e.target.value })
-                  }
-                >
-                  <option>Lenovo</option>
-                  <option>Asus</option>
-                  <option>Acer</option>
-                  <option>HP</option>
-                  <option>Dell</option>
-                </select>
-              )
+            label: 'Brand',
+            editable: false,
         }, 
         {
-            id: 2, 
+            id: "3", 
             field: 'cpu', 
-            label: 'cpu',
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-              }) => (
-                <select
-                  style={styles.select}
-                  value={value}
-                  onChange={(e) =>
-                    onChange({ ...data, [column.field]: e.target.value })
-                  }
-                >
-                  <option>i3</option>
-                  <option>i5</option>
-                  <option>i7</option>
-                  <option>i9</option>
-                </select>
-              )
+            label: 'CPU',
+            editable: false,
         },
         {
-            id: 3, 
+            id: "4", 
             field: 'ram', 
-            label: 'ram',
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-              }) => (
-                <select
-                  style={styles.select}
-                  value={value}
-                  onChange={(e) =>
-                    onChange({ ...data, [column.field]: e.target.value })
-                  }
-                >
-                  <option>4</option>
-                  <option>8</option>
-                  <option>12</option>
-                  <option>16</option>
-                  <option>24</option>
-                  <option>32</option>
-                </select>
-              )
+            label: 'RAM',
+            editable: false,
         },
         {
-            id: 4, 
+            id: "5", 
             field: 'storage', 
             label: 'Storage',
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-              }) => (
-                <select
-                  style={styles.select}
-                  value={value}
-                  onChange={(e) =>
-                    onChange({ ...data, [column.field]: e.target.value })
-                  }
-                >
-                  <option>128GB</option>
-                  <option>256GB</option>
-                  <option>516GB</option>
-                  <option>1TB</option>
-                </select>
-              )
+            editable: false,
         },
         {
-            id: 5, 
+            id: "6", 
             field: 'storage_type', 
             label: 'Storage Type',
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-              }) => (
-                <select
-                  style={styles.select}
-                  value={value}
-                  onChange={(e) =>
-                    onChange({ ...data, [column.field]: e.target.value })
-                  }
-                >
-                <option>HDD</option>
-                  <option>SSD</option>
-                </select>
-              )
+            editable: false,
         },
         {
-            id: 6, 
+            id: "7", 
             field: 'display_resolution', 
-            label: 'display resolution',
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-              }) => (
-                <select
-                  style={styles.select}
-                  value={value}
-                  onChange={(e) =>
-                    onChange({ ...data, [column.field]: e.target.value })
-                  }
-                >
-                  <option>1280x1080</option>
-                  <option>1366x768</option>
-                  <option>1920x1080</option>
-                  <option>2160x1440</option>
-                  <option>3840x2160</option>
-                </select>
-              )
+            label: 'Display Resolution',
+            editable: false,
         },
         {
-            id: "Button",
-            field: "button",
-            label: 'Edit',
-            width: "max-content",
-            pinned: true,
-            sortable: false,
-            resizable: false,
-            cellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex
-            }) => (
-                <div style={styles.buttonsCellContainer}>
-                <button
-                    title="Edit"
-                    style={styles.editButton}
-                    onClick={(e) => {
-                    e.stopPropagation();
-                    tableManager.rowEditApi.setEditRowId(data.id);
-                    }}
-                >
-                    {EDIT_SVG}
-                </button>
-                </div>
-            ),
-            editorCellRenderer: ({
-                tableManager,
-                value,
-                data,
-                column,
-                colIndex,
-                rowIndex,
-                onChange
-            }) => (
-                <div style={styles.buttonsCellEditorContainer}>
-                <button
-                    title="Cancel"
-                    style={styles.cancelButton}
-                    onClick={(e) => {
-                    e.stopPropagation();
-                    tableManager.rowEditApi.setEditRowId(null);
-                  }}
-                >
-                    {CANCEL_SVG}
-                </button>
-                <button
-                    title="Save"
-                    style={styles.saveButton}
-                    onClick={(e) => {
-                    e.stopPropagation();
-                    let rowsClone = [...tableManager.rowsApi.rows];
-                    let updatedRowIndex = rowsClone.findIndex(
-                        (r) => r.id === data.id
-                    );
-                    rowsClone[updatedRowIndex] = data;
-                    console.log("data>>>>", data)
-                    updateChange(data)
-                    tableManager.rowEditApi.setEditRowId(null);
-                    }}
-                >
-                    {SAVE_SVG}
-                </button>
-                </div>
-            )
-    
-          }
+          id: "8", 
+          field: 'availability', 
+          label: 'Available in Inventory',
+          getValue: ({value, column}) => value ? 'Available' : 'Not Available', 
+          editable: false,
+        },
+        {
+          id: "9", 
+          field: 'availability_student', 
+          label: 'Available with student',
+          getValue: ({value, column}) => value ? 'Available' : 'Not Available',
+          editable: false,
+        },
+        {
+          id: "10", 
+          field: 'std_id', 
+          label: 'Student ID',
+          getValue: ({value, column}) => value ? `Assigned to ${value}` : 'Not Assigned',
+          editable: false,
+          // editorCellRenderer: ({
+          //   tableManager,
+          //   value,
+          //   data,
+          //   column,
+          //   colIndex,
+          //   rowIndex,
+          //   onChange
+          // }) => (
+          //   <select
+          //     style={styles.select}
+          //     value={value}
+          //     onChange={(e) =>
+          //       onChange({ ...data, [column.field]: e.target.value })
+          //     }
+          //   >
+          //     {/* {state.map((item, index)=>{
+          //       return <option key={index}>{item.id}</option>
+          //     })} */}
+          //   </select>
+          // )
+        },
+        {
+          id: "11", 
+          field: 'id', 
+          label: 'Select Student',
+          getValue: ({value, column}) => '',
+          editorCellRenderer: ({
+            tableManager,
+            value,
+            data,
+            column,
+            colIndex,
+            rowIndex,
+            onChange
+          }) => (
+            <select
+              style={styles.select}
+              value={value}
+              onChange={(e) =>
+                onChange({ ...data, [column.field]: e.target.value })
+              }
+            >
+              {console.log("fihaofiwnqdajsdioashldihasoidkn",props.data)}
+              {/* {console.log("fihaofiwnqdajsdioashldihasoidkn",props.myStudents)} */}
+              {/* {availableStudent.map((item, index)=>{
+                return <option key={index}>{item}</option>
+              })} */}
+            </select>
+          )
+      },
+        {
+          id: "buttons",
+          width: "max-content",
+          pinned: true,
+          sortable: false,
+          resizable: false,
+          cellRenderer: ({
+            tableManager,
+            value,
+            data,
+            column,
+            colIndex,
+            rowIndex
+          }) => (
+            <div style={styles.buttonsCellContainer}>
+              <button
+                title="Edit"
+                style={styles.editButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  tableManager.rowEditApi.setEditRowId(data.id);
+                }}
+              >
+                {EDIT_SVG}
+              </button>
+            </div>
+          ),
+          editorCellRenderer: ({
+            tableManager,
+            value,
+            data,
+            column,
+            colIndex,
+            rowIndex,
+            onChange
+          }) => (
+            <div style={styles.buttonsCellEditorContainer}>
+              <button
+                title="Cancel"
+                style={styles.cancelButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  tableManager.rowEditApi.setEditRowId(null);
+                }}
+              >
+                {CANCEL_SVG}
+              </button>
+              <button
+                title="Save"
+                style={styles.saveButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  let rowsClone = [...tableManager.rowsApi.rows];
+                  let updatedRowIndex = rowsClone.findIndex(
+                    (r) => r.id === data.id
+                  );
+                  rowsClone[updatedRowIndex] = data;
+                  tableManager.rowEditApi.setEditRowId(null);
+                }}
+              >
+                {SAVE_SVG}
+              </button>
+            </div>
+          )
+        }
     ];
 
     return (
         <>
         <GridTable 
             columns={columns}
-            rows={props.myLaptops.laptops} 
+            rows={props.myLaptops} 
             onRowClick={({ rowIndex, data, column, isEdit, event }, tableManager) =>
             !isEdit &&
             tableManager.rowSelectionApi.getIsRowSelectable(data.id) &&
@@ -631,13 +595,12 @@ export const MyAwesomeTable = (props) => {
 };
 
 const mapStateToProps = state => ({
-    myLaptops: state.laptop
+    myLaptops: state.laptops.laptops,
+    myStudents: state.laptops.students
   })
   
   const mapDispatchToProps = {
     fetchLaptops,
-    updateLaptops,
-    addLaptops
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(MyAwesomeTable);
