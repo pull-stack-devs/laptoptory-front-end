@@ -1,13 +1,17 @@
+footer p{
+    margin-top:50px;
+margin-left: 600px;
 
+}
 .site-footer {
     margin-top: 20px;
     position: relative;
-    background-color:#7971ea0c;
+    background-color:#00587a;
     width: 100%;	
     bottom: 0; 
     justify-content: center;
     font-weight: bolder;
-  
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .site-footer .container {
@@ -31,7 +35,7 @@
 }
 
 .site-footer .grid-container a {
-    color: #7971ea;
+    color: #e7e7de;
     text-decoration: none;
     font-size: 15px;
     line-height: 16.25px;
@@ -39,9 +43,15 @@
 
 .site-footer .grid-item {
     padding: 10px;
-    color: #7971ea;
+    color: #e7e7de;
 }
 
+ #logo{
+    background-image: url('../../img/finall.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+}
 
 .site-footer .grid-container .inner-grid-container {
     display: grid;
@@ -60,7 +70,7 @@
 .site-footer .container p {
     font-size: 14px;
     text-align: left;
-    color: #A2845C;
+    color: #e7e7de;
     font-weight: 500;
     
 }
@@ -76,13 +86,13 @@
 }
 
 .site-footer .grid-container .grid-item .social-buttons a {
-
+background-color: #00587a;
     display: inline-flex;
     text-decoration: none;
     font-size: 30px;
     width: 60px;
     height: 60px;
-    color: #1A1F24;
+    color: #e7e7de;
     justify-content: center;
     align-items: center;
     position: relative;

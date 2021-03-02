@@ -4,6 +4,7 @@ import Signup from './components/auth/Signup';
 import { AuthContext } from './context/SignInContext';
 import { useContext } from 'react';
 import HomePage from './components/home/HomePage';
+import AboutUs from './components/home/aboutUs';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -28,7 +29,9 @@ function App() {
           </Route>
         </Switch>
       </div> */}
-      <HomePage />
+      {/* <HomePage /> */}
+
+      <AboutUs />
     </BrowserRouter>
   );
 }

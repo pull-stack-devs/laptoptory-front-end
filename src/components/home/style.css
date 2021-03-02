@@ -1,37 +1,42 @@
 @import './header.css';
 @import './footer.css';
-
-
-#why-us{flex:column ;
-    justify-content:center ;
-    align-items:stretch}
-  
-  
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
     body {
-        font-family: "Open Sans", sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
         color: #444444;
       }
-      
-      a {
-        color: #47b2e4;
-        text-decoration: none;
-      }
-      
-      a:hover {
-        color: #73c5eb;
-        text-decoration: none;
-      }
-      
+          
       h1, h2, h3, h4, h5, h6 {
-        font-family: "Jost", sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;;
+      }
+
+      .container > .right {
+          margin-top: 180px;
+        position: absolute; 
+        right: 0; 
+        font-size: 20px;
+    
+        margin-right: 110px;
+        color: #0f3057;
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+      
+      @media (max-width: 480px) { /* adjust */
+        .container {
+          flex-direction: column; /* stacks flex-items vertically */
+        }
+        .container > .right {
+          position: static; /* back to default */
+          align-self: flex-end; /* aligns to the horizontal end */
+        }
       }
 
 
      /* table */
 
-     table{
-       background-color: #eeeeee;
+     table {
+    background-color: black;
      }
 
      strong {
@@ -43,18 +48,19 @@
     }
     
     table {
+        margin-top: 30px;
         background: #f5f5f5;
         border-collapse: separate;
         box-shadow: inset 0 1px 0 #fff;
         font-size: 12px;
         line-height: 24px;
-        margin: 30px auto;
+        margin:  auto;
         text-align: left;
         width: 800px;
     }	
     
     th {
-        background: url(https://jackrugile.com/images/misc/noise-diagonal.png),  #6d64f1;
+        background: url(https://jackrugile.com/images/misc/noise-diagonal.png),  #00587a;
         border-left: 1px solid #555;
         border-right: 1px solid #777;
         border-top: 1px solid #555;
@@ -141,6 +147,7 @@
       # Sections General
       --------------------------------------------------------------*/
       section {
+        margin-top: 30px;
         padding: 60px 0;
         overflow: hidden;
       }
@@ -161,7 +168,8 @@
         margin-bottom: -20px;
         padding-bottom: 20px;
         position: relative;
-        color: #37517e;
+        color: #0f3057;
+        font-family: 'Source Sans Pro', sans-serif;
       }
       
       .section-title h2::before {
@@ -194,17 +202,16 @@
       # Why Us
       --------------------------------------------------------------*/
       .why-us .content {
+        margin-top: 30px;
         padding: 60px 100px 0 100px;
       }
-      .why-us{
-        margin-top: -50px;
-        background-color: #eeeeee;
-      }
+     
    
       .why-us .img {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center center;
+        margin :10px;
       }
       @media (max-width: 1024px) {
         .why-us .content, .why-us .accordion-list {
@@ -241,7 +248,7 @@
         }
         section .section-title{
             text-align:center;
-            color:#007b5e;
+            color:#f3f5fa;
             margin-bottom:50px;
             text-transform:uppercase;
         }
@@ -264,9 +271,10 @@
         #what-we-do .card .card-block{
             padding-left: 50px;
             position: relative;
+            height: 80px;
         }
         #what-we-do .card .card-block a{
-            color: #007b5e !important;
+            color: #b671716b !important;
             font-weight:700;
             text-decoration:none;
         }
@@ -283,7 +291,7 @@
             font-family: FontAwesome;
             position: absolute;
             font-size: 39px;
-            color: #007b5e;
+            color: #b67171;
             left: 0;
             -webkit-transition: -webkit-transform .2s ease-in-out;
             transition:transform .2s ease-in-out;
@@ -396,12 +404,12 @@
                   }
       
       /*--------------------------------------------------------------
-      # Pricing
+     
       --------------------------------------------------------------*/
     
     
     #demo {
-        background: linear-gradient(112deg, #ffffff 50%, antiquewhite 50%);
+        background: linear-gradient(112deg, #ffffff 50%, #f3f5fa 50%);
         max-width: 900px;
         margin: auto
     }
@@ -461,7 +469,7 @@
     }
     
     i {
-        background-color: rgb(223, 56, 89);
+        background-color: #b6717191;
         padding: 1.4rem
     }
     
@@ -493,4 +501,102 @@
           padding: 0;
         }
       }
+
+/* TEAM CSS */
+
+      .team .member {
+        position: relative;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 5px;
+        background: #fff;
+        transition: 0.5s;
+      }
+      
+      .team .member .pic {
+        overflow: hidden;
+        width: 180px;
+        border-radius: 50%;
+      }
+      
+      .team .member .pic img {
+        transition: ease-in-out 0.3s;
+      }
+      
+      .team .member:hover {
+        transform: translateY(-10px);
+      }
+      
+      .team .member .member-info {
+        padding-left: 30px;
+      }
+      
+      .team .member h4 {
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 20px;
+        color: #37517e;
+      }
+      
+      .team .member span {
+        display: block;
+        font-size: 15px;
+        padding-bottom: 10px;
+        position: relative;
+        font-weight: 500;
+      }
+      
+      .team .member span::after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 1px;
+        background: #cbd6e9;
+        bottom: 0;
+        left: 0;
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+      
+      .team .member p {
+        margin: 10px 0 0 0;
+        font-size: 14px;
+      }
+      
+      .team .member .social {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      
+      .team .member .social a {
+        transition: ease-in-out 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        width: 32px;
+        height: 32px;
+        background: #eff2f8;
+      }
+      
+      .team .member .social a i {
+        color: #37517e;
+        font-size: 16px;
+        margin: 0 2px;
+      }
+      
+      .team .member .social a:hover {
+        background: #47b2e4;
+      }
+      
+      .team .member .social a:hover i {
+        color: #fff;
+      }
+      
+      .team .member .social a + a {
+        margin-left: 8px;
+      }
+      
  

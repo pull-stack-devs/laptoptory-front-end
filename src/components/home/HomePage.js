@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -7,146 +7,157 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import hero from './img/hero.jpg';
-import whyus from './img/whyus.PNG';
+import whyus from '../../img/whyus.PNG';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
+        width: '70%',
+        marginLeft: '15%'
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
+        paddingLeft: 20
     },
+
 }));
 
 export default function HomePage() {
+    useEffect(() => {
+        AOS.init();
 
+    }, [])
     const classes = useStyles();
     return (
         <>
 
-            <div class="bs-example">
-                <nav class="navbar navbar-expand-md navbar-light bg-light">
-                    <a href="#" class="navbar-brand">
-                        <img src="" height="28" alt="CoolBrand" />
-                        </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+            <header>
+                <nav class="nav" id="nav">
+                    <div id="iconsNav">
+                        <a href="#" class="active"><i class="fa fa-home"></i> Home</a>
+                        <a href="#"><i class="fa fa-gear"></i> Service</a>
+                        <a href="#"><i class="fa fa-phone"></i> Contact</a>
+                        <a href="#"><i class="fa fa-user"></i> About</a>
+                        <a href="#"><i class="fa">&#xf090;</i>Sign In</a>
+                    </div>
+                </nav>
+            </header>
 
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <div class="navbar-nav">
-                                <a href="#" class="nav-item nav-link active">Home</a>
-                                <a href="#" class="nav-item nav-link">Profile</a>
-                                <a href="#" class="nav-item nav-link">Messages</a>
-                                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+            <section id="hero" class="d-flex align-items-center">
+                {/* <img src={hero} alt="img"/> */}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                            data-aos="fade-up" data-aos-delay="200">
+                            <h2>Better Solutions For Your Business</h2>
+                            <h3>We are team of talented dvelopers to easy your life</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <main id="main">
+
+
+                <section id="what-we-do"
+                >
+                    <div class="section-title" >
+                        <h2>Our Services</h2>
+                    </div>
+                    <div class="container-fluid" data-aos="fade-up" data-aos-duration="3000">
+                        {/* <h2 class="section-title mb-2 h1">What we do</h2>
+                        <p class="text-center text-muted h5">Having and managing a correct marketing strategy is crucial in a fast moving market.</p> */}
+                        <div class="row mt-5">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card">
+                                    <div class="card-block block-1">
+                                        <h3 class="card-title">Special title</h3>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="navbar-nav ml-auto">
-                                <a href="#" class="nav-item nav-link">Login</a>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card">
+                                    <div class="card-block block-2">
+                                        <h3 class="card-title">Special title</h3>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card">
+                                    <div class="card-block block-3">
+                                        <h3 class="card-title">Special title</h3>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                </nav>
-         </div>
-
-                <section id="hero" class="d-flex align-items-center">
-                    {/* <img src={hero} alt="img"/> */}
-                    <div class="container">
                         <div class="row">
-                            <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-                                data-aos="fade-up" data-aos-delay="200">
-                                <h2>Better Solutions For Your Business</h2>
-                                <h3>We are team of talented dvelopers to easy your life</h3>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card">
+                                    <div class="card-block block-4">
+                                        <h3 class="card-title">Special title</h3>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card">
+                                    <div class="card-block block-5">
+                                        <h3 class="card-title">Special title</h3>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card">
+                                    <div class="card-block block-6">
+                                        <h3 class="card-title">Special title</h3>
+                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
+                {/* </section> */}
 
 
+                <section id="why-us" class="why-us section-bg" >
+                    <div class="section-title">
+                        <h2>Why Us ?</h2>
+                        <div class="container" data-aos="fade-up" data-aos-duration="1000">
 
-                <main id="main">
-                    {/* <section id="services"  data-aos="fade-up"
-data-aos-duration="1000">
-    <div class="section-title">
-        <h2>Our Services</h2>
-    </div> */}
-                    <section id="what-we-do" >
-                        <div class="container-fluid">
-                            <h2 class="section-title mb-2 h1">What we do</h2>
-                            <p class="text-center text-muted h5">Having and managing a correct marketing strategy is crucial in a fast moving market.</p>
-                            <div class="row mt-5">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-block block-1">
-                                            <h3 class="card-title">Special title</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-block block-2">
-                                            <h3 class="card-title">Special title</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-block block-3">
-                                            <h3 class="card-title">Special title</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-block block-4">
-                                            <h3 class="card-title">Special title</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-block block-5">
-                                            <h3 class="card-title">Special title</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-                                    <div class="card">
-                                        <div class="card-block block-6">
-                                            <h3 class="card-title">Special title</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02" title="Read more" class="read-more" >Read more<i class="fa fa-angle-double-right ml-2"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                            </br> Proin varius purus suscipit, consectetur metus eu, consectetur sem. <br>
+                                </br>Cras at neque augue. Vestibulum id nisl lacus. Morbi vel egestas eros.
+  <br></br> Sed at ultricies ipsum, eget aliquam lectus. Nulla lacus erat, euismod <br>
+                                </br>sed varius nec, mollis at nibh. In sit amet enim tristique ex pellentesque <br>
+                                </br>porttitor. Mauris vehicula interdum quam a varius.</p>
                         </div>
-                    </section>
-                    {/* </section> */}
+                    </div>
+                    <img src={whyus} alt="whyus" class="img" width="40%" height="40%" />
 
+                </section>
 
-                    <section id="why-us" class="why-us section-bg"  >
-                        <div class="section-title">
-                            <h2>Why Us ?</h2>
-                            <p></p>
-                        </div>
-                        <img src={whyus} alt="whyus" class="img" width="40%" height="35%" />
+                <section class="slider">
 
-                    </section>
-
-
+                    <div class="section-title">
+                        <h2>Feedback</h2>
+                        <p></p>
+                    </div>
                     <div class="container">
                         <div id="demo" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
@@ -168,17 +179,17 @@ data-aos-duration="1000">
                                         <div id="image-caption">Harry Mon</div>
                                     </div>
                                 </div>
-                            </div> <a class="carousel-control-prev" href="#demo" data-slide="prev"> <i class='fas fa-arrow-left'></i> </a> <a class="carousel-control-next" href="#demo" data-slide="next"> <i class='fas fa-arrow-right'></i> </a>
+                            </div> <a class="carousel-control-prev" href="#demo" data-slide="prev">   </a> <a class="carousel-control-next" href="#demo" data-slide="next">  </a>
                         </div>
                     </div>
 
+                </section>
 
 
-
-                    <div class="section-title">
-                        <h2>PROS </h2>
-                    </div>
-<div class="table">
+                <div class="section-title">
+                    <h2>PROS </h2>
+                </div>
+                <section class="table-section">
                     <table >
                         <thead>
                             <tr>
@@ -217,106 +228,106 @@ data-aos-duration="1000">
                             </tr>
                         </tbody>
                     </table>
+                </section>
+
+                <section id="faq" class="faq section-bg">
+                    <div class="section-title">
+                        <h2>FREQUENTLY ASKED QUESTIONS</h2>
                     </div>
 
-                    <section id="faq" class="faq section-bg">
-                        <div class="section-title">
-                            <h2>FREQUENTLY ASKED QUESTIONS</h2>
-                        </div>
-
-                        <div className={classes.root}>
-                            <Accordion>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
-                                    <Typography className={classes.heading}>Accordion 1</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                        sit amet blandit leo lobortis eget.
+                    <div className={classes.root}>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography className={classes.heading}>Accordion 1</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                    sit amet blandit leo lobortis eget.
           </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel2a-content"
-                                    id="panel2a-header"
-                                >
-                                    <Typography className={classes.heading}>Accordion 2</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                        sit amet blandit leo lobortis eget.
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2a-content"
+                                id="panel2a-header"
+                            >
+                                <Typography className={classes.heading}>Accordion 2</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                    sit amet blandit leo lobortis eget.
           </Typography>
-                                </AccordionDetails>
-                            </Accordion>
+                            </AccordionDetails>
+                        </Accordion>
 
-                            <Accordion>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel2a-content"
-                                    id="panel2a-header"
-                                >
-                                    <Typography className={classes.heading}>Accordion 3</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                        sit amet blandit leo lobortis eget.
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2a-content"
+                                id="panel2a-header"
+                            >
+                                <Typography className={classes.heading}>Accordion 3</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                    sit amet blandit leo lobortis eget.
           </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-
-                        </div>
-
-                    </section>
-                </main>
-
-
-              <footer class="site-footer">
-                    <div class="container">
-
-                        <div class="grid-container">
-                            <div class="grid-item">
-
-                                <iframe class="logo-img" src="https://www.google.jo/maps/place/%D9%83%D9%84%D9%8A%D8%A9+%D9%84%D9%88%D9%85%D9%8A%D9%86%D9%88%D8%B3+%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9%D9%8A%D8%A9+%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9+-+(Luminus+Technical+University+College+(LTUC%E2%80%AD/@31.897932,35.8710084,17z/data=!3m1!4b1!4m5!3m4!1s0x151ca7e4aee722d5:0x8693a9183825010b!8m2!3d31.897932!4d35.8688197 " class="logo-img"></iframe>
-
-                            </div>
-
-                            <div class="grid-item inner-grid-container">
-
-                                <div class="grid-item"><a href="">About Us</a></div>
-                                <div class="grid-item"><a href="">Our Services</a></div>
-                                <div class="grid-item"><a href="">Pricing</a></div>
-                                <div class="grid-item"><a href="">Blog</a></div>
-                                <div class="grid-item"><a href="">Contact us</a></div>
-                                <div class="grid-item"><a href="">Finance</a></div>
-                                <div class="grid-item"><a href="">Cookie Policy</a></div>
-                                <div class="grid-item"><a href="">Jobs</a></div>
-
-
-                            </div>
-
-                            <div class="grid-item">
-                                <div class="social-buttons">
-                                    <a href="#" class="fa fa-instagram"></a>
-                                    <a href="#" class="fa fa-linkedin"></a>
-                                    <a href="#" class="fa fa-facebook"></a>
-                                    <a href="#" class="fa fa-twitter"></a>
-                                </div>
-                            </div>
-                        </div>
-
+                            </AccordionDetails>
+                        </Accordion>
 
                     </div>
-                    </footer>
 
-</>
+                </section>
+            </main>
+
+
+            <footer class="site-footer">
+                <div class="container">
+
+                    <div class="grid-container">
+                        <div class="grid-item" id="logo">
+
+                            {/* <img src="../../img/logo.png"/> */}
+
+                        </div>
+
+                        <div class="grid-item inner-grid-container">
+
+                            <div class="grid-item"><a href="">About Us</a></div>
+                            <div class="grid-item"><a href="">Our Services</a></div>
+                            <div class="grid-item"><a href="">Pricing</a></div>
+                            <div class="grid-item"><a href="">Blog</a></div>
+                            <div class="grid-item"><a href="">Contact us</a></div>
+                            <div class="grid-item"><a href="">Finance</a></div>
+                            <div class="grid-item"><a href="">Cookie Policy</a></div>
+                            <div class="grid-item"><a href="">Jobs</a></div>
+
+
+                        </div>
+
+                        <div class="grid-item">
+                            <div class="social-buttons">
+                                <a href="#" class="fa fa-instagram"></a>
+                                <a href="#" class="fa fa-linkedin"></a>
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Copyrights Reserver ℗ </p>
+                </div>
+            </footer>
+
+        </>
 
     )
 }
