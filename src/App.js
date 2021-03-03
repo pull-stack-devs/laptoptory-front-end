@@ -1,6 +1,9 @@
 import Dashboard from './components/Dashboard';
 import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
+import HomePage from './components/home/Home';
+import AboutUs from './components/home/About';
+
 import { AuthContext } from './context/SignInContext';
 import { useContext } from 'react';
 
@@ -16,15 +19,28 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/">
-            {!context.loggedIn ? <Redirect to="/signin" /> : <> <Dashboard /> </>}
+            <HomePage />
+          </Route>
+          <Route exact path="/about">
+            <AboutUs />
+          </Route>
+          <Route path="/dashboard">
+            {!context.loggedIn ? (
+              <Redirect to="/signin" />
+            ) : (
+              <>
+                {' '}
+                <Dashboard />{' '}
+              </>
+            )}
           </Route>
           <Route exact path="/signin">
             {console.log('inside login route')}
             {console.log('context=>>>>>> ', context.loggedIn)}
-            {context.loggedIn ? <Redirect to="/" /> : <Signin />}
+            {context.loggedIn ? <Redirect to="/dashboard" /> : <Signin />}
           </Route>
           <Route exact path="/signup">
-            {context.loggedIn ? <Redirect to="/" /> : <Signup />}
+            {context.loggedIn ? <Redirect to="/dashboard" /> : <Signup />}
           </Route>
           <Route exact path="/linkedin" component={LinkedInPopUp} />
         </Switch>

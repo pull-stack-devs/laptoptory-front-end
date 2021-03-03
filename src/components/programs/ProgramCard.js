@@ -85,7 +85,7 @@ function ProgramCard(props) {
 
   return (
     <>
-      <Grid container spacing={3} justify="center">
+      <Grid container xs={12} spacing={3}>
         {props.myPrograms.map((item) => (
           <Grid item xs={12} md={6} lg={4}>
             <ProgramItems items={item} />

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect, useDispatch } from 'react-redux';
+import ProgramsRequirments from './ProgramRequirements';
 import { updatProgram } from '../../rtk/ProgramsSlicer';
 import Show from '../Show';
 import {
@@ -28,6 +29,7 @@ import {
 import { red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,12 +80,23 @@ const useStyles = makeStyles((theme) => ({
   inputWidth: {
     width: '45%',
   },
+  expandPanel: {
+    padding: '6px 15px 16px',
+  },
+  removeIconPadding: {
+    padding: '0px',
+  },
+  collapsePadding: {
+    padding: '0px',
+  },
 }));
+
 function ProgramItems(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [state, setState] = useState(false);
   const [record, setRecorrd] = useState(props.items);
+  const [editMenu, setEditMenu] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -93,7 +106,12 @@ function ProgramItems(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleEditMenuOpen = () => {
+    setEditMenu(true);
+  };
+  const handleEditMenuClose = () => {
+    setEditMenu(false);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -127,26 +145,21 @@ function ProgramItems(props) {
           title={props.items.name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ')}
         />
         <CardActions disableSpacing className={classes.centerBottom}>
-          {/* onClick={changeState}  */}
           <Tooltip
             title="Edit a program requirements"
             onClick={handleClickOpen}
           >
-            <IconButton aria-label="add to favorites">
-              <EditIcon />
+            <IconButton
+              className={classes.hoverEdit}
+              aria-label="add to favorites"
+            >
+              <EditIcon               fontSize="small"
+/>
             </IconButton>
           </Tooltip>
         </CardActions>
       </Box>
       <CardContent className={classes.cardInfo}>
-        {/* <Typography
-            variant="h5"
-            gutterBottom
-            component="h2"
-            className={classes.title}
-          >
-            {props.items.name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ')}
-          </Typography> */}
         <Typography variant="subtitle2" gutterBottom>
           <span className={classes.boldLabel}>Department: </span>
           <span className={classes.programData}>{props.items.department}</span>
@@ -165,11 +178,14 @@ function ProgramItems(props) {
           component="p"
         ></Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions className={classes.expandPanel} disableSpacing>
+        <Typography variant="button" component="h6">
+          Program Requirements
+        </Typography>{' '}
         <IconButton
-          className={clsx(classes.expand, {
+          className={`${clsx(classes.expand, {
             [classes.expandOpen]: expanded,
-          })}
+          })} ${classes.removeIconPadding}`}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
@@ -177,21 +193,14 @@ function ProgramItems(props) {
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography variant="subtitle2" gutterBottom>
-            Program reqs
-          </Typography>
-        </CardContent>
+      <Collapse
+        className={classes.collapsePadding}
+        in={expanded}
+        timeout="auto"
+        unmountOnExit
+      >
+        <ProgramsRequirments item={props.items} key={props.items.id} />
       </Collapse>
-      {/* <CardActions disableSpacing className={classes.centerBottom}>
-          <Tooltip title="Edit a program requirements" onClick={changeState}>
-            <IconButton aria-label="add to favorites">
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
-        </CardActions> */}
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -199,10 +208,7 @@ function ProgramItems(props) {
       >
         <DialogTitle id="form-dialog-title">Update Program Info</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {/* To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally. */}
-          </DialogContentText>
+          <DialogContentText></DialogContentText>
           <TextField
             disabled
             className={classes.inputWidth}
@@ -249,7 +255,7 @@ function ProgramItems(props) {
           />
           <FormControl className={classes.formControl}>
             <InputLabel shrink htmlFor="age-native-helper">
-              Age
+              Program Status
             </InputLabel>
             <NativeSelect
               value={state.age}
@@ -276,101 +282,20 @@ function ProgramItems(props) {
               )}
             </NativeSelect>
           </FormControl>
-
-          {/* <TextField
-              name="department"
-              variant="outlined"
-              type="version"
-              defaultValue={props.items.department}
-              onChange={update}
-              autoFocus
-              margin="dense"
-            /> */}
-          {/* <TextField
-              name="is_active"
-              variant="outlined"
-              defaultValue={() => programStatusSetter(props.items.is_active)}
-              onChange={update}
-            />
-            <TextField
-              name="version"
-              variant="outlined"
-              defaultValue={props.items.version}
-              onChange={update}
-            /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Close
           </Button>
-          {/* <Tooltip
-              title="Edit a program requirements"
-              onClick={changeAndUpdate}
-            >
-              <IconButton aria-label="add to favorites">
-                <EditIcon />
-              </IconButton>
-            </Tooltip> */}
           <Button onClick={changeAndUpdate} color="primary">
             Update
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* <Show condition={state}>
-        <TextField
-          name="name"
-          variant="outlined"
-          defaultValue={props.items.name}
-          onChange={update}
-        />
-        <CardContent>
-          <TextField
-            name="department"
-            variant="outlined"
-            type="version"
-            defaultValue={props.items.department}
-            onChange={update}
-            autoFocus
-            margin="dense"
-          />
-          <TextField
-            name="is_active"
-            variant="outlined"
-            defaultValue={() => programStatusSetter(props.items.is_active)}
-            onChange={update}
-          />
-          <TextField
-            name="version"
-            variant="outlined"
-            defaultValue={props.items.version}
-            onChange={update}
-          />
-        </CardContent>
-
-        <CardActions disableSpacing className={classes.centerBottom}>
-          <Tooltip
-            title="Edit a program requirements"
-            onClick={changeAndUpdate}
-          >
-            <IconButton aria-label="add to favorites">
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Delete a program">
-                        <IconButton aria-label="share">
-                            <DeleteIcon />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Assign a laptop">
-                        <IconButton aria-label="share">
-                            <AssignmentIndIcon />
-                        </IconButton>
-                    </Tooltip>
-        </CardActions>
-      </Show> */}
     </Card>
   );
 }
-
-export default ProgramItems;
+const mapStateToProps = (state) => ({
+  activeReq: state.programs.detailedRequirments,
+});
+export default connect(mapStateToProps)(ProgramItems);

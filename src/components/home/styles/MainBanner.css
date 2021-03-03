@@ -1,0 +1,13 @@
+.banner {
+    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../../../images/hero.jpg");
+}
+.banner-text{
+    height: 100vh;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}
+.banner-text h2, .banner-text h4{
+color: #fff;
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import LaptopsRow from './StudentsRow';
 import { connect, useDispatch } from 'react-redux';
 import { getStudents, addStudent } from '../../rtk/StudentsSlicer';
-import {getRemoteData} from '../../rtk/ProgramsSlicer';
+import { getRemoteData } from '../../rtk/ProgramsSlicer';
 import {
   Table,
   TableBody,
@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 650,
   },
   addBtn: {
+    zIndex: '10',
+    color: '#fff',
     position: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EnhancedStudentsTableHead(props) {
+function StudentsTable(props) {
   const classes = useStyles();
   // const [values, setValues] = useState([]);
   const dispatch = useDispatch();
@@ -63,45 +65,27 @@ function EnhancedStudentsTableHead(props) {
   const handleClose = () => {
     setOpen('');
   };
-  // const getData = async () => {
-  //   let results = await axios.get(apiU, {
-  //     headers: {
-  //       'Access-Control-Allow-Origin': '*',
-  //       'Content-type': 'application/json',
-  //       Authorization: `Bearer ${cookie.load('auth')}`,
-  //     },
-  //   });
-
-  //   // let results = superagent
-  //   //   .get(apiU)
-  //   //   .set('Authorization', `Bearer ${cookie.load('auth')}`);
-
-  //   console.log('results>>>', results);
-  //   setValues(results.data);
-  //   return results.data;
-  // };
-
   const radioGroupRef = useRef(null);
   const handleName = (e) => {
-    setName(e.target.value)
-  }
+    setName(e.target.value);
+  };
 
   const handleNationality = (e) => {
-    setNationality(e.target.value)
-  }
+    setNationality(e.target.value);
+  };
   const handleId = (e) => {
-    setNational_id(e.target.value)
-  }
+    setNational_id(e.target.value);
+  };
 
   const handleStatus = (e) => {
-    setStudent_status(e.target.value)
-  }
+    setStudent_status(e.target.value);
+  };
   const handleProgramName = (e) => {
-    setProgram_name(e.target.value)
-  }
+    setProgram_name(e.target.value);
+  };
   const handleProgramVersion = (e) => {
-    setProgram_version(e.target.value)
-  }
+    setProgram_version(e.target.value);
+  };
   const handleAdd = (e) => {
     let object = {
       name: name,
@@ -109,53 +93,38 @@ function EnhancedStudentsTableHead(props) {
       national_id: national_id,
       student_status: student_status,
       program_name: program_name,
-      program_version: program_version
+      program_version: program_version,
     };
     console.log('from addd =======>', object);
     dispatch(addStudent(object));
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getStudents());
-      await dispatch(getRemoteData())
+      await dispatch(getRemoteData());
     };
     fetchData();
-   
   }, []);
-
 
   return (
     <TableContainer>
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Nationality</TableCell>
-              <TableCell align="left">National_Id</TableCell>
-              <TableCell align="left">Student_Status</TableCell>
-              <TableCell align="left">Program_Name</TableCell>
-              <TableCell align="left">Program_Version</TableCell>
-              {/* <TableCell align="left">Power Cable</TableCell>
-              <TableCell align="left">Display Resolution</TableCell>
-              <TableCell align="left">Model</TableCell>
-              <TableCell align="left">Availability</TableCell> */}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {props.myStudents.map((item, indx) => {
-              console.log('item', item);
-              return <LaptopsRow items={item} key={indx} />;
-            })}
-          </TableBody>
-        </Table>
-        <Fab onClick={handleClickOpen} color="primary" aria-label="add" className={classes.addBtn}>
+        <LaptopsRow students={props.myStudents} />
+        <Fab
+          onClick={handleClickOpen}
+          color="primary"
+          aria-label="add"
+          className={classes.addBtn}
+        >
           <AddIcon />
         </Fab>
 
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
           <DialogTitle id="form-dialog-title">Add Program</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -186,7 +155,7 @@ function EnhancedStudentsTableHead(props) {
               fullWidth
               onChange={handleId}
             />
-             <RadioGroup
+            <RadioGroup
               ref={radioGroupRef}
               aria-label="ringtone"
               name="ringtone"
@@ -194,11 +163,16 @@ function EnhancedStudentsTableHead(props) {
               onChange={handleProgramName}
             >
               Programs
-              {props.myprograms.map(item=>{
-               return <FormControlLabel value={item} key={item} control={<Radio />} label={item} />
-
+              {props.myprograms.map((item) => {
+                return (
+                  <FormControlLabel
+                    value={item}
+                    key={item}
+                    control={<Radio />}
+                    label={item}
+                  />
+                );
               })}
-
             </RadioGroup>
 
             <RadioGroup
@@ -209,11 +183,16 @@ function EnhancedStudentsTableHead(props) {
               onChange={handleProgramVersion}
             >
               Programs
-              {props.myVersions.map(item=>{
-               return <FormControlLabel value={item} key={item} control={<Radio />} label={item} />
-
+              {props.myVersions.map((item) => {
+                return (
+                  <FormControlLabel
+                    value={item}
+                    key={item}
+                    control={<Radio />}
+                    label={item}
+                  />
+                );
               })}
-
             </RadioGroup>
             {/* <TextField
               autoFocus
@@ -239,19 +218,27 @@ function EnhancedStudentsTableHead(props) {
               onChange={handleStatus}
             >
               Is Active Status
-              <FormControlLabel value='true' key="true" control={<Radio />} label="Yes" />
-              <FormControlLabel value='false' key="false" control={<Radio />} label="No" />
-
+              <FormControlLabel
+                value="true"
+                key="true"
+                control={<Radio />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="false"
+                key="false"
+                control={<Radio />}
+                label="No"
+              />
             </RadioGroup>
-
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Close
-                        </Button>
+            </Button>
             <Button onClick={handleAdd} color="primary">
               Add
-          </Button>
+            </Button>
           </DialogActions>
         </Dialog>
       </Paper>
@@ -259,10 +246,10 @@ function EnhancedStudentsTableHead(props) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   myStudents: state.students.students,
   myprograms: state.programs.programsNames,
-  myVersions:state.programs.programsVersions,
+  myVersions: state.programs.programsVersions,
 });
 
-export default connect(mapStateToProps)(EnhancedStudentsTableHead);
+export default connect(mapStateToProps)(StudentsTable);

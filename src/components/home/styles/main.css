@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #5d5c61;
+}
+p{
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.secondary-color{
+    background-color: #f9f9f9;
+}
+
