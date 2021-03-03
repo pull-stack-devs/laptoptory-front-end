@@ -22,6 +22,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SideList from './SideList';
+import ChartParent from './chart/ChartParent';
 import LaptopsTable from './laptops/LaptopsTable';
 import ProgramsGrid from './programs/ProgramGrid';
 import UsersGrid from './users/UsersGrid';
@@ -259,6 +260,10 @@ function Dashboard(props) {
           {/* <SocketIO /> */}
           {/* <Route exact path="/" component={UsersGrid} /> */}
           {/* </Route> */}
+          <Route exact path="/dashboard">
+            {console.log('inide dashboard route')}
+            {!context.loggedIn ? <Redirect to="/signin" /> : <ChartParent />}
+          </Route>
           <Route exact path="/dashboard/laptops">
             {console.log('inide Studnets route')}
             {!context.loggedIn ? <Redirect to="/signin" /> : <LaptopsTable />}

@@ -3,6 +3,7 @@ import SideItem from './SideItem';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import FaceIcon from '@material-ui/icons/Face';
 import PeopleIcon from '@material-ui/icons/People';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import SchoolIcon from '@material-ui/icons/School';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,6 +23,15 @@ function SideList(props) {
 
   return (
     <div>
+       <Link
+        to="/dashboard/laptops"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Laptops')}
+      >
+        <SideItem listItemName="Dashboard">
+          <DashboardIcon />
+        </SideItem>
+      </Link>
       <Link
         to="/dashboard/laptops"
         className={classes.sideLink}
