@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { AuthContext } from '../context/SignInContext';
 import {
   CssBaseline,
   Drawer,
@@ -11,13 +12,24 @@ import {
   Divider,
   IconButton,
   Container,
+  Badge,
+  Menu,
+  MenuItem,
+  Breadcrumbs,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import SideList from './SideList';
+import ChartParent from './chart/ChartParent';
 import LaptopsTable from './laptops/LaptopsTable';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import ProgramsGrid from './programs/ProgramGrid';
+import UsersGrid from './users/UsersGrid';
+import { Route, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
+import SocketIO from './SocketIO';
+import StudentsTable from './students/StudentsTable';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -97,17 +109,46 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  profileMenu: {
+    top: '50px',
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+    width: 20,
+    height: 20,
+  },
+  link: {
+    display: 'flex',
+  },
+  breadcrumbs: {
+    marginBottom: '20px',
+  },
 }));
+
 function Dashboard(props) {
-  let { path, url } = useRouteMatch();
+  const context = useContext(AuthContext);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [currentPage, setCurrentPage] = React.useState('');
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const profileOpen = Boolean(anchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const changeCurrentPage = (pageName) => {
+    setCurrentPage(pageName);
+  };
+  const handleProfileMenuClose = () => {
+    setAnchorEl(null);
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -140,11 +181,47 @@ function Dashboard(props) {
           >
             Laptoptory
           </Typography>
-          {/* <IconButton color="inherit">
+          <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton> */}
+          </IconButton>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            className={classes.profileMenu}
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={profileOpen}
+            onClose={handleProfileMenuClose}
+          >
+            <MenuItem
+              onClick={() => {
+                handleProfileMenuClose();
+                context.logout();
+              }}
+            >
+              Logout
+            </MenuItem>
+            {/* <MenuItem onClick={handleProfileMenuClose}>My account</MenuItem> */}
+          </Menu>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -160,7 +237,7 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <SideList url={url} />
+        <SideList activePage={changeCurrentPage} />
         {/* <List>{mainListItems}</List>
         <Divider />
         <List>{secondaryListItems}</List> */}
@@ -168,24 +245,39 @@ function Dashboard(props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Route exact path={path} component={LaptopsTable} />
+          <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
+            <Typography color="inherit" className={classes.link}>
+              {/* <DashboardIcon className={classes.icon} /> */}
+              Dashboard
+            </Typography>
+            {currentPage ? (
+              <Typography color="textPrimary" className={classes.link}>
+                {/* <DashboardIcon className={classes.icon} /> */}
+                {currentPage}
+              </Typography>
+            ) : null}
+          </Breadcrumbs>
+          {/* <SocketIO /> */}
+          {/* <Route exact path="/" component={UsersGrid} /> */}
           {/* </Route> */}
-          <Route exact path={path}>
-            {' '}
-            {console.log('inide Home route')}
-            <p>A route for Home</p>
+          <Route exact path="/dashboard/charts">
+            {console.log('inide dashboard route')}
+            {!context.loggedIn ? <Redirect to="/signin" /> : <ChartParent />}
           </Route>
-          <Route exact path="students">
+          <Route exact path="/dashboard/laptops">
             {console.log('inide Studnets route')}
-            <p>A route for students</p>
+            {!context.loggedIn ? <Redirect to="/signin" /> : <LaptopsTable />}
           </Route>
-          <Route exact path="/programs">
-            <p>A route for programs</p>
+          <Route exact path="/dashboard/students">
+            {!context.loggedIn ? <Redirect to="/signin" /> : <StudentsTable />}
           </Route>
-          <Route exact path="/users">
-            <p>A route for users</p>
+          <Route exact path="/dashboard/programs">
+            {!context.loggedIn ? <Redirect to="/signin" /> : <ProgramsGrid />}
           </Route>
-          <Box pt={4}>{/* <Copyright /> */}</Box>
+          <Route exact path="/dashboard/users">
+            {!context.loggedIn ? <Redirect to="/signin" /> : <UsersGrid />}
+          </Route>
+          <Box pt={4}>{/* <Copyright /> */}</Box>.
         </Container>
       </main>
     </div>

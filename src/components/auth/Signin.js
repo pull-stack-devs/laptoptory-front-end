@@ -10,18 +10,22 @@ import {
   Paper,
   Grid,
   Typography,
+  Container,
+  Box,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import coloredLogo2 from '../../images/coloredLogo2.png';
+import LinkedInPage from './LinkedIn';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+    width: '100%',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage:
+      'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light'
@@ -30,8 +34,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
+  flexBox: {
+    height: '100vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
   paper: {
-    margin: theme.spacing(8, 4),
+    borderRadius: '25px',
+    boxSizing: 'border-box',
+    padding: ' 50px 30px',
+    margin: 'auto',
+    maxWidth: '400px',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -46,6 +62,17 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  logoImage: {
+    maxWidth: '200px',
+    margin: 'auto',
+    display: 'block',
+    marginBottom: '30px',
+  },
+  formBtn: {
+    maxWidth: '160px',
+    display: 'block',
+    margin: '24px auto 16px',
   },
 }));
 
@@ -66,14 +93,13 @@ function SignInSide() {
     context.login(userName, password);
   };
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline/>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+
+    <Container maxWidth="xl" className={classes.image}>
+      <Box className={classes.flexBox}>
+        {/* <CssBaseline /> */}
+
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src={coloredLogo2} alt="logo" className={classes.logoImage} />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -102,31 +128,25 @@ function SignInSide() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <LinkedInIcon />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={`${classes.formBtn} ${classes.submit}`}
             >
               Sign In
             </Button>
+            <LinkedInPage />
             <Grid container>
               <Grid item>
-                <Link to="/signup">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
           </form>
         </div>
-      </Grid>
-    </Grid>
+      </Box>
+    </Container>
   );
 }
 

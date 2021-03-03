@@ -1,0 +1,38 @@
+.our-services .service-card{
+    margin-bottom: 30px;
+}
+.our-services .service-card .card-block:before {
+    font-family: FontAwesome;
+    position: absolute;
+    font-size: 25px;
+    /* color: #b67171; */
+    color: #47b2e4;
+    display: block;
+    text-align: center;
+    max-width: 30px;
+    left: 0;
+    -webkit-transition: -webkit-transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+}
+.our-services .service-card .card-block{
+    padding-left: 40px;
+}
+
+.our-services .service-card .block-1:before {
+    content: "\f0e7";
+}
+.our-services .service-card .block-2:before {
+    content: "\f0eb";
+}
+.our-services .service-card .block-3:before {
+    content: "\f00c";
+}
+.our-services .service-card .block-4:before {
+    content: "\f209";
+}
+.our-services .service-card .block-5:before {
+    content: "\f0a1";
+}
+.our-services .service-card .block-6:before {
+    content: "\f218";
+}

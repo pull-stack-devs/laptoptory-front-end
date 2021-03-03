@@ -3,38 +3,66 @@ import SideItem from './SideItem';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import FaceIcon from '@material-ui/icons/Face';
 import PeopleIcon from '@material-ui/icons/People';
-import SchoolIcon from '@material-ui/icons/School';
-import { Link } from "react-router-dom";
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';import SchoolIcon from '@material-ui/icons/School';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   sideLink: {
     textDecoration: 'none',
-    color: 'rgba(0,0,0,0.87)'
-  }
+    color: 'rgba(0,0,0,0.87)',
+  },
 }));
-
 function SideList(props) {
+  const [activeLink, setActiveLink] = React.useState('');
   const classes = useStyles();
+  const updateActivePage = (pageName) => {
+    props.activePage(pageName);
+  };
 
   return (
     <div>
-      <Link to="/laptops" className={classes.sideLink}>
+       <Link
+        to="/dashboard/laptops"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Laptops')}
+      >
+        <SideItem listItemName="Charts">
+          <DonutLargeIcon />
+        </SideItem>
+      </Link>
+      <Link
+        to="/dashboard/laptops"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Laptops')}
+      >
         <SideItem listItemName="Laptops">
           <LaptopIcon />
         </SideItem>
       </Link>
-      <Link to="students" className={classes.sideLink}>
+      <Link
+        to="/dashboard/students"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Studnets')}
+      >
         <SideItem listItemName="Students">
           <FaceIcon />
         </SideItem>
       </Link>
-      <Link to="/programs" className={classes.sideLink}>
+      <Link
+        to="/dashboard/programs"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Programs')}
+      >
         <SideItem listItemName="Programs">
           <SchoolIcon />
         </SideItem>
       </Link>
-      <Link to="/users" className={classes.sideLink}>
+      <Link
+        to="/dashboard/users"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Users')}
+      >
         <SideItem listItemName="Users">
           <PeopleIcon />
         </SideItem>

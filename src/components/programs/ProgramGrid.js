@@ -1,14 +1,13 @@
 import React from 'react';
-import LaptopCard from './LaptopCard';
+import ProgramCard from './ProgramCard';
 import { Grid } from '@material-ui/core';
+import { connect, useDispatch } from 'react-redux';
 
-export default function ProgramGrid() {
-  return (
-    <Grid container spacing={3}>
-      {/* Chart */}
-      <Grid item xs={12} md={8} lg={9}>
-        <LaptopCard />
-      </Grid>
-    </Grid>
-  );
+function ProgramGrid() {
+  return <ProgramCard />;
 }
+const mapStateToProps = (state) => ({
+  myPrograms: state.programs.programs,
+});
+
+export default connect(mapStateToProps)(ProgramGrid);
