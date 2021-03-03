@@ -15,8 +15,9 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SideList from './SideList';
-// import LaptopsTable from './laptops/LaptopsTable';
-import StudentsTable from './students/StudentsTable';
+import Chart from "./chart/ChartParent";
+// import LaptopsTable from './laptops/LaptopsRow';
+// import StudentsTable from './students/StudentsTable';
 // import ProgramsGrid from './programs/ProgramGrid';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import cookie from 'react-cookies';
@@ -170,7 +171,7 @@ function Dashboard(props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Route exact path={path} component={StudentsTable} />
+          <Route exact path={path} component={Chart} />
           {/* </Route> */}
           <Route exact path={path}>
             {' '}
