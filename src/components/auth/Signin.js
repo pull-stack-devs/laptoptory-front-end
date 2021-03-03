@@ -93,9 +93,11 @@ function SignInSide() {
     context.login(userName, password);
   };
   return (
+
     <Container maxWidth="xl" className={classes.image}>
       <Box className={classes.flexBox}>
         {/* <CssBaseline /> */}
+
         <div className={classes.paper}>
           <img src={coloredLogo2} alt="logo" className={classes.logoImage} />
           <Typography component="h1" variant="h5">
