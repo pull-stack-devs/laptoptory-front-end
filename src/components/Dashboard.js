@@ -18,6 +18,7 @@ import SideList from './SideList';
 import UserGrid from './users/UsersGrid';
 // import MyAwesomeTable from "./laptopExample/LaptopsRow";
 import LaptopsTable from "./laptopExample/LaptopsTable";
+import LaptopRow from "./laptopExample/LaptopRow";
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import cookie from 'react-cookies';
 

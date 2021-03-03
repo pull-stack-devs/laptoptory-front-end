@@ -17,7 +17,7 @@ import {
   } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-import { fetchLaptops, addLaptops, assignLaptops, returnLaptops, getLaptops } from "../../rtk/laptop.store";
+import { fetchLaptops, fetchStudents, addLaptops, assignLaptops, returnLaptops, getLaptops } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
 
 const styles = {
@@ -157,7 +157,7 @@ const useStyles = makeStyles((theme) => ({
 export const MyAwesomeTable = (props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [state, setState] = useState([])
+    const [record, setRecord] = useState({});
     // console.log("props>>>>>>>>>>", props)
     const [laptop, setLaptop] = useState({
         'serial_no':'',
@@ -189,43 +189,27 @@ export const MyAwesomeTable = (props) => {
         props.addLaptops(laptop)
       };
 
-      // let student_with_laptop = props.myLaptops.laptops.map((item)=>{
-      //   if(item.availability_student) {
-      //     return item.std_lapt_id
-      //   }
-      // })
-  
-      // let availableStudent = props.myLaptops.students.map((item)=>{
-      //   if(item.student_status && !student_with_laptop.includes(item.id)) {
-      //     return item.id
-      //   }
-      // })
+      const updateAssigning = (e) =>{
+        setRecord({...record, [e.target.name]: e.target.value})
+      }
 
-      // console.log("availableStudent", availableStudent)
+      const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-    useEffect(()=>{
-        const getData = async ()=>{
-          await dispatch(fetchLaptops());
-        }
-        getData();
-        // dispatch(fetchLaptops());
-        // setState(availableStudent);
-    }, [])
+      const assignLaptopToStudent = () =>{
+        console.log("record", record)
+        dispatch(assignLaptops({
+          studentId: record.student_id,
+          laptopSerial: record.serial_number
+        }))
+      }
 
-    // let availableStudent = props.myLaptops.students.map((item)=>{
-    //   if(item.student_status) {
-    //     return item.id
-    //   }
-    // })
-
-    console.log("state>>>", state)
-
-    // console.log("availableStudent", availableStudent)
-
-    // const updateChange = (row) =>{
-    //     props.updateLaptops(row);
-    // }
+      const returnLaptopToStudent = ()=>{
+        dispatch(returnLaptops({
+          studentId: record.student_id,
+          laptopSerial: record.serial_number,
+          id: record.laptop_student_id
+        }))
+      }
 
     console.log("props>>>>>>>>>", props)
     
@@ -237,112 +221,76 @@ export const MyAwesomeTable = (props) => {
           width: "54px"
         },
         {
+          id: "1", 
+          field: 'serial_no', 
+          label: 'Serial Number',
+          disabled: false
+        },
+        {
             id: "2", 
             field: 'brand', 
             label: 'Brand',
-            editable: false,
+            disabled: false
         }, 
         {
             id: "3", 
             field: 'cpu', 
             label: 'CPU',
-            editable: false,
+            disabled: false
         },
         {
             id: "4", 
             field: 'ram', 
             label: 'RAM',
-            editable: false,
+            disabled: false
         },
         {
             id: "5", 
             field: 'storage', 
             label: 'Storage',
-            editable: false,
+            disabled: false
         },
         {
             id: "6", 
             field: 'storage_type', 
             label: 'Storage Type',
-            editable: false,
+            disabled: false
         },
         {
             id: "7", 
             field: 'display_resolution', 
             label: 'Display Resolution',
-            editable: false,
+            disabled: false
         },
         {
           id: "8", 
           field: 'availability', 
           label: 'Available in Inventory',
           getValue: ({value, column}) => value ? 'Available' : 'Not Available', 
-          editable: false,
+          disabled: false
         },
         {
           id: "9", 
           field: 'availability_student', 
           label: 'Available with student',
           getValue: ({value, column}) => value ? 'Available' : 'Not Available',
-          editable: false,
+          disabled: false
         },
         {
           id: "10", 
           field: 'std_id', 
           label: 'Student ID',
           getValue: ({value, column}) => value ? `Assigned to ${value}` : 'Not Assigned',
-          editable: false,
-          // editorCellRenderer: ({
-          //   tableManager,
-          //   value,
-          //   data,
-          //   column,
-          //   colIndex,
-          //   rowIndex,
-          //   onChange
-          // }) => (
-          //   <select
-          //     style={styles.select}
-          //     value={value}
-          //     onChange={(e) =>
-          //       onChange({ ...data, [column.field]: e.target.value })
-          //     }
-          //   >
-          //     {/* {state.map((item, index)=>{
-          //       return <option key={index}>{item.id}</option>
-          //     })} */}
-          //   </select>
-          // )
+          disabled: false,
+          
         },
         {
           id: "11", 
-          field: 'id', 
-          label: 'Select Student',
-          getValue: ({value, column}) => '',
-          editorCellRenderer: ({
-            tableManager,
-            value,
-            data,
-            column,
-            colIndex,
-            rowIndex,
-            onChange
-          }) => (
-            <select
-              style={styles.select}
-              value={value}
-              onChange={(e) =>
-                onChange({ ...data, [column.field]: e.target.value })
-              }
-            >
-              {console.log("fihaofiwnqdajsdioashldihasoidkn",props.data)}
-              {/* {console.log("fihaofiwnqdajsdioashldihasoidkn",props.myStudents)} */}
-              {/* {availableStudent.map((item, index)=>{
-                return <option key={index}>{item}</option>
-              })} */}
-            </select>
-          )
-      },
+          field: 'std_lapt_id', 
+          label: 'Student Laptop ID',
+          getValue: ({value, column}) => value ? `${value}` : 'Empty',
+          disabled: false,
+        },
         {
           id: "buttons",
           width: "max-content",
@@ -412,15 +360,28 @@ export const MyAwesomeTable = (props) => {
 
     return (
         <>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField id="standard-basic" label="Serial Number" name="serial_number" onChange={updateAssigning}/>
+          <TextField id="filled-basic" label="Student ID" variant="filled" name="student_id" type="number" min="1" onChange={updateAssigning}/>
+          <TextField id="outlined-basic" label="Student Laptop ID" variant="outlined" type="number" min="1" name="laptop_student_id" onChange={updateAssigning}/>
+          <Button variant="contained" color="primary" onClick={assignLaptopToStudent}>
+            Assign
+          </Button>
+          <Button variant="contained" color="secondary" onClick={returnLaptopToStudent}>
+            Return
+          </Button>
+        </form>
         <GridTable 
             columns={columns}
             rows={props.myLaptops} 
+            isLoading={true}
             onRowClick={({ rowIndex, data, column, isEdit, event }, tableManager) =>
             !isEdit &&
             tableManager.rowSelectionApi.getIsRowSelectable(data.id) &&
             tableManager.rowSelectionApi.toggleRowSelection(data.id)
             }
         />
+        
         <Fab color="primary" aria-label="add" className={classes.addBtn}>
             <Button onClick={handleClickOpen}>
               <AddIcon />
@@ -595,8 +556,8 @@ export const MyAwesomeTable = (props) => {
 };
 
 const mapStateToProps = state => ({
-    myLaptops: state.laptops.laptops,
-    myStudents: state.laptops.students
+  myLaptops: state.laptops.laptops,
+  myStudents: state.student.studentID
   })
   
   const mapDispatchToProps = {
