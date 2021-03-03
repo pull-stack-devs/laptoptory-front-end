@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import whyus from '../../img/whyus.PNG';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import logo1 from '../../img/logo.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,10 +23,12 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: theme.typography.fontWeightRegular,
         paddingLeft: 20
     },
+    
 
 }));
 
 export default function HomePage() {
+    
     useEffect(() => {
         AOS.init();
 
@@ -33,19 +36,22 @@ export default function HomePage() {
     const classes = useStyles();
     return (
         <>
-
-            <header>
-                <nav class="nav" id="nav">
-                    <div id="iconsNav">
-                        <a href="#" class="active"><i class="fa fa-home"></i> Home</a>
-                        <a href="#"><i class="fa fa-gear"></i> Service</a>
-                        <a href="#"><i class="fa fa-phone"></i> Contact</a>
-                        <a href="#"><i class="fa fa-user"></i> About</a>
-                        <a href="#"><i class="fa">&#xf090;</i>Sign In</a>
-                    </div>
-                </nav>
-            </header>
-
+<header class="header">
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div className="container"><img src={logo1} alt="" width="15%" height="15%"/>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="#" class="nav-link text-uppercase font-weight-bold">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">About</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Gallery</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Portfolio</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
             <section id="hero" class="d-flex align-items-center">
                 {/* <img src={hero} alt="img"/> */}
                 <div class="container">
@@ -138,7 +144,7 @@ export default function HomePage() {
                 <section id="why-us" class="why-us section-bg" >
                     <div class="section-title">
                         <h2>Why Us ?</h2>
-                        <div class="container" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="container" >
 
                             <p class="right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
                             </br> Proin varius purus suscipit, consectetur metus eu, consectetur sem. <br>

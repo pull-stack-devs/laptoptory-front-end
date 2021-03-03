@@ -20,6 +20,8 @@ import Alert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
+import '../home/style.css';
+import linked from '../../img/linked.png';
 
 const useStyles = makeStyles((theme) => ({
   // paper: {
@@ -120,19 +122,49 @@ export default function SignUp() {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign Up
-          </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <TextField
+
+
+    <>
+      <section class="signImg">
+        <div class="loginBox">
+          <h2>Sign Up</h2>
+          <form onSubmit={handleSubmit}>
+            <p>Username</p>
+            <input type="name"
+              placeholder="Username"
+              onChange={handleName}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Username"
+              name="username"
+              autoFocus></input>
+
+            <p>Password</p>
+            <input type="password" name="password" placeholder="Enter Password"  required
+              onChange={handlePassword}
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"></input>
+
+            <p>Email</p>
+            <input type="email" name="email" placeholder="Enter Email" required
+              onChange={handleEmail}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="email"
+              label="Email"
+              id="email"
+              autoComplete="current-email"></input>
+
+            <p>Name</p>
+            <input type="name" placeholder="Enter Your Name" required
               onChange={handleUserName}
               variant="outlined"
               margin="normal"
@@ -142,102 +174,22 @@ export default function SignUp() {
               label="Username"
               name="username"
               autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              onChange={handlePassword}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <TextField
-              onChange={handleName}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="name"
-              label="Name"
-              id="password"
-              autoComplete="name"
-            />
-            <TextField
-              onChange={handleEmail}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="email"
-              label="Email"
-              id="email"
-              autoComplete="current-email"
-            />
+              autoFocus></input>
 
-            <Grid item xs={12}>
-              <FormControl className={classes.formControl} xs={12}>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={role}
-                  onChange={handleChangeradio}
-                >
-                  <MenuItem name="select" value="admin">
-                    Admin
-                  </MenuItem>
-                  <MenuItem name="select" value="editor">
-                    Editor
-                  </MenuItem>
-                  <MenuItem name="select" value="user">
-                    User
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign UP
-            </Button>
-            <Show condition={context.signedUp}>
-              <Collapse in={open}>
-                <Alert
-                  action={
-                    <IconButton
-                      aria-label="close"
-                      color="inherit"
-                      size="small"
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                    >
-                      <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                  }
-                >
-                  You Signed up successfuly wait for permission and{' '}
-                  <a href="/">Sign In</a>
-                </Alert>
-              </Collapse>
-            </Show>
-            <Grid container>
-              <Grid item>
-                <Link to="/signin">{'have an account? Sign In'}</Link>
-              </Grid>
-            </Grid>
+            <div class="dropdown">
+              <button onChange={handleChangeradio} class="dropbtn">Role</button>
+              <div id="myDropdown" class="dropdown-content">
+                <a href="#">Admin</a>
+                <a href="#">User</a>
+                <a href="#">Editor</a>
+              </div>
+            </div>
+
+            <input type="submit" name="sign-in" value="Sign up"></input>
+            <img src={linked}/>
           </form>
         </div>
-      </Grid>
-    </Grid>
+      </section>
+    </>
   );
 }

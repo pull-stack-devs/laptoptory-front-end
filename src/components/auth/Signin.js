@@ -15,6 +15,8 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import '../home/style.css';
+import linked from '../../img/linked.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInSide() {
+export default function SignInSide() {
   const context = useContext(AuthContext);
   const classes = useStyles();
   const [userName, setUserName] = useState('');
@@ -66,19 +68,14 @@ function SignInSide() {
     context.login(userName, password);
   };
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <TextField
+    <>
+    <section class="signImg">
+      <div class="signin">
+     
+          <h2>Sign In</h2>
+          <form onSubmit={handleSubmit}>
+            <p>Username</p>
+            <input type="name"  placeholder="Username" required
               onChange={handleChangeUserName}
               variant="outlined"
               margin="normal"
@@ -88,46 +85,27 @@ function SignInSide() {
               label="Username"
               name="username"
               autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              onChange={handleChange}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <LinkedInIcon />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link to="/signup">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+              autoFocus></input>
+
+              <p>Password</p>
+              <input type="password" name="password" placeholder="Enter Password"  required
+                onChange={handleChange}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"></input>
+
+                <input type="submit" name="sign-in" value="Sign In"></input>
+                <img src={linked}/>
           </form>
-        </div>
-      </Grid>
-    </Grid>
+      </div>
+      </section>
+    </>
+   
   );
 }
-
-export default SignInSide;
