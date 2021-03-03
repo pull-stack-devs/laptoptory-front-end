@@ -7,7 +7,7 @@ import laptopSlice from './laptop.store.js';
 
 
 
-const reducers = combineReducers({programs:programs,students:students, user: userSlice, laptop: laptopSlice, })
+const reducers = combineReducers({programs:programs,students:students, user: userSlice, laptops: laptopSlice, })
 const store = configureStore({ reducer: reducers});
 
 export default store;

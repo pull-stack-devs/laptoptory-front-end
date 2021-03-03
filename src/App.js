@@ -3,14 +3,12 @@ import Signin from './components/auth/Signin';
 import Signup from './components/auth/Signup';
 import HomePage from './components/home/Home';
 import AboutUs from './components/home/About';
-
+import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { AuthContext } from './context/SignInContext';
 import { useContext } from 'react';
 
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-
-import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 
 function App() {
   const context = useContext(AuthContext);
@@ -29,8 +27,8 @@ function App() {
               <Redirect to="/signin" />
             ) : (
               <>
-                {' '}
-                <Dashboard />{' '}
+                <Dashboard />
+                <Redirect to="/dashboard/charts" />
               </>
             )}
           </Route>

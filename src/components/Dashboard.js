@@ -260,7 +260,7 @@ function Dashboard(props) {
           {/* <SocketIO /> */}
           {/* <Route exact path="/" component={UsersGrid} /> */}
           {/* </Route> */}
-          <Route exact path="/dashboard">
+          <Route exact path="/dashboard/charts">
             {console.log('inide dashboard route')}
             {!context.loggedIn ? <Redirect to="/signin" /> : <ChartParent />}
           </Route>

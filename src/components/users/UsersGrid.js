@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function UserGrid(props) {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
   const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
