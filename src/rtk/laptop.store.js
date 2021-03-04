@@ -60,6 +60,25 @@ export const fetchStudents = () => async (dispatch) => {
   dispatch(getStudent(students.data))
 }
 
+// Update laptop row
+export const updateLaptops = (row) => async(dispatch) =>{
+  let record = JSON.stringify(row)
+  let data = await axios({
+    method: 'put',
+    url: laptopApi,
+    data: record,
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.load('auth')}`,
+    },       
+  });
+
+  if(data.data) {
+    await dispatch(fetchLaptops())
+  }
+}
+
 // assign a laptop to a student
 export const assignLaptops = (item) => async (dispatch) =>{
   console.log("items>>>>>>>", item)
