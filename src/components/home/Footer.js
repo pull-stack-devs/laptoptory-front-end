@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import whiteLogo from '../../images/whiteLogo.png';
+import Copyrights from './Copyrights';
 import { HashLink } from 'react-router-hash-link';
 import './styles/Footer.css';
 import AOS from 'aos';
@@ -92,9 +93,7 @@ function Footer(props) {
           </Row>
         </Container>
       </div>
-      <div className="footer-copyrights">
-        <p>Copyright © 2021 Laptoptory.</p>
-      </div>
+      <Copyrights />
     </footer>
   );
 }

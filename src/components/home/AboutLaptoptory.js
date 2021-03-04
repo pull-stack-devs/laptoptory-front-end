@@ -27,20 +27,20 @@ function AboutLaptoptory(props) {
                 <img
                   src={whyus}
                   alt="whyus"
-                  class="img-fluid mx-auto d-block"
+                  className="img-fluid mx-auto d-block"
                 />
               </Col>
               <Col xs={6}>
                 <div className="about-laptoptory-text">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    <br></br> Proin varius purus suscipit, consectetur metus eu,
-                    consectetur sem. <br></br>Cras at neque augue. Vestibulum id
-                    nisl lacus. Morbi vel egestas eros.
-                    <br></br> Sed at ultricies ipsum, eget aliquam lectus. Nulla
-                    lacus erat, euismod <br></br>sed varius nec, mollis at nibh.
-                    In sit amet enim tristique ex pellentesque <br></br>
-                    porttitor. Mauris vehicula interdum quam a varius.
+                    Laptoptory is a web application that will track all the
+                    student's or employee's laptop status, whether they get one
+                    from the inventory, or returns the laptop to it. Also, the
+                    user can check the persons information, and the list of
+                    laptops in the inventory that matches the specified
+                    requirements & assign matched laptops to specific person &
+                    gives a tracking informations to the user about all the
+                    saved laptops in the database.
                   </p>
                 </div>
               </Col>

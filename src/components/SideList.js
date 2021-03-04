@@ -4,6 +4,7 @@ import LaptopIcon from '@material-ui/icons/Laptop';
 import FaceIcon from '@material-ui/icons/Face';
 import PeopleIcon from '@material-ui/icons/People';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';import SchoolIcon from '@material-ui/icons/School';
+import HistoryIcon from '@material-ui/icons/History';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -23,9 +24,9 @@ function SideList(props) {
   return (
     <div>
        <Link
-        to="/dashboard/laptops"
+        to="/dashboard/charts"
         className={classes.sideLink}
-        onClick={() => updateActivePage('Laptops')}
+        onClick={() => updateActivePage('Charts')}
       >
         <SideItem listItemName="Charts">
           <DonutLargeIcon />
@@ -65,6 +66,15 @@ function SideList(props) {
       >
         <SideItem listItemName="Users">
           <PeopleIcon />
+        </SideItem>
+      </Link>
+      <Link
+        to="/dashboard/logs"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Logs')}
+      >
+        <SideItem listItemName="Logs">
+          <HistoryIcon />
         </SideItem>
       </Link>
     </div>

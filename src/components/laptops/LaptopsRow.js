@@ -13,11 +13,15 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    FormControl
+    FormControl,
+    Grid
   } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import AssignmentReturnIcon from '@material-ui/icons/AssignmentReturn';
+import { grey } from '@material-ui/core/colors';
 import AddIcon from '@material-ui/icons/Add';
-import { fetchLaptops, fetchStudents, addLaptops, assignLaptops, returnLaptops, getLaptops } from "../../rtk/laptop.store";
+import { fetchLaptops, addLaptops, assignLaptops, returnLaptops, updateLaptops } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
 
 const styles = {
@@ -127,7 +131,10 @@ const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       bottom: theme.spacing(2),
       right: theme.spacing(2),
-    },
+      backgroundColor: '#0F3057',
+      "&:hover":{
+        backgroundColor: '#0F3057',
+      }    },
     root: {
       width: '100%',
       overflowX: 'auto',
@@ -147,6 +154,24 @@ const useStyles = makeStyles((theme) => ({
     noLabel: {
       marginTop: theme.spacing(3),
     },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+    typography: {
+      padding: theme.spacing(2),
+    },
+    item: {
+      position: 'relative',
+      marginBottom:'30px'
+    },
+    grid_table: {
+      marginTop: 40,
+    },
+    dialogTextField: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'space-between'
+    }
   }));
 
   const Transition = React.forwardRef(function Transition(props, ref) {
@@ -172,6 +197,27 @@ export const MyAwesomeTable = (props) => {
         'availability':false,
     })
 
+    const [openAssign, setOpenAssign] = React.useState(false);
+
+    const handleClickOpenAssign = () => {
+      setOpenAssign(true);
+    };
+
+    const handleCloseAssign = () => {
+      setOpenAssign(false);
+    };
+
+    const [openReturn, setOpenReturn] = React.useState(false);
+
+    const handleClickOpenReturn = () => {
+      setOpenReturn(true);
+    };
+
+    const handleCloseReturn = () => {
+      setOpenReturn(false);
+    };
+
+
     const handleClickOpen = () => {
         setOpen(true);
       };
@@ -186,7 +232,7 @@ export const MyAwesomeTable = (props) => {
 
       const addItem = () =>{
         setOpen(false)
-        props.addLaptops(laptop)
+        dispatch(addLaptops(laptop))
       };
 
       const updateAssigning = (e) =>{
@@ -201,6 +247,7 @@ export const MyAwesomeTable = (props) => {
           studentId: record.student_id,
           laptopSerial: record.serial_number
         }))
+        setOpenAssign(false)
       }
 
       const returnLaptopToStudent = ()=>{
@@ -209,6 +256,11 @@ export const MyAwesomeTable = (props) => {
           laptopSerial: record.serial_number,
           id: record.laptop_student_id
         }))
+        setOpenReturn(true);
+      }
+
+      const updateLaptopRow = (row) =>{
+        dispatch(updateLaptops(row));
       }
 
     console.log("props>>>>>>>>>", props)
@@ -230,44 +282,191 @@ export const MyAwesomeTable = (props) => {
             id: "2", 
             field: 'brand', 
             label: 'Brand',
-            disabled: false
+            editorCellRenderer: ({
+              tableManager,
+              value,
+              data,
+              column,
+              colIndex,
+              rowIndex,
+              onChange
+            }) => (
+                <select
+                  style={styles.select}
+                  value={value}
+                  onChange={(e) =>
+                    onChange({ ...data, [column.field]: e.target.value })
+                  }
+                >
+                  <option value="Lenovo">Lenovo</option>
+                  <option value="Asus">Asus</option>
+                  <option value="Acer">Acer</option>
+                  <option value="HP">HP</option>
+                  <option value="Dell">Dell</option>
+                </select>
+            )
         }, 
         {
             id: "3", 
             field: 'cpu', 
             label: 'CPU',
-            disabled: false
+            editorCellRenderer: ({
+              tableManager,
+              value,
+              data,
+              column,
+              colIndex,
+              rowIndex,
+              onChange
+            }) => (
+              <select
+                style={styles.select}
+                value={value}
+                onChange={(e) =>
+                  onChange({ ...data, [column.field]: e.target.value })
+                }
+              >
+                <option value="i3">i3</option>
+                <option value="i5">i5</option>
+                <option value="i7">i7</option>
+                <option value="i9">i9</option>
+              </select>
+            )
         },
         {
             id: "4", 
             field: 'ram', 
             label: 'RAM',
-            disabled: false
+            editorCellRenderer: ({
+              tableManager,
+              value,
+              data,
+              column,
+              colIndex,
+              rowIndex,
+              onChange
+            }) => (
+              <select
+                style={styles.select}
+                value={value}
+                onChange={(e) =>
+                  onChange({ ...data, [column.field]: e.target.value })
+                }
+              >
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+                <option value="16">16</option>
+                <option value="24">24</option>
+                <option value="32">32</option>
+              </select>
+            )
         },
         {
             id: "5", 
             field: 'storage', 
             label: 'Storage',
-            disabled: false
+            editorCellRenderer: ({
+              tableManager,
+              value,
+              data,
+              column,
+              colIndex,
+              rowIndex,
+              onChange
+            }) => (
+              <select
+                style={styles.select}
+                value={value}
+                onChange={(e) =>
+                  onChange({ ...data, [column.field]: e.target.value })
+                }
+              >
+                <option value="128GB">128GB</option>
+                <option value="256GB">256GB</option>
+                <option value="516GB">516GB</option>
+                <option value="1TB">1TB</option>
+                <option value="2TB">2TB</option>
+              </select>
+            )
         },
         {
             id: "6", 
             field: 'storage_type', 
             label: 'Storage Type',
-            disabled: false
+            editorCellRenderer: ({
+              tableManager,
+              value,
+              data,
+              column,
+              colIndex,
+              rowIndex,
+              onChange
+            }) => (
+              <select
+                style={styles.select}
+                value={value}
+                onChange={(e) =>
+                  onChange({ ...data, [column.field]: e.target.value })
+                }
+              >
+              <option value="HDD">HDD</option>
+              <option value="SSD">SSD</option>
+              </select>
+            )
         },
         {
             id: "7", 
             field: 'display_resolution', 
             label: 'Display Resolution',
-            disabled: false
+            editorCellRenderer: ({
+              tableManager,
+              value,
+              data,
+              column,
+              colIndex,
+              rowIndex,
+              onChange
+            }) => (
+              <select
+                style={styles.select}
+                value={value}
+                onChange={(e) =>
+                  onChange({ ...data, [column.field]: e.target.value })
+                }
+              >
+                <option value="1280x1080">1280x1080</option>
+                <option value="1366x768">1366x768</option>
+                <option value="1920x1080">1920x1080</option>
+                <option value="2160x1440">2160x1440</option>
+                <option value="3840x2160">3840x2160</option>
+              </select>
+            )
         },
         {
           id: "8", 
           field: 'availability', 
           label: 'Available in Inventory',
-          getValue: ({value, column}) => value ? 'Available' : 'Not Available', 
-          disabled: false
+          editorCellRenderer: ({
+            tableManager,
+            value,
+            data,
+            column,
+            colIndex,
+            rowIndex,
+            onChange
+          }) => (
+            <select
+              style={styles.select}
+              value={value}
+              onChange={(e) =>
+                onChange({ ...data, [column.field]: e.target.value })
+              }
+            >
+              <option value={true}>Available</option>
+              <option value={false}>Not Available</option>
+            </select>
+          )
         },
         {
           id: "9", 
@@ -348,6 +547,19 @@ export const MyAwesomeTable = (props) => {
                     (r) => r.id === data.id
                   );
                   rowsClone[updatedRowIndex] = data;
+                  updateLaptopRow({
+                    'id': data.id,
+                    'serial_no':data.serial_no,
+                    'model':data.modal,
+                    'brand':data.brand,
+                    'cpu':data.cpu,
+                    'ram':data.ram,
+                    'storage':data.storage,
+                    'display_resolution':data.display_resolution,
+                    'storage_type':data.storage_type,
+                    'power_cable':false,
+                    'availability':data.availability,
+                })
                   tableManager.rowEditApi.setEditRowId(null);
                 }}
               >
@@ -361,16 +573,72 @@ export const MyAwesomeTable = (props) => {
     return (
         <>
         <form className={classes.root} noValidate autoComplete="off">
-          <TextField id="standard-basic" label="Serial Number" name="serial_number" onChange={updateAssigning}/>
-          <TextField id="filled-basic" label="Student ID" variant="filled" name="student_id" type="number" min="1" onChange={updateAssigning}/>
-          <TextField id="outlined-basic" label="Student Laptop ID" variant="outlined" type="number" min="1" name="laptop_student_id" onChange={updateAssigning}/>
-          <Button variant="contained" color="primary" onClick={assignLaptopToStudent}>
+        <Grid item container xs={6} className={classes.item}>
+          <Grid item
+          className="animate__animated animate__fadeInUp" style={{marginRight: 10}}>
+            <Fab variant="extended" color='primary' onClick={handleClickOpenAssign}>
+              <AssignmentIndIcon className={classes.extendedIcon} />
+              Assign
+            </Fab>
+          </Grid>
+          <Grid item
+          className="animate__animated animate__fadeInUp" >
+            <Fab variant="extended" color='secondary' onClick={handleClickOpenReturn}>
+              <AssignmentReturnIcon className={classes.extendedIcon} />
+              Return
+            </Fab>
+          </Grid>
+        </Grid>
+
+        <Dialog
+        open={openAssign}
+        onClose={handleCloseAssign}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Assign a laptop to a student:"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description" className={classes.dialogTextField}>
+            <TextField id="filled-basic" label="Serial Number" variant="filled" name="serial_number" onChange={updateAssigning}/>
+            < TextField id="filled-basic" label="Student ID" variant="filled" name="student_id" type="number" min="1" onChange={updateAssigning}/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAssign} color="primary">
+          Cancel
+          </Button>
+          <Button onClick={assignLaptopToStudent} color="primary" autoFocus>
             Assign
           </Button>
-          <Button variant="contained" color="secondary" onClick={returnLaptopToStudent}>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openReturn}
+        onClose={handleCloseReturn}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Return a student laptop to the inventory:"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description" className={classes.dialogTextField}>
+            <TextField id="filled-basic" label="Serial Number" variant="filled" name="serial_number" onChange={updateAssigning}/>
+            < TextField id="filled-basic" label="Student ID" variant="filled" name="student_id" type="number" min="1" onChange={updateAssigning}/>
+            <TextField id="filled-basic" label="Student Laptop ID" variant="filled" type="number" min="1" name="laptop_student_id" onChange={updateAssigning}/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseReturn} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={returnLaptopToStudent} color="primary" autoFocus>
             Return
           </Button>
+        </DialogActions>
+      </Dialog>
+          
         </form>
+        
         <GridTable 
             columns={columns}
             rows={props.myLaptops} 
@@ -380,10 +648,14 @@ export const MyAwesomeTable = (props) => {
             tableManager.rowSelectionApi.getIsRowSelectable(data.id) &&
             tableManager.rowSelectionApi.toggleRowSelection(data.id)
             }
+            className={classes.grid_table}
+            className="animate__animated animate__fadeInUp"
         />
         
-        <Fab onClick={handleClickOpen} color="primary" aria-label="add" className={classes.addBtn}>
-              <AddIcon />
+        <Fab color="primary" aria-label="add" className={classes.addBtn}>
+            <Button onClick={handleClickOpen}>
+              <AddIcon style={{ color: grey[50]}} />
+            </Button>
         </Fab>
         <Dialog
         open={open}
@@ -396,8 +668,6 @@ export const MyAwesomeTable = (props) => {
         <DialogTitle id="alert-dialog-slide-title">{"Add a new Laptop to the table"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
           </DialogContentText>
             <TextField
               autoFocus

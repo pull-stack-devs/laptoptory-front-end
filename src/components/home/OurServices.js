@@ -20,10 +20,9 @@ function OurServices(props) {
               <Col md={4}>
                 <div className="service-card">
                   <div className="card-block block-1">
-                    <h3 className="card-title">Special title</h3>
+                    <h3 className="card-title">Assets Management</h3>
                     <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
+                      Laptoptory helps you to manage your assets in the organization and keeps a record for you to ensure nothing gets lost.
                     </p>{' '}
                   </div>
                 </div>
@@ -31,10 +30,9 @@ function OurServices(props) {
               <Col md={4}>
                 <div className="service-card">
                   <div className="card-block block-2">
-                    <h3 className="card-title">Special title</h3>
+                    <h3 className="card-title">Tracking Assets</h3>
                     <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
+                      Laptoptory allows you to track your assets and see who has them and whether to get them back or not.
                     </p>{' '}
                   </div>
                 </div>
@@ -42,15 +40,14 @@ function OurServices(props) {
               <Col md={4}>
                 <div className="service-card">
                   <div className="card-block block-3">
-                    <h3 className="card-title">Special title</h3>
+                    <h3 className="card-title">Action Logs</h3>
                     <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
+                     Laptoptory logs the critical actions for you so you can get back to them when needed.
                     </p>{' '}
                   </div>
                 </div>
               </Col>
-              <Col md={4}>
+              {/* <Col md={4}>
                 <div className="service-card">
                   <div className="card-block block-4">
                     <h3 className="card-title">Special title</h3>
@@ -82,7 +79,7 @@ function OurServices(props) {
                     </p>{' '}
                   </div>
                 </div>
-              </Col>
+              </Col> */}
             </Row>
           </div>
         </Col>
@@ -91,79 +88,3 @@ function OurServices(props) {
   );
 }
 export default OurServices;
-
-{
-  /* <div className="container-fluid" >
-        <div className="row mt-5">
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <div className="card">
-              <div className="card-block block-1">
-                <h3 className="card-title">Special title</h3>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <div className="card">
-              <div className="card-block block-2">
-                <h3 className="card-title">Special title</h3>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <div className="card">
-              <div className="card-block block-3">
-                <h3 className="card-title">Special title</h3>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <div className="card">
-              <div className="card-block block-4">
-                <h3 className="card-title">Special title</h3>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <div className="card">
-              <div className="card-block block-5">
-                <h3 className="card-title">Special title</h3>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-            <div className="card">
-              <div className="card-block block-6">
-                <h3 className="card-title">Special title</h3>
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> */
-}

@@ -23,16 +23,16 @@ function Faq(props) {
           >
              <Row>
           <Col xs={6}>
-              <FaqCard question="test test test" answer="test test test" />
+              <FaqCard question="How to check the status of a laptop?" answer="By searching student id or laptop id in students table." />
           </Col>
           <Col xs={6}>
-              <FaqCard question="test test test" answer="test test test" />
+              <FaqCard question="How can I track a laptop?" answer="By checking its availabilty in the laptops table." />
           </Col>
           <Col xs={6}>
-              <FaqCard question="test test test" answer="test test test" />
+              <FaqCard question="What's the maximum numbers of laptops for each program?" answer="Unlimited number." />
           </Col>
           <Col xs={6}>
-              <FaqCard question="test test test" answer="test test test" />
+              <FaqCard question="Can I see the laptops number with graduated students?" answer="We have a chart showing that" />
           </Col>
       </Row>
           </div>

@@ -19,10 +19,13 @@
 }
 
 .our-services .service-card .block-1:before {
-    content: "\f0e7";
+    /* content: "\f0e7"; */
+    content: "\f00c";
+
 }
 .our-services .service-card .block-2:before {
-    content: "\f0eb";
+    /* content: "\f0eb"; */
+    content: "\f00c";
 }
 .our-services .service-card .block-3:before {
     content: "\f00c";

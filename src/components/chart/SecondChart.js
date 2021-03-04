@@ -1,9 +1,9 @@
 // import ApexCharts from 'apexcharts'
 // import React, { useEffect } from 'react'
+
+
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import AOS from 'aos';
-import 'aos/dist/aos.css'; 
 
 class ChartCop extends Component {
 
@@ -21,7 +21,7 @@ class ChartCop extends Component {
             speed: 1000,
             animateGradually: {
               enabled: true,
-              // delay: 250
+              delay: 250
             },
             dynamicAnimation: {
               enabled: true,
@@ -50,11 +50,12 @@ class ChartCop extends Component {
               },total:{
                 show:true
               }
+            
             }
           }
         },
         theme: {
-          palette: 'palette3',
+          palette: 'palette2',
         },
         fill: {
           type: 'gradient',
@@ -62,7 +63,7 @@ class ChartCop extends Component {
             shade: 'dark',
             type: "horizontal",
             shadeIntensity: 0.5,
-            gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+            gradientToColors: undefined, 
             inverseColors: true,
             opacityFrom: 1,
             opacityTo: 1,
@@ -70,109 +71,32 @@ class ChartCop extends Component {
             colorStops: []
           }
         },
-        series: [this.props.data.data0, this.props.data.data1, this.props.data.data2],
-        labels: ['Students Not Granteded Laptops','Students Granted Laptops','Students Did not Return Laptops']
+        series: [this.props.numbers.num1,this.props.numbers.num2],
+        labels: ['Non-Available Laptops','Available Laptops']
       },
       
     }
 
   }
  
-  // const dispatch=useDispatch();
-  // dispatch(getNumData())
 
 componentDidMount=()=>{
-  setTimeout(() => {
-    this.setState({
-      series: [this.props.data.data0, this.props.data.data1, this.props.data.data2],
-      
-    })
-    
-  },3000)
-  AOS.init();
+    setTimeout(() => {
+        this.setState({
+          series: [this.props.numbers.num1,this.props.numbers.num2],
+          
+        })
+        
+      },3000)
 }
-  // const dispatch=useDispatch();
-  // dispatch(getNumData())
-  // componentDidAppear = () => {
-  //   const newSeries = [];
-
-  //   this.state.series.map((s,i) => {
-  //     const data = s.data.map(() => {
-  //       return this.props[`data${i}`]
-  //     })
-  //     newSeries.push({ data, name: s.name })
-  //   })
-
-  //   this.setState({
-  //     series: newSeries
-  //   })
-    
-  // }
-  // componentWillEnter = () => {
-  //   const newSeries = [];
-
-  //   this.state.series.map((s,i) => {
-  //     const data = s.data.map(() => {
-  //       return this.props[`data${i}`]
-  //     })
-  //     newSeries.push({ data, name: s.name })
-  //   })
-
-  //   this.setState({
-  //     series: newSeries
-  //   })
-  // }
-  // componentDidEnter = () => {
-  //   const newSeries = [];
-
-  //   this.state.series.map((s,i) => {
-  //     const data = s.data.map(() => {
-  //       return this.props[`data${i}`]
-  //     })
-  //     newSeries.push({ data, name: s.name })
-  //   })
-
-  //   this.setState({
-  //     series: newSeries
-  //   })
-  // }
-  // componentDidLeave = () => {
-  //   const newSeries = [];
-
-  //   this.state.series.map((s,i) => {
-  //     const data = s.data.map(() => {
-  //       return this.props[`data${i}`]
-  //     })
-  //     newSeries.push({ data, name: s.name })
-  //   })
-
-  //   this.setState({
-  //     series: newSeries
-  //   })
-  // }
-  // componentWillLeave = () => {
-  //   const newSeries = [];
-
-  //   this.state.series.map((s,i) => {
-  //     const data = s.data.map(() => {
-  //       return this.props[`data${i}`]
-  //     })
-  //     newSeries.push({ data, name: s.name })
-  //   })
-
-  //   this.setState({
-  //     series: newSeries
-  //   })
-  // }
-
 
 
   render() {
     return (
-      <div data-aos="flip-left" className="donut" style={{width:"50%",height:"500px",marginLeft:"0px" , boxShadow: '5px 8px 10px 7px #BDC4C5',paddingTop:"5px",borderRadius:"15px",textAlign:"center"}}>
-        <h4>Students Statistics</h4>
-        <hr style={{width:"50%",height:"2px",backgroundColor:"#6F5F95"}}></hr>
-        <Chart  options={this.state.options} series={this.state.series} type="donut" width="100%" />
+      <div data-aos="flip-right" className="donut" style={{width:"48%",height:"500px",marginLeft:"0px" , boxShadow: '5px 8px 10px 7px #BDC4C5',paddingTop:"5px",borderRadius:"15px",textAlign:"center"}}>
+          <h4>Laptops Statistics</h4>
+          <hr style={{width:"50%",height:"2px",backgroundColor:"#6F5F95"}}></hr>
+        <Chart options={this.state.options} series={this.state.series} type="donut" width="100%" />
       </div>
     );
 

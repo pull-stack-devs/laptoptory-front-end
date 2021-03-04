@@ -359,6 +359,7 @@ export const MyAwesomeTable = (props) => {
   return (
     <>
       <GridTable
+      className="animate__animated animate__fadeInUp"
         columns={columns}
         rows={props.students}
         onRowClick={({ rowIndex, data, column, isEdit, event }, tableManager) =>

@@ -41,9 +41,7 @@ function Testimonials(props) {
                       <div className="tesimonial-text">
                         <h3>Rawan</h3>
                         <p>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing
-                          elit. Magni qui tempore ratione neque necessitatibus
-                          cupiditate itaque iste possimus maiores saepe
+                          The system is very easy to use and have a fancy design.
                         </p>
                       </div>
                     </div>
@@ -60,9 +58,7 @@ function Testimonials(props) {
                       <div className="tesimonial-text">
                         <h3>Esra'a</h3>
                         <p>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing
-                          elit. Magni qui tempore ratione neque necessitatibus
-                          cupiditate itaque iste possimus maiores saepe
+                          The system is so reliable and offers many features.
                         </p>
                       </div>
                     </div>
@@ -79,9 +75,7 @@ function Testimonials(props) {
                       <div className="tesimonial-text">
                         <h3>Anolla</h3>
                         <p>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing
-                          elit. Magni qui tempore ratione neque necessitatibus
-                          cupiditate itaque iste possimus maiores saepe
+                         The security is really great and only approved users can enter.
                         </p>
                       </div>
                     </div>
@@ -98,9 +92,7 @@ function Testimonials(props) {
                       <div className="tesimonial-text">
                         <h3>Mahmoud</h3>
                         <p>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing
-                          elit. Magni qui tempore ratione neque necessitatibus
-                          cupiditate itaque iste possimus maiores saepe
+                          Considering the features that this system offers, their pricing is really good.
                         </p>
                       </div>
                     </div>

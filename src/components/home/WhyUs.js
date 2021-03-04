@@ -35,7 +35,7 @@ function WhyUs(props) {
                 </div>
                 <div className="why-us-text">
                   <h3>High Security</h3>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni qui tempore ratione neque necessitatibus cupiditate itaque iste possimus maiores saepe</p>
+                  <p>Laptoptory offers a multi-layered of security to make sure your data is safe.</p>
                 </div>
               </Col>
               <Col md={4}>
@@ -48,7 +48,7 @@ function WhyUs(props) {
                 </div>
                 <div className="why-us-text">
                   <h3>Competitive Pricing</h3>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni qui tempore ratione neque necessitatibus cupiditate itaque iste possimus maiores saepe</p>
+                  <p>Lpatoptory offers cheap prices comparing to other alike systems.</p>
                 </div>
               </Col>
               <Col md={4}>
@@ -61,7 +61,7 @@ function WhyUs(props) {
                 </div>
                 <div className="why-us-text">
                   <h3>Ease of Use</h3>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni qui tempore ratione neque necessitatibus cupiditate itaque iste possimus maiores saepe</p>
+                  <p>Laptoptory is built using the latest techology and have a fancy-look design to ensure the best user experience.</p>
                 </div>
               </Col>
             </Row>

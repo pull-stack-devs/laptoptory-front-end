@@ -25,8 +25,9 @@ import SideList from './SideList';
 import ChartParent from './chart/ChartParent';
 import LaptopsTable from './laptops/LaptopsTable';
 import ProgramsGrid from './programs/ProgramGrid';
+import LogTable from './logsTable/LogTable';
 import UsersGrid from './users/UsersGrid';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Link  } from 'react-router-dom';
 import cookie from 'react-cookies';
 import SocketIO from './SocketIO';
 import StudentsTable from './students/StudentsTable';
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    backgroundColor:'#0f3057',
   },
   toolbarIcon: {
     display: 'flex',
@@ -123,6 +125,12 @@ const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
     marginBottom: '20px',
   },
+  redirectLink:{
+    color:"white",
+    '&:hover':{
+      color:"#541D2B"
+    }
+  }
 }));
 
 function Dashboard(props) {
@@ -181,11 +189,20 @@ function Dashboard(props) {
           >
             Laptoptory
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Link to="/dashboard/users" className={classes.redirectLink}>
+            <IconButton color="inherit">
+              <Badge
+                badgeContent={context.numSinedUp > 0 ? context.numSinedUp : 0}
+                color="secondary"
+              >
+                <NotificationsIcon
+                  onClick={() => {
+                    context.setNumSigned(0);
+                  }}
+                />
+              </Badge>
+            </IconButton>
+          </Link>
           <IconButton
             edge="end"
             aria-label="account of current user"
@@ -220,7 +237,6 @@ function Dashboard(props) {
             >
               Logout
             </MenuItem>
-            {/* <MenuItem onClick={handleProfileMenuClose}>My account</MenuItem> */}
           </Menu>
         </Toolbar>
       </AppBar>
@@ -257,7 +273,7 @@ function Dashboard(props) {
               </Typography>
             ) : null}
           </Breadcrumbs>
-          {/* <SocketIO /> */}
+          <SocketIO />
           {/* <Route exact path="/" component={UsersGrid} /> */}
           {/* </Route> */}
           <Route exact path="/dashboard/charts">
@@ -276,6 +292,9 @@ function Dashboard(props) {
           </Route>
           <Route exact path="/dashboard/users">
             {!context.loggedIn ? <Redirect to="/signin" /> : <UsersGrid />}
+          </Route>
+          <Route exact path="/dashboard/logs">
+            {!context.loggedIn ? <Redirect to="/signin" /> : <LogTable />}
           </Route>
           <Box pt={4}>{/* <Copyright /> */}</Box>.
         </Container>

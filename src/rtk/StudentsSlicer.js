@@ -13,7 +13,9 @@ const students = createSlice({
         studentsWithLap:0,
         stdWithNoLap:0,
         notReturned:0,
-        stdID:[]
+        stdID:[],
+        availableLap:0,
+        nonAvailableLap:0
     },
     reducers: {
 
@@ -30,6 +32,12 @@ const students = createSlice({
         },
         setNotReturn(state,action){
             state.notReturned =action.payload
+        },
+        setAvailableLap(state,action){
+            state.availableLap =action.payload
+        },
+        setNavailableLap(state,action){
+            state.nonAvailableLap =action.payload
         }
         // ,setStdID(state,action){
         //     let stdWithLap=action.payload.std.map((student,indx)=>{
@@ -72,7 +80,20 @@ export const getNumData = () => async (dispatch,getState) => {
         }
         
     });
-   
+
+    function setLap(){
+        
+       let counter=0
+        data.data.forEach(element => {
+         if(!element.availability){
+           counter =counter+1
+         }
+         dispatch(setNavailableLap(counter));
+         dispatch(setAvailableLap((data.data.length)-counter))
+       });
+
+    }
+    setLap()
     function nums() {  
         let stdWithLap=0
         let notReturned=0
@@ -159,6 +180,6 @@ export const addStudent = (obj) => async (dispatch) => {
 
 
 
-export const { setStudents ,setStdWithLap ,setStdWithNoLap, setNotReturn} = students.actions;
+export const { setStudents ,setStdWithLap ,setStdWithNoLap, setNotReturn,setAvailableLap,setNavailableLap} = students.actions;
 
 export default students.reducer;

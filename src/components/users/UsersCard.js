@@ -34,6 +34,8 @@ import { useDispatch, connect } from 'react-redux';
 import DoneIcon from '@material-ui/icons/Done';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -87,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardInfo: {
     padding: ' 10px 10px 10px  25px',
+    color :'#0F3057'
   },
   boldLabel: {
     fontWeight: 'bold',
@@ -95,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
   },
   capitalizedText: {
     textTransform: 'capitalize',
+    color :'#9E5256',
   },
   labelPadding: {
     display: 'inline-block',
@@ -113,6 +117,9 @@ export function UserCard(props) {
   const [updateOpen, setUpdateOpen] = React.useState(false);
   const [approvalRole, setApprovalRole] = React.useState(props.items.role_name);
 
+  useEffect(()=>{
+    AOS.init()
+  },[])
   console.log('props users card>>>>>', props);
   const handleApprovalRoleChange = (event) => {
     setApprovalRole(event.target.value);
@@ -130,13 +137,6 @@ export function UserCard(props) {
     setUpdateOpen(false);
   };
   const dispatch = useDispatch();
-
-  // const changeType = () => {
-  //   setState(true);
-  //   setRecord(props.items);
-  //   console.log('state>>>>>>', state);
-  // };
-
   const updateChange = () => {
     setUpdateOpen(false);
     dispatch(updateUsers(record));
@@ -158,13 +158,13 @@ export function UserCard(props) {
 
   return (
     <>
-      <Card className={classes.root} key={props.key}>
+      <Card className={classes.root} key={props.key}  data-aos="fade-up" >
         <Box color="text.primary" className={classes.flexBox}>
           <AvatarGroup
             max={4}
             className={` ${classes.avatar} ${classes.middle}`}
           >
-            <Avatar>
+            <Avatar >
               {props.items.name[0].toUpperCase() +
                 props.items.name[1].toUpperCase()}
             </Avatar>
@@ -175,7 +175,7 @@ export function UserCard(props) {
           />
         </Box>
         <CardContent className={classes.cardInfo}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom >
             <span className={classes.boldLabel}>Username:</span>{' '}
             <span>{props.items.username}</span>
           </Typography>
@@ -184,7 +184,6 @@ export function UserCard(props) {
             <span> {props.items.email}</span>
           </Typography>
           <Typography variant="subtitle2" gutterBottom>
-            {/* <span className={classes.boldLabel}>Role:</span>{' '} */}
             {props.accepted !== 1 ? (
               <>
                 <span className={classes.boldLabel}>Role:</span>
@@ -243,7 +242,6 @@ export function UserCard(props) {
         </CardActions>
       </Card>
       <Dialog
-        // fullScreen={fullScreen}
         open={deleteOpen}
         onClose={handleCloseDeleteOpen}
         aria-labelledby="responsive-dialog-title"
@@ -273,8 +271,6 @@ export function UserCard(props) {
         <DialogTitle id="form-dialog-title">Update User Info</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {/* To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally. */}
           </DialogContentText>
           <TextField
             disabled
@@ -337,23 +333,6 @@ export function UserCard(props) {
               <option value={'user'}>User</option>
             </NativeSelect>
           </FormControl>
-          {/* <FormControl className={classes.formControl}>
-            <InputLabel shrink htmlFor="approval-native-helper">
-              Approval
-            </InputLabel>
-            <NativeSelect
-              value={state.age}
-              inputProps={{
-                name: 'is_accepted',
-                id: 'age-native-helper',
-              }}
-              onChange={handleChange}
-              defaultValue={props.items.is_accepted}
-            >
-              <option value={true}>Approved</option>
-              <option value={false}>Non Approved</option>
-            </NativeSelect>
-          </FormControl> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseUpdateOpen} color="primary">
@@ -364,69 +343,6 @@ export function UserCard(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* <Show condition={state}>
-        <Card className={classes.root} key={props.key}>
-          <AvatarGroup max={4}>
-            <Avatar>
-              {props.items.name[0].toUpperCase() +
-                props.items.name[1].toUpperCase()}
-            </Avatar>
-          </AvatarGroup>
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="component-outlined">Username</InputLabel>
-            <OutlinedInput
-              id="component-outlined"
-              value={props.items.username}
-              onChange={handleChange}
-              label="Username"
-              name="username"
-            />
-          </FormControl>
-          <CardContent>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Role Name</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                name="role_name"
-                onChange={handleChange}
-              >
-                <MenuItem value={'admin'}>admin</MenuItem>
-                <MenuItem value={'editor'}>editor</MenuItem>
-                <MenuItem value={'user'}>user</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="component-outlined">Email</InputLabel>
-              <OutlinedInput
-                id="component-outlined"
-                value={props.items.email}
-                onChange={handleChange}
-                label="Email"
-                name="email"
-              />
-            </FormControl>
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="component-outlined">User's Name</InputLabel>
-              <OutlinedInput
-                id="component-outlined"
-                value={props.items.name}
-                onChange={handleChange}
-                label="Name"
-                name="name"
-              />
-            </FormControl>
-          </CardContent>
-          <CardActions disableSpacing className={classes.centerBottom}>
-            <Tooltip title="Edit a laptop properties">
-              <IconButton aria-label="add to favorites" onClick={updateChange}>
-                <EditIcon />
-              </IconButton>
-            </Tooltip>
-          </CardActions>
-        </Card>
-      </Show> */}
     </>
   );
 }

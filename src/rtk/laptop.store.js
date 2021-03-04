@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+  
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import cookie from "react-cookies";
+import { useDispatch } from "react-redux";
 
 const api = 'https://pull-stack-laptoptory.herokuapp.com/studentLaptops';
 const studentApi = 'https://pull-stack-laptoptory.herokuapp.com/students';
@@ -57,6 +59,25 @@ export const fetchStudents = () => async (dispatch) => {
   });
   dispatch(fetchLaptops());
   dispatch(getStudent(students.data))
+}
+
+// Update laptop row
+export const updateLaptops = (row) => async(dispatch) =>{
+  let record = JSON.stringify(row)
+  let data = await axios({
+    method: 'put',
+    url: laptopApi,
+    data: record,
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${cookie.load('auth')}`,
+    },       
+  });
+
+  if(data.data) {
+    await dispatch(fetchLaptops())
+  }
 }
 
 // assign a laptop to a student

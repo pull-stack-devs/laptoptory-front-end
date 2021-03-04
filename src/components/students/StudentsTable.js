@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+    backgroundColor: '#0F3057',
+    "&:hover":{
+      backgroundColor: '#0F3057',
+    }
   },
   root: {
     width: '100%',

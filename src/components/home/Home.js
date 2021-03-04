@@ -16,7 +16,7 @@ export default function HomePage() {
     AOS.init();
   }, []);
   return (
-    <>
+    <div id="home">
       <Header />
       <main id="main">
         <MainBanner data-aos="fade-up" data-aos-delay="200" />
@@ -27,6 +27,6 @@ export default function HomePage() {
         <Faq />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/SignInContext';
+import styled from 'styled-components';
 import {
   Avatar,
   Button,
@@ -14,12 +15,12 @@ import {
   Box,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import coloredLogo2 from '../../images/coloredLogo2.png';
 import LinkedInPage from './LinkedIn';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  main: {
     height: '100vh',
     width: '100%',
   },
@@ -74,7 +75,40 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     margin: '24px auto 16px',
   },
+  coloredText:{
+    color: '#5D5C61',
+    '&:hover': {
+      color: '#0F3057',
+      textDecoration: 'none'
+    }
+  }
 }));
+
+const StyledTextField = styled(TextField)`
+  label.Mui-focused {
+    color: #0F3057;
+  }
+  .MuiOutlinedInput-root {
+    fieldset {
+      border-color: #5D5C61;
+    }
+    &:hover fieldset {
+      border-color: #5D5C61;
+    }
+    &.Mui-focused fieldset {
+      border-color: #0F3057;
+    }
+  }
+`;
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    backgroundColor: '#0F3057',
+    '&:hover': {
+      backgroundColor: '#0F3057',
+    },
+  },
+}))(Button);
 
 function SignInSide() {
   const context = useContext(AuthContext);
@@ -102,7 +136,8 @@ function SignInSide() {
             Sign in
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <TextField
+            <StyledTextField
+              claassName={classes.textField}
               onChange={handleChangeUserName}
               variant="outlined"
               margin="normal"
@@ -113,8 +148,18 @@ function SignInSide() {
               name="username"
               autoComplete="email"
               autoFocus
+              // InputProps={{
+              //   className: classes.textField,
+              // }}
+              // InputProps={{
+              //   classes: {
+              //     root: classes.root,
+              //     // focused: classes.focused,
+              //     notchedOutline: classes.notchedOutline,
+              //   },
+              // }}
             />
-            <TextField
+            <StyledTextField
               onChange={handleChange}
               variant="outlined"
               margin="normal"
@@ -126,7 +171,7 @@ function SignInSide() {
               id="password"
               autoComplete="current-password"
             />
-            <Button
+            <ColorButton
               type="submit"
               fullWidth
               variant="contained"
@@ -134,11 +179,12 @@ function SignInSide() {
               className={`${classes.formBtn} ${classes.submit}`}
             >
               Sign In
-            </Button>
+            </ColorButton>
             <LinkedInPage />
             <Grid container>
               <Grid item>
-                <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
+              Don't have an account?{' '}
+                <Link className={classes.coloredText} to="/signup">{"Sign Up"}</Link>
               </Grid>
             </Grid>
           </form>

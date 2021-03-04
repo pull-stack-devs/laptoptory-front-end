@@ -6,7 +6,8 @@ import 'aos/dist/aos.css';
 
 function Section(props) {
   return (
-    <section data-aos="fade-up" data-aos-duration="500" className={`section-component ${props.classes}`} id={props.id}>
+    <section  className={`section-component ${props.classes}`} id={props.id}>
+      {/* data-aos="fade-up" data-aos-duration="500" */}
       <Container>
         {props.children}
       </Container>

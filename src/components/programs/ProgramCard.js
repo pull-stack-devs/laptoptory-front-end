@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProgramItems from './ProgramItems';
 import { connect, useDispatch } from 'react-redux';
 import { getRemoteData, addProgram } from '../../rtk/ProgramsSlicer';
@@ -14,16 +14,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 const useStyles = makeStyles((theme) => ({
   addBtn: {
     position: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
-  },
+    backgroundColor: '#0F3057',
+    "&:hover":{
+      backgroundColor: '#0F3057',
+    }  },
   formControl: {
     margin: theme.spacing(1),
     width: '45%',
@@ -31,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
   inputWidth: {
     width: '45%',
   },
+  editIcon :{
+color: 'rgba(255, 255, 255, 0.4)'
+  },
+ 
 }));
 
 function ProgramCard(props) {
@@ -41,9 +44,6 @@ function ProgramCard(props) {
   const [department, setDepartment] = useState('');
   const [version, setVersion] = useState('');
   const [is_active, setIs_active] = useState();
-
-  const radioGroupRef = useRef(null);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -87,16 +87,11 @@ function ProgramCard(props) {
     <>
       <Grid container xs={12} spacing={3}>
         {props.myPrograms.map((item) => (
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} className="animate__animated animate__fadeInUp">
             <ProgramItems items={item} />
           </Grid>
         ))}
       </Grid>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-               ADD Program
-          <AddIcon />
-        
-     </Button> */}
       <Fab
         onClick={handleClickOpen}
         color="primary"
@@ -114,8 +109,6 @@ function ProgramCard(props) {
         <DialogTitle id="form-dialog-title">Add Program</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {/* To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally. */}
           </DialogContentText>
           <TextField
             className={classes.inputWidth}
@@ -173,52 +166,6 @@ function ProgramCard(props) {
               <option value={false}>Inactive</option>
             </NativeSelect>
           </FormControl>
-          {/* 
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Name"
-            type="name"
-            fullWidth
-            onChange={handleName}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Department"
-            type="department"
-            fullWidth
-            onChange={handleDepartmen}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Version"
-            type="version"
-            fullWidth
-            onChange={handleVersion}
-          />
-          <RadioGroup
-            ref={radioGroupRef}
-            aria-label="ringtone"
-            name="ringtone"
-            label="Is_Active"
-            onChange={handleSelect}
-          >
-            Is_Active
-            <FormControlLabel
-              value="true"
-              key="true"
-              control={<Radio />}
-              label="Yes"
-            />
-            <FormControlLabel
-              value="''"
-              key="''"
-              control={<Radio />}
-              label="No"
-            />
-</RadioGroup>*/}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
