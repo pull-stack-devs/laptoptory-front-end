@@ -1,5 +1,6 @@
 .our-services .service-card{
     margin-bottom: 30px;
+    font-family: 'Lato', sans-serif;
 }
 .our-services .service-card .card-block:before {
     font-family: FontAwesome;

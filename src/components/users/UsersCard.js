@@ -34,6 +34,8 @@ import { useDispatch, connect } from 'react-redux';
 import DoneIcon from '@material-ui/icons/Done';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -87,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardInfo: {
     padding: ' 10px 10px 10px  25px',
+    color :'#0F3057'
   },
   boldLabel: {
     fontWeight: 'bold',
@@ -95,6 +98,7 @@ const useStyles = makeStyles((theme) => ({
   },
   capitalizedText: {
     textTransform: 'capitalize',
+    color :'#9E5256',
   },
   labelPadding: {
     display: 'inline-block',
@@ -113,6 +117,9 @@ export function UserCard(props) {
   const [updateOpen, setUpdateOpen] = React.useState(false);
   const [approvalRole, setApprovalRole] = React.useState(props.items.role_name);
 
+  useEffect(()=>{
+    AOS.init()
+  },[])
   console.log('props users card>>>>>', props);
   const handleApprovalRoleChange = (event) => {
     setApprovalRole(event.target.value);
@@ -158,13 +165,13 @@ export function UserCard(props) {
 
   return (
     <>
-      <Card className={classes.root} key={props.key}>
+      <Card className={classes.root} key={props.key}  data-aos="fade-up" >
         <Box color="text.primary" className={classes.flexBox}>
           <AvatarGroup
             max={4}
             className={` ${classes.avatar} ${classes.middle}`}
           >
-            <Avatar>
+            <Avatar >
               {props.items.name[0].toUpperCase() +
                 props.items.name[1].toUpperCase()}
             </Avatar>
@@ -175,7 +182,7 @@ export function UserCard(props) {
           />
         </Box>
         <CardContent className={classes.cardInfo}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom >
             <span className={classes.boldLabel}>Username:</span>{' '}
             <span>{props.items.username}</span>
           </Typography>

@@ -14,6 +14,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+
+
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+    backgroundColor:'#0f3057',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -31,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
   inputWidth: {
     width: '45%',
   },
+  editIcon :{
+color: 'rgba(255, 255, 255, 0.4)'
+  },
+ 
 }));
 
 function ProgramCard(props) {
@@ -41,6 +48,9 @@ function ProgramCard(props) {
   const [department, setDepartment] = useState('');
   const [version, setVersion] = useState('');
   const [is_active, setIs_active] = useState();
+
+
+
 
   const radioGroupRef = useRef(null);
 
@@ -87,7 +97,7 @@ function ProgramCard(props) {
     <>
       <Grid container xs={12} spacing={3}>
         {props.myPrograms.map((item) => (
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4} className="animate__animated animate__fadeInUp">
             <ProgramItems items={item} />
           </Grid>
         ))}

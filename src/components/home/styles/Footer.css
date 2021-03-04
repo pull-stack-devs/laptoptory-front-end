@@ -1,6 +1,10 @@
+footer{
+    font-family: 'Lato', sans-serif;
+}
 .footer-top {
     padding: 40px 0;
     background-color: #0f3057;
+    
 }
 .footer-copyrights {
     padding: 15px;
@@ -11,6 +15,7 @@
 
 .footer-copyrights p {
     margin-bottom: 0;
+    
 }
 
 .footer h3 {

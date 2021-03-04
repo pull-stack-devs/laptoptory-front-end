@@ -8,6 +8,7 @@
 }
 header nav {
     transition: background-color 1s ease;
+    font-family: 'Lato', sans-serif;
 }
 nav .navbar-brand {
     max-width: 180px;

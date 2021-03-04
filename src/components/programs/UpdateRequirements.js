@@ -30,10 +30,22 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(0.5),
     },
+    borderRadius:'10',
   },
   cardContentPadding: {
     padding: '0px 16px',
   },
+  button :{
+      display:'block',
+      width:'100px',
+      margin : "10px auto 0",
+      color :'#000',
+      backgroundColor:'#fff',
+      border :'1px solid #9E5256',
+borderRadius:'20px',
+boxShadow:'none',
+  }
+ 
 }));
 
 function UpdateRequirment(props) {
@@ -61,15 +73,15 @@ function UpdateRequirment(props) {
         <CardContent className={classes.cardContentPadding}>
             <div className={classes.chipsDiv}>
 
-       <Chip size="small" label={`CPU: ${props.details.cpu}`} />
-       <Chip size="small" label={`Storage Space: ${props.details.storage_space.toString()}`} />
-       <Chip size="small" label={`Storage Type: ${props.details.storage_type}`} />
+       <Chip  size="small" label={`CPU: ${props.details.cpu}`} />
+       <Chip  size="small" label={`Storage Space: ${props.details.storage_space.toString()}`} />
+       <Chip  size="small" label={`Storage Type: ${props.details.storage_type}`} />
        <Chip size="small" label={`RAM: ${props.details.ram}`} />
-       <Chip size="small" label={`Display: ${props.details.display_resolution.toString()}`} />
+       <Chip  size="small" label={`Display: ${props.details.display_resolution.toString()}`} />
 
        </div>
 
-            <Typography paragraph><Button onClick={handleClickOpen} color="primary">
+            <Typography paragraph><Button onClick={handleClickOpen} className={classes.button} variant="contained" >
                 Edit
         </Button></Typography>
 

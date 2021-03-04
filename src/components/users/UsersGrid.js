@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   tabs:{
-    marginBottom: '30px'
+    marginBottom: '30px',
+    color :'#0F3057',
   }
 }));
 

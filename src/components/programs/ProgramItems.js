@@ -31,13 +31,28 @@ import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+
 const useStyles = makeStyles((theme) => ({
+
   root: {
     maxWidth: 345,
     margin: 'auto',
+    borderRadius:'20',
+    transition:{
+      easing:{
+        easeIn: 'cubic-bezier(0, 0, 0.2, 1)',
+      },
+    duration:{
+      shortest: 500,
+    }
+    },
+    "&:hover": {
+      transform: 'scale(1.05)',
+    }
   },
   title: {
     textTransform: 'capitalize',
+  color:'#0F3057',
   },
   media: {
     height: 0,
@@ -56,10 +71,13 @@ const useStyles = makeStyles((theme) => ({
   },
   cardInfo: {
     padding: ' 10px 10px 10px  25px',
+    color :  '#9E5256',
+    
   },
   centerBottom: {
     display: 'flex',
     justifyContent: 'center',
+   
   },
   expandOpen: {
     transform: 'rotate(180deg)',
@@ -89,6 +107,14 @@ const useStyles = makeStyles((theme) => ({
   collapsePadding: {
     padding: '0px',
   },
+  iconEdit:{
+    color:'rgba(208, 211, 212 )',
+    "&:hover": {
+      backgroundColor: "#233e5e",
+      color:'#fff'
+    }
+  },
+ 
 }));
 
 function ProgramItems(props) {
@@ -146,6 +172,7 @@ function ProgramItems(props) {
         />
         <CardActions disableSpacing className={classes.centerBottom}>
           <Tooltip
+          className={classes.iconEdit}
             title="Edit a program requirements"
             onClick={handleClickOpen}
           >

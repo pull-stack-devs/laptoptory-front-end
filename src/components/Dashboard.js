@@ -36,8 +36,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
+ 
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    backgroundColor:'#0f3057',
   },
   toolbarIcon: {
     display: 'flex',
@@ -66,9 +68,11 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButtonHidden: {
     display: 'none',
+    
   },
   title: {
     flexGrow: 1,
+   
   },
   drawerPaper: {
     position: 'relative',
@@ -116,12 +120,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(0.5),
     width: 20,
     height: 20,
+    
   },
   link: {
     display: 'flex',
   },
   breadcrumbs: {
     marginBottom: '20px',
+    
   },
 }));
 
