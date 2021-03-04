@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import Chart from "react-apexcharts";
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
+import Loader from 'react-loader'
 
 class ChartCop extends Component {
 
@@ -77,6 +78,7 @@ class ChartCop extends Component {
     }
 
   }
+  
  
   // const dispatch=useDispatch();
   // dispatch(getNumData())
@@ -88,7 +90,7 @@ componentDidMount=()=>{
       
     })
     
-  },3000)
+  },2000)
   AOS.init();
 }
   // const dispatch=useDispatch();

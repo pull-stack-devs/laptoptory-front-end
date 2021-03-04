@@ -9,27 +9,30 @@ import SecondChart from './SecondChart'
 function ChartParent(props) {
 
 const dispatch = useDispatch();
+const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    document.title = 'chart'
+    // document.title = 'chart'
     // const fetchData = async () => {
-       dispatch(getStudents())
-       dispatch(getNumData())
+      dispatch(getStudents())
+      dispatch(getNumData())
+      setTimeout(()=>{
+         setIsLoaded(true)
+       }, 4000)
       //  dispatch(fetchLaptops())
     // };
     // fetchData();
-     
-     
-       
      
   }, [])
   console.log(props.stdNotReturned)
   return (
     <>
+    {isLoaded && 
     <div style={{ paddingTop:"8%",width:"100%",display:"flex",flexDirection:"row",flexWrap:"wrap",justifyContent:"space-between",color:"#5D5C61"}}>
         <Chart data={{ data0: props.stdNotAssigned, data1: props.stdwithLap, data2: props.stdNotReturned }} />
         <SecondChart numbers={{num1:props.nonAvailableLap,num2:props.availableLap}} />
     </div>
+    }
     </>
   )
 
