@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './styles/Header.css';
 import whiteLogo from '../../images/whiteLogo.png';
-import coloredLogo from '../../images/coloredLogo.png';
 import coloredLogo2 from '../../images/coloredLogo2.png';
 import { HashLink } from 'react-router-hash-link';
-import { NavLink } from 'react-router-dom';
 
 function Header(props) {
   const [headerState, setHeaderState] = useState('beforeScroll');
@@ -30,8 +28,7 @@ function Header(props) {
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    // setHeaderState('beforeScroll');
-  }, [handleScroll]);
+  });
 
   return (
     <header className={headerState}>

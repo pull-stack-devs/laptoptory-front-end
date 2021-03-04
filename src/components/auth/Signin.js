@@ -2,13 +2,8 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/SignInContext';
 import styled from 'styled-components';
 import {
-  Avatar,
   Button,
-  CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
-  Paper,
   Grid,
   Typography,
   Container,
@@ -58,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -129,7 +124,6 @@ function SignInSide() {
   return (
     <Container maxWidth="xl" className={classes.image}>
       <Box className={classes.flexBox}>
-        {/* <CssBaseline /> */}
         <div className={classes.paper}>
           <img src={coloredLogo2} alt="logo" className={classes.logoImage} />
           <Typography component="h1" variant="h5">
@@ -148,16 +142,6 @@ function SignInSide() {
               name="username"
               autoComplete="email"
               autoFocus
-              // InputProps={{
-              //   className: classes.textField,
-              // }}
-              // InputProps={{
-              //   classes: {
-              //     root: classes.root,
-              //     // focused: classes.focused,
-              //     notchedOutline: classes.notchedOutline,
-              //   },
-              // }}
             />
             <StyledTextField
               onChange={handleChange}

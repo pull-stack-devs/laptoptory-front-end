@@ -5,7 +5,6 @@ import {connect, useDispatch} from 'react-redux';
 import { getStudents } from "../../rtk/StudentsSlicer";
 
 function LaptopsTable(props) {
-    // const [record, setRecord] = useState([]);
     const dispatch = useDispatch()
     useEffect(() => {
         const getData = () => {
@@ -15,7 +14,6 @@ function LaptopsTable(props) {
         getData();
     }, [dispatch])
 
-    console.log("myyyyyyyyyyt", props.myLaptops, props.myStudents)
     return (
         <div>
             <MyAwesomeTable data={{laptops: props.myLaptops, students: props.myStudents}}/>

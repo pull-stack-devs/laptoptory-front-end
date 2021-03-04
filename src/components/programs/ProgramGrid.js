@@ -1,7 +1,6 @@
 import React from 'react';
 import ProgramCard from './ProgramCard';
-import { Grid } from '@material-ui/core';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 function ProgramGrid() {
   return <ProgramCard />;

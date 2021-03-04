@@ -2,7 +2,6 @@ import React from 'react';
 import SectionTitle from './SectionTitle';
 import Section from './Section';
 import { Col, Row } from 'react-bootstrap';
-import AOS from 'aos';
 import './styles/OurServices.css';
 import 'aos/dist/aos.css';
 function OurServices(props) {
@@ -47,39 +46,6 @@ function OurServices(props) {
                   </div>
                 </div>
               </Col>
-              {/* <Col md={4}>
-                <div className="service-card">
-                  <div className="card-block block-4">
-                    <h3 className="card-title">Special title</h3>
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>{' '}
-                  </div>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="service-card">
-                  <div className="card-block block-5">
-                    <h3 className="card-title">Special title</h3>
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>{' '}
-                  </div>
-                </div>
-              </Col>
-              <Col md={4}>
-                <div className="service-card">
-                  <div className="card-block block-6">
-                    <h3 className="card-title">Special title</h3>
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>{' '}
-                  </div>
-                </div>
-              </Col> */}
             </Row>
           </div>
         </Col>

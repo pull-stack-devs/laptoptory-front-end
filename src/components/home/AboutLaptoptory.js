@@ -4,7 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 import Section from './Section';
 import SectionTitle from './SectionTitle';
 import './styles/AboutLaptoptory.css';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function AboutLaptoptory(props) {

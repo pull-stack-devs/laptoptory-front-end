@@ -4,11 +4,6 @@ import { connect, useDispatch } from 'react-redux';
 import { getStudents, addStudent } from '../../rtk/StudentsSlicer';
 import { getRemoteData } from '../../rtk/ProgramsSlicer';
 import {
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
   TableContainer,
   Fab,
   Paper,
@@ -26,10 +21,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
-// import axios from 'axios';
-// import cookie from 'react-cookies';
-// import superagent from 'superagent';
-// const apiU = 'https://pull-stack-laptoptory.herokuapp.com/laptops';
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -53,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 
 function StudentsTable(props) {
   const classes = useStyles();
-  // const [values, setValues] = useState([]);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
@@ -99,7 +90,7 @@ function StudentsTable(props) {
       program_name: program_name,
       program_version: program_version,
     };
-    console.log('from addd =======>', object);
+    
     dispatch(addStudent(object));
   };
 
@@ -109,7 +100,7 @@ function StudentsTable(props) {
       await dispatch(getRemoteData());
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <TableContainer>
@@ -132,8 +123,6 @@ function StudentsTable(props) {
           <DialogTitle id="form-dialog-title">Add Program</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {/* To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally. */}
             </DialogContentText>
             <TextField
               autoFocus
@@ -198,22 +187,7 @@ function StudentsTable(props) {
                 );
               })}
             </RadioGroup>
-            {/* <TextField
-              autoFocus
-              margin="dense"
-              label="Student Program"
-              type="version"
-              fullWidth
-              onChange={handleProgramName}
-            /> */}
-            {/* <TextField
-              autoFocus
-              margin="dense"
-              label="Program Version"
-              type="version"
-              fullWidth
-              onChange={handleProgramVersion}
-            /> */}
+          
             <RadioGroup
               ref={radioGroupRef}
               aria-label="ringtone"

@@ -3,7 +3,6 @@ import { AuthContext } from '../../context/SignInContext';
 import Show from '../Show';
 import styled from 'styled-components';
 import {
-  Avatar,
   Button,
   Container,
   Box,
@@ -11,7 +10,6 @@ import {
   Grid,
   Typography,
   InputLabel,
-  MenuItem,
   FormControl,
   Select,
   IconButton,
@@ -19,29 +17,11 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import coloredLogo2 from '../../images/coloredLogo2.png';
 import LinkedInPage from './LinkedIn';
 const useStyles = makeStyles((theme) => ({
-  // paper: {
-  //     marginTop: theme.spacing(8),
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     alignItems: 'center',
-  // },
-  // avatar: {
-  //     margin: theme.spacing(1),
-  //     backgroundColor: theme.palette.secondary.main,
-  // },
-  // form: {
-  //     width: '100%', // Fix IE 11 issue.
-  //     marginTop: theme.spacing(3),
-  // },
-  // submit: {
-  //     margin: theme.spacing(3, 0, 2),
-  // },
   formControl: {
     width: '100%',
     margin: '16px 0 8px',
@@ -87,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -154,7 +134,6 @@ export default function SignUp() {
     setRole(event.target.value);
   };
   const handleName = (e) => {
-    console.log('from sign up====>', e.target.name);
     setName(e.target.value);
   };
   const handleUserName = (e) => {
@@ -176,7 +155,6 @@ export default function SignUp() {
       email: email,
       name: name,
     };
-    console.log('from sign up====>', object);
     context.signUp(object);
   };
 
@@ -270,90 +248,7 @@ export default function SignUp() {
                 </FormControl>
               </Grid>
             </Grid>
-            {/* <StyledTextField
-              onChange={handleUserName}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Username"
-              name="username"
-              autoComplete="email"
-              autoFocus
-            />
-            <StyledTextField
-              onChange={handlePassword}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <StyledTextField
-              onChange={handleName}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="name"
-              label="Name"
-              id="password"
-              autoComplete="name"
-            />
-            <StyledTextField
-              onChange={handleEmail}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="email"
-              label="Email"
-              id="email"
-              autoComplete="current-email"
-            /> */}
-            {/* <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
-              <Select
-                native
-                value={role}
-                onChange={handleChangeradio}
-                label="Age"
-                inputProps={{
-                  name: 'age',
-                  id: 'outlined-age-native-simple',
-                }}
-              >
-                <option aria-label="None" value="" />
-                <option value={'admin'}>Admin</option>
-                <option value={'editor'}>Twenty</option>
-                <option value={'user'}>User</option>
-              </Select>
-            </FormControl> */}
             <Grid item xs={12}>
-              {/* <FormControl variant="outlined" className={classes.formControl} xs={12}>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={role}
-                  onChange={handleChangeradio}
-                >
-                  <MenuItem name="select" value="admin">
-                    Admin
-                  </MenuItem>
-                  <MenuItem name="select" value="editor">
-                    Editor
-                  </MenuItem>
-                  <MenuItem name="select" value="user">
-                    User
-                  </MenuItem>
-                </Select>
-              </FormControl> */}
             </Grid>
             <ColorButton
               type="submit"

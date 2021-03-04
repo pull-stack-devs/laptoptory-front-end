@@ -23,7 +23,6 @@ const students = createSlice({
             state.students = action.payload;
         },
         setStdWithLap(state,action){
-            console.log('from slicer',action.payload)
              state.studentsWithLap =action.payload;
              
         },
@@ -39,18 +38,6 @@ const students = createSlice({
         setNavailableLap(state,action){
             state.nonAvailableLap =action.payload
         }
-        // ,setStdID(state,action){
-        //     let stdWithLap=action.payload.std.map((student,indx)=>{
-        //         if(student.student_status!=false){
-        //             return student.id
-        //         }
-        //     })
-        //     action.payload.laptops.map(lap=>{
-        //         if(lap.availability_student =null&&!stdWithLap.includes(lap.std_id)){
-        //             state.stdID.push(lap.serial_no) 
-        //         }
-        //     })
-        // }
     },
 });
 
@@ -99,12 +86,10 @@ export const getNumData = () => async (dispatch,getState) => {
         let notReturned=0
         data.data.forEach(element=>{
             studentsData.forEach(item => {
-                // console.log(element.std_id,item.id,item.student_status)
-                if(element.std_id==item.id){
+                if(element.std_id===item.id){
                     stdWithLap=stdWithLap+1
-                    console.log(stdWithLap)
                 }
-                if(element.std_id==item.id&&item.student_status==false){
+                if(element.std_id===item.id&&item.student_status===false){
                     notReturned=notReturned+1
                 }
                 
@@ -116,13 +101,9 @@ export const getNumData = () => async (dispatch,getState) => {
      dispatch(setStdWithLap(nums()[0]))
      dispatch(setNotReturn(nums()[1]))
 
-     console.log('from get num dataaaaaaaaaaaaaaaaaaa',nums()[0])
-    // dispatch(setStudents(data.data))
-
 }
 
 export const updatStudentData = (obj) => async (dispatch) => {
-    console.log("dispatch :", obj)
     const data = await axios({
         method: 'put',
         url: api,
@@ -141,7 +122,6 @@ export const updatStudentData = (obj) => async (dispatch) => {
 };
 
 export const deleteStudent = (obj) => async (dispatch) => {
-    console.log("dispatch :", obj)
     const data = await axios(api,{
         method: 'delete',
         headers: {
@@ -159,7 +139,6 @@ export const deleteStudent = (obj) => async (dispatch) => {
 };
 
 export const addStudent = (obj) => async (dispatch) => { 
-    console.log('from slicer========>',JSON.stringify(obj))
     const data = await axios({
         method: 'post',
         url: api,
@@ -171,7 +150,7 @@ export const addStudent = (obj) => async (dispatch) => {
         data:JSON.stringify(obj),
 
     });
-    console.log(data)
+    
     if(data.data){
       await dispatch(getStudents())
     }

@@ -52,7 +52,7 @@ class LinkedInPage extends Component {
     if (result.data.token) {
       this.context.validateToken(result.data.token);
     }
-    if (!result.data.token && result.data[0].is_accepted == false) {
+    if (!result.data.token && result.data[0].is_accepted === false) {
       this.setState({ open: true });
     }
   };
@@ -75,7 +75,7 @@ class LinkedInPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { code, errorMessage, open } = this.state;
+    const { open } = this.state;
     return (
       <div>
         <LinkedIn
@@ -92,7 +92,6 @@ class LinkedInPage extends Component {
             src={linkedin}
             alt="Log in with Linked In"
             className={classes.linkedIn}
-            // style={{ maxWidth: '180px' }}
           />
         </LinkedIn>
         <Show condition={this.state.open}>

@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   addReq,
   getRequirmentsData,
-  updateReq,
 } from '../../rtk/ProgramsSlicer';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -13,16 +12,8 @@ import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {
-  Card,
-  Link,
-  CardHeader,
   CardContent,
-  CardActions,
-  IconButton,
-  Typography,
-  Tooltip,
 } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import UpdateRequirements from './UpdateRequirements';
 import Show from '../Show';
@@ -102,30 +93,28 @@ function ProgramRequirements(props) {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getRequirmentsData());
+      props.activeReq.forEach((element) => {
+        if (
+          element.program_name === props.item.name &&
+          element.program_version === props.item.version
+        ) {
+          setFlag(true);
+          return setDetails(element);
+        }
+      });
+
     };
     fetchData();
 
-    props.activeReq.forEach((element) => {
-      if (
-        element.program_name == props.item.name &&
-        element.program_version == props.item.version
-      ) {
-        setFlag(true);
-        return setDetails(element);
-      }
-    });
-  }, []);
+  });
   return (
     <>
-      <Show condition={flag != false}>
+      <Show condition={flag !== false}>
         <UpdateRequirements details={details} />
       </Show>
 
-      <Show condition={flag == false}>
+      <Show condition={flag === false}>
         <CardContent className={classes.cardContentPadding}>
-          {/* <Typography paragraph className={classes.centerdText}>
-            This program has no specified requirments.
-          </Typography> */}
           <Button
             onClick={handleClickOpen}
             color="primary"

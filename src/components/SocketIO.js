@@ -20,17 +20,14 @@ function SocketIO() {
 
   useEffect(() => {
     if (context.loggedIn && context.user.role_name === 'super-admin') {
-      console.log('before socket connect');
       const socket = socketIOClient(ENDPOINT, { transports: ['websocket'] });
       socket.on('superAdminLogin', (data) => {
-        console.log(data);
         setResponse(data);
         setOpen(true);
         context.setNumSigned(Object.keys(data).length);
       });
-      console.log('from sockeeeeeeettttttt', context.numSinedUp);
     }
-  }, []);
+  }, [context]);
 
 
   return (

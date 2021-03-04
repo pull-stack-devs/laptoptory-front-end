@@ -7,10 +7,8 @@ import {
   faShieldAlt,
   faWallet,
   faCheese,
-  faMagic,
 } from '@fortawesome/free-solid-svg-icons';
 import './styles/WhyUs.css';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function WhyUs(props) {

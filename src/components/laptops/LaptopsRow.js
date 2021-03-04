@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import GridTable from '@nadavshaar/react-grid-table';
 import {
     Fab,
@@ -120,8 +120,6 @@ const SAVE_SVG = (
   </svg>
 );
 
-// custom cell component
-
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -183,7 +181,6 @@ export const MyAwesomeTable = (props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [record, setRecord] = useState({});
-    // console.log("props>>>>>>>>>>", props)
     const [laptop, setLaptop] = useState({
         'serial_no':'',
         'model':'',
@@ -242,7 +239,6 @@ export const MyAwesomeTable = (props) => {
       const dispatch = useDispatch();
 
       const assignLaptopToStudent = () =>{
-        console.log("record", record)
         dispatch(assignLaptops({
           studentId: record.student_id,
           laptopSerial: record.serial_number
@@ -262,8 +258,6 @@ export const MyAwesomeTable = (props) => {
       const updateLaptopRow = (row) =>{
         dispatch(updateLaptops(row));
       }
-
-    console.log("props>>>>>>>>>", props)
     
     const columns = [
         {
@@ -648,8 +642,7 @@ export const MyAwesomeTable = (props) => {
             tableManager.rowSelectionApi.getIsRowSelectable(data.id) &&
             tableManager.rowSelectionApi.toggleRowSelection(data.id)
             }
-            className={classes.grid_table}
-            className="animate__animated animate__fadeInUp"
+            className={`${classes.grid_table} animate__animated animate__fadeInUp`}
         />
         
         <Fab color="primary" aria-label="add" className={classes.addBtn}>
@@ -826,10 +819,10 @@ export const MyAwesomeTable = (props) => {
 const mapStateToProps = state => ({
   myLaptops: state.laptops.laptops,
   myStudents: state.students.studentID
-  })
+})
   
-  const mapDispatchToProps = {
-    fetchLaptops,
-  }
+const mapDispatchToProps = {
+  fetchLaptops,
+}
   
-  export default connect(mapStateToProps, mapDispatchToProps)(MyAwesomeTable);
+export default connect(mapStateToProps, mapDispatchToProps)(MyAwesomeTable);

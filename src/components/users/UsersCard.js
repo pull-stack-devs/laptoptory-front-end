@@ -25,15 +25,10 @@ import {
 } from '@material-ui/core';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import { updateUsers, deleteUsers, acceptUsers } from '../../rtk/user.store';
-import Show from '../Show';
-import { red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { useDispatch, connect } from 'react-redux';
-import DoneIcon from '@material-ui/icons/Done';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    // backgroundColor: red[500],
     padding: '16px',
   },
   formControl: {
@@ -111,7 +105,6 @@ const useStyles = makeStyles((theme) => ({
 
 export function UserCard(props) {
   const classes = useStyles();
-  const [state, setState] = useState(false);
   const [record, setRecord] = useState(props.items);
   const [deleteOpen, setDeleteOpen] = React.useState(false);
   const [updateOpen, setUpdateOpen] = React.useState(false);
@@ -120,7 +113,6 @@ export function UserCard(props) {
   useEffect(()=>{
     AOS.init()
   },[])
-  console.log('props users card>>>>>', props);
   const handleApprovalRoleChange = (event) => {
     setApprovalRole(event.target.value);
   };
@@ -143,7 +135,6 @@ export function UserCard(props) {
   };
 
   const updateAccepted = () => {
-    console.log('record>>>>', record);
     props.acceptUsers({ id: props.items.id, role_name: approvalRole });
   };
 
@@ -320,7 +311,7 @@ export function UserCard(props) {
               Role
             </InputLabel>
             <NativeSelect
-              value={state.age}
+              value={false}
               inputProps={{
                 name: 'role_name',
                 id: 'role-native-helper',

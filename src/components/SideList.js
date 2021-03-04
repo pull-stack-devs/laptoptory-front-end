@@ -3,7 +3,8 @@ import SideItem from './SideItem';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import FaceIcon from '@material-ui/icons/Face';
 import PeopleIcon from '@material-ui/icons/People';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';import SchoolIcon from '@material-ui/icons/School';
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
+import SchoolIcon from '@material-ui/icons/School';
 import HistoryIcon from '@material-ui/icons/History';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function SideList(props) {
-  const [activeLink, setActiveLink] = React.useState('');
   const classes = useStyles();
   const updateActivePage = (pageName) => {
     props.activePage(pageName);

@@ -28,7 +28,6 @@ import ProgramsGrid from './programs/ProgramGrid';
 import LogTable from './logsTable/LogTable';
 import UsersGrid from './users/UsersGrid';
 import { Route, Redirect, Link  } from 'react-router-dom';
-import cookie from 'react-cookies';
 import SocketIO from './SocketIO';
 import StudentsTable from './students/StudentsTable';
 const drawerWidth = 240;
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
     backgroundColor:'#0f3057',
   },
   toolbarIcon: {
@@ -157,11 +156,8 @@ function Dashboard(props) {
     setOpen(false);
   };
 
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
   return (
     <div className={classes.root}>
-      {console.log(cookie.load('auth'))}
       <CssBaseline />
       <AppBar
         position="absolute"
@@ -254,34 +250,25 @@ function Dashboard(props) {
         </div>
         <Divider />
         <SideList activePage={changeCurrentPage} />
-        {/* <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
             <Typography color="inherit" className={classes.link}>
-              {/* <DashboardIcon className={classes.icon} /> */}
               Dashboard
             </Typography>
             {currentPage ? (
               <Typography color="textPrimary" className={classes.link}>
-                {/* <DashboardIcon className={classes.icon} /> */}
                 {currentPage}
               </Typography>
             ) : null}
           </Breadcrumbs>
           <SocketIO />
-          {/* <Route exact path="/" component={UsersGrid} /> */}
-          {/* </Route> */}
           <Route exact path="/dashboard/charts">
-            {console.log('inide dashboard route')}
             {!context.loggedIn ? <Redirect to="/signin" /> : <ChartParent />}
           </Route>
           <Route exact path="/dashboard/laptops">
-            {console.log('inide Studnets route')}
             {!context.loggedIn ? <Redirect to="/signin" /> : <LaptopsTable />}
           </Route>
           <Route exact path="/dashboard/students">
@@ -296,7 +283,7 @@ function Dashboard(props) {
           <Route exact path="/dashboard/logs">
             {!context.loggedIn ? <Redirect to="/signin" /> : <LogTable />}
           </Route>
-          <Box pt={4}>{/* <Copyright /> */}</Box>.
+          <Box pt={4}></Box>.
         </Container>
       </main>
     </div>

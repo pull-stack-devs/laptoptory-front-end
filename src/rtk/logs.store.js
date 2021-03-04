@@ -11,9 +11,7 @@ const logSlice = createSlice({
     },
     reducers: {
       getLogs(state, action) {
-          console.log("action", action)
           state.logs = action.payload;
-          console.log("state", state.logs)
       }
     },
   });

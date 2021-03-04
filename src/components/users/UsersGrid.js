@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import UsersCard from './UsersCard';
 import { Grid, Paper, Tab, Tabs } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,10 +25,7 @@ export function UserGrid(props) {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
-
-  console.log('props users>>>>>>', props);
-  console.log('value', value);
+  }, [dispatch]);
 
   return (
     <>
@@ -45,8 +42,8 @@ export function UserGrid(props) {
         </Tabs>
       </Paper>
       <Grid container xs={12} spacing={3}>
-        {/* Chart */}
-        {props.myUsers.users.map((item, index) => {
+        
+        {props.myUsers.users.forEach((item, index) => {
           if (value === 1) {
             if (!item.is_accepted) {
               return (
@@ -56,7 +53,7 @@ export function UserGrid(props) {
               );
             }
           }
-          if (value === 0) {
+          else if (value === 0) {
             if (item.is_accepted && item.role_name !== 'super-admin') {
               return (
                 <Grid item xs={3} md={4} lg={4}>

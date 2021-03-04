@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect, useDispatch } from 'react-redux';
 import ProgramsRequirments from './ProgramRequirements';
 import { updatProgram } from '../../rtk/ProgramsSlicer';
-import Show from '../Show';
 import {
   Card,
   CardHeader,
@@ -29,7 +28,6 @@ import {
 import { red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -120,9 +118,7 @@ const useStyles = makeStyles((theme) => ({
 function ProgramItems(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [state, setState] = useState(false);
   const [record, setRecorrd] = useState(props.items);
-  const [editMenu, setEditMenu] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -132,17 +128,8 @@ function ProgramItems(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleEditMenuOpen = () => {
-    setEditMenu(true);
-  };
-  const handleEditMenuClose = () => {
-    setEditMenu(false);
-  };
   const handleClose = () => {
     setOpen(false);
-  };
-  const changeState = () => {
-    setState(!state);
   };
 
   const update = (e) => {
@@ -168,7 +155,7 @@ function ProgramItems(props) {
       <Box color="text.primary" className={classes.flexBox}>
         <CardHeader
           className={classes.title}
-          title={props.items.name.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ')}
+          title={props.items.name.replace(/[.,#!$%&;:{}=\-_`~()]/g, ' ')}
         />
         <CardActions disableSpacing className={classes.centerBottom}>
           <Tooltip
@@ -285,7 +272,7 @@ function ProgramItems(props) {
               Program Status
             </InputLabel>
             <NativeSelect
-              value={state.age}
+              value={false}
               inputProps={{
                 name: 'is_active',
                 id: 'age-native-helper',

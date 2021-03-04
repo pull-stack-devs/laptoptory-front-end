@@ -4,7 +4,6 @@ import whiteLogo from '../../images/whiteLogo.png';
 import Copyrights from './Copyrights';
 import { HashLink } from 'react-router-hash-link';
 import './styles/Footer.css';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 function Footer(props) {
   const scrollWithOffset = (el) => {

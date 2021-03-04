@@ -19,9 +19,6 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/team" component={AboutUs} />
 
-          {/* <Route exact path="/team">
-            <AboutUs />
-          </Route> */}
           <Route path="/dashboard">
             {!context.loggedIn ? (
               <Redirect to="/signin" />
@@ -33,8 +30,6 @@ function App() {
             )}
           </Route>
           <Route exact path="/signin">
-            {console.log('inside login route')}
-            {console.log('context=>>>>>> ', context.loggedIn)}
             {context.loggedIn ? <Redirect to="/dashboard" /> : <Signin />}
           </Route>
           <Route exact path="/signup">

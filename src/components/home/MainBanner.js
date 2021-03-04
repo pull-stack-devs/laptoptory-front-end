@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles/MainBanner.css';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 function MainBanner(props) {
   return (
@@ -17,7 +16,6 @@ function MainBanner(props) {
           </Col>
         </Row>
       </Container>
-      {/* <img src={hero} alt="img"/> */}
     </section>
   );
 }

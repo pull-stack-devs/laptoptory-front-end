@@ -1,5 +1,5 @@
 import { updateReq } from "../../rtk/ProgramsSlicer"
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,16 +10,10 @@ import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {
-    Card,
-    CardHeader,
     CardContent,
-    CardActions,
-    IconButton,
     Typography,
-    Tooltip,
     Chip
 } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +48,6 @@ function UpdateRequirment(props) {
     const [open, setOpen] = useState(false);
     const [record, setRecorrd] = useState(props.details);
     const update = (e) => {
-        console.log("in updaaaaaaaaaaaaate", e.target.value)
         setRecorrd({ ...record, [e.target.name]: e.target.value })
     }
     const handleClickOpen = () => {
@@ -66,7 +59,6 @@ function UpdateRequirment(props) {
     };
     const handleEdit = (e) => {
         handleClose()
-        console.log(record);
         dispatch(updateReq(record));
     }
     return (
@@ -74,10 +66,10 @@ function UpdateRequirment(props) {
             <div className={classes.chipsDiv}>
 
        <Chip  size="small" label={`CPU: ${props.details.cpu}`} />
-       <Chip  size="small" label={`Storage Space: ${props.details.storage_space.toString()}`} />
+       <Chip  size="small" label={`Storage Space: ${props.details.storage_space}`} />
        <Chip  size="small" label={`Storage Type: ${props.details.storage_type}`} />
        <Chip size="small" label={`RAM: ${props.details.ram}`} />
-       <Chip  size="small" label={`Display: ${props.details.display_resolution.toString()}`} />
+       <Chip  size="small" label={`Display: ${props.details.display_resolution}`} />
 
        </div>
 
@@ -166,11 +158,7 @@ function UpdateRequirment(props) {
 const mapStateToProps = state => ({
 
     activeReq: state.programs.programsRequirments,
-    // activeOne: state.categories,
 
 });
-// const mapDispatchToProps = (dispatch, getState,string) => ({
-//     setReq: (string)=>dispatch(setdetailedRequirments(string)),
-//     // activeProduct: (string)=>dispatch(activeProduct(string))
-// })
+
 export default connect(mapStateToProps)(UpdateRequirment);

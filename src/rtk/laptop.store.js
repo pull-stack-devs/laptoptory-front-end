@@ -1,8 +1,7 @@
   
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import cookie from "react-cookies";
-import { useDispatch } from "react-redux";
 
 const api = 'https://pull-stack-laptoptory.herokuapp.com/studentLaptops';
 const studentApi = 'https://pull-stack-laptoptory.herokuapp.com/students';
@@ -18,19 +17,14 @@ const laptopSlice = createSlice({
   },
   reducers: {
     getLaptops(state, action) {
-        console.log("action", action)
         state.laptops = action.payload;
-        console.log("state", state.laptops)
     },
     getStudent(state,action) {
-      console.log("action", action)
       state.students = action.payload
-      console.log("state", state.students)
     }
   },
 });
 
-// Fetch laptop student data
 export const fetchLaptops = () => async (dispatch) => {
   const laptops = await axios( {
     method: 'get',
@@ -43,7 +37,6 @@ export const fetchLaptops = () => async (dispatch) => {
   });
 
   dispatch(getLaptops(laptops.data))
-  console.log("prods>>>>>", laptops.data)
 }
 
 export const fetchStudents = () => async (dispatch) => {
@@ -61,7 +54,6 @@ export const fetchStudents = () => async (dispatch) => {
   dispatch(getStudent(students.data))
 }
 
-// Update laptop row
 export const updateLaptops = (row) => async(dispatch) =>{
   let record = JSON.stringify(row)
   let data = await axios({
@@ -80,9 +72,7 @@ export const updateLaptops = (row) => async(dispatch) =>{
   }
 }
 
-// assign a laptop to a student
 export const assignLaptops = (item) => async (dispatch) =>{
-  console.log("items>>>>>>>", item)
     let record = JSON.stringify(item)
     let data = await axios({
         method: 'post',
@@ -100,9 +90,7 @@ export const assignLaptops = (item) => async (dispatch) =>{
     }
 }
 
-// return a laptop from the student to the inventory
 export const returnLaptops = (item) => async (dispatch) =>{
-  console.log("items>>>>>>>", item)
     let record = JSON.stringify(item)
     let data = await axios({
         method: 'post',
@@ -120,9 +108,8 @@ export const returnLaptops = (item) => async (dispatch) =>{
       }
 }
 
- // add a laptop to a laptop table
+ 
 export const addLaptops = (item) => async (dispatch) =>{
-  console.log("items>>>>>>>", item)
   let record = JSON.stringify(item)
   let data = await axios({
       method: 'post',

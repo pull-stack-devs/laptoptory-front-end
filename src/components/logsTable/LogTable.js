@@ -33,8 +33,6 @@ const columns = [
         dispatch(fetchLogs());
     }, [dispatch])
 
-    console.log("propsss logzzzzz", props)
-
     return (
       <div style={{ height: '80vh', width: '100%' }}>
         <DataGrid rows={props.myLogs} columns={columns} pageSize={15}

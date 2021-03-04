@@ -5,7 +5,6 @@ import SectionTitle from './SectionTitle';
 import Section from './Section';
 import avatar from '../../images/avatar.png';
 import './styles/Testimonials.css';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 function Testimonials(props) {
   return (

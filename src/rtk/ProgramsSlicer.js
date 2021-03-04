@@ -13,7 +13,6 @@ const programs = createSlice({
     programsNames: [],
     programsVersions: [],
     programsRequirments: [],
-    // detailedRequirments:{},
   },
   reducers: {
     setPrograms(state, action) {
@@ -60,12 +59,10 @@ export const getRequirmentsData = () => async (dispatch) => {
       Authorization: `Bearer ${cookie.load('auth')}`,
     },
   });
-  console.log('data for requirments', data.data);
   dispatch(setProgramsReq(data.data));
 };
 
 export const updatProgram = (obj) => async (dispatch) => {
-  console.log('dispatch :', obj);
   const data = await axios({
     method: 'put',
     url: api,
@@ -97,7 +94,6 @@ export const addProgram = (obj) => async (dispatch) => {
   }
 };
 export const addReq = (obj) => async (dispatch) => {
-  console.log('dispatch :', obj);
   const data = await axios({
     method: 'post',
     url: reqApi,
@@ -113,7 +109,6 @@ export const addReq = (obj) => async (dispatch) => {
   }
 };
 export const updateReq = (obj) => async (dispatch) => {
-  console.log('dispatch :', obj);
   const data = await axios({
     method: 'put',
     url: reqApi,
@@ -124,7 +119,6 @@ export const updateReq = (obj) => async (dispatch) => {
     },
     data: JSON.stringify(obj),
   });
-  console.log('in upddddddddaaaaaatttteeee', data.data);
   if (data.data) {
     await dispatch(getRequirmentsData());
   }

@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import GridTable from '@nadavshaar/react-grid-table';
-import {
-  Slide,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
-import { updatStudentData, deleteStudent } from "../../rtk/StudentsSlicer";
+import { updatStudentData } from "../../rtk/StudentsSlicer";
 import { connect, useDispatch } from 'react-redux';
 
 const styles = {
@@ -104,52 +99,8 @@ const SAVE_SVG = (
   </svg>
 );
 
-const Username = ({ tableManager, value, field, data, column, colIndex, rowIndex }) => {
-  return (
-    <div className='rgt-cell-inner' style={{ display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-      <img src={data.avatar} alt="user avatar" />
-      <span className='rgt-text-truncate' style={{ marginLeft: 10 }}>{value}</span>
-    </div>
-  )
-}
-
-const useStyles = makeStyles((theme) => ({
-  table: {
-    minWidth: 650,
-  },
-  addBtn: {
-    position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  root: {
-    width: '100%',
-    overflowX: 'auto',
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 300,
-  },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  chip: {
-    margin: 2,
-  },
-  noLabel: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 
 export const MyAwesomeTable = (props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();     
   useEffect(()=>{
   },[])
@@ -227,57 +178,12 @@ export const MyAwesomeTable = (props) => {
       field: 'program_name',
       label: 'program_name',
       editable: false
-      // editorCellRenderer: ({
-      //   tableManager,
-      //   value,
-      //   data,
-      //   column,
-      //   colIndex,
-      //   rowIndex,
-      //   onChange
-      // }) => (
-      //   <select
-      //     style={styles.select}
-      //     value={value}
-      //     onChange={(e) =>
-      //       onChange({ ...data, [column.field]: e.target.value })
-      //     }
-      //   >
-      //     {props.myprograms.map((program,indx) => {
-
-      //       return <option key={indx}>{program}</option>
-      //     })}
-      //   </select>
-      // )
     },
     {
       id: 6,
       field: 'program_version',
       label: 'program_version',
       editable: false
-      // editorCellRenderer: ({
-      //   tableManager,
-      //   value,
-      //   data,
-      //   column,
-      //   colIndex,
-      //   rowIndex,
-      //   onChange
-      // }) => (
-      //   <select
-      //     style={styles.select}
-      //     value={value}
-      //     onChange={(e) =>
-      //       onChange({ ...data, [column.field]: e.target.value })
-      //     }
-      //   >
-      //     {props.myVersions.map((program,indx) => {
-
-      //       return <option key={indx}>{program}</option>
-      //     })}
-  
-      //   </select>
-      // )
     },
     {
       id: 7,
@@ -343,7 +249,6 @@ export const MyAwesomeTable = (props) => {
                 (r) => r.id === data.id
               );
               rowsClone[updatedRowIndex] = data;
-              console.log("data>>>>", data)
               updateChange(data)
               tableManager.rowEditApi.setEditRowId(null);
             }}
