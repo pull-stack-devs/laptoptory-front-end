@@ -17,6 +17,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SideList from './SideList';
 import UserGrid from './users/UsersGrid';
 // import MyAwesomeTable from "./laptopExample/LaptopsRow";
+import LogTable from "./logsTable/LogTable";
 import LaptopsTable from "./laptopExample/LaptopsTable";
 import LaptopRow from "./laptopExample/LaptopRow";
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
@@ -174,7 +175,7 @@ function Dashboard(props) {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
-            <Route exact path={`${path}`} component={LaptopsTable} />
+            <Route exact path={`${path}`} component={LogTable} />
             {/* </Route> */}
             <Route exact path={path}>
               {' '}
