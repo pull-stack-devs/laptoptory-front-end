@@ -16,6 +16,8 @@ class AuthProvider extends React.Component {
     this.state = {
       loggedIn: false,
       signedUp: false,
+      numSinedUp:0,
+      setNumSigned: this.setNumSigned,
       login: this.login,
       signUp: this.signUp,
       logout: this.logout,
@@ -23,7 +25,9 @@ class AuthProvider extends React.Component {
       isValidAction: this.isValidAction,
     };
   }
-
+  setNumSigned =(numSinedUp)=>{
+    this.setState({numSinedUp});
+  }
   login = async (username, password) => {
     const encodedData = base64.encode(`${username}:${password}`);
     console.log('from login====>', password, username);

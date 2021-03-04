@@ -1,0 +1,11 @@
+.resize-triggers{
+    max-width: 100px;
+    max-height: 500px;
+}
+.charOne{
+    width: 50%;
+    height: 700px;
+    position: absolute;
+    margin-left: 50%;
+    
+}

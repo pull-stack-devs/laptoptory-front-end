@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { AuthContext } from '../context/SignInContext';
 import {
   CssBaseline,
   Drawer,
@@ -26,10 +25,12 @@ import ChartParent from './chart/ChartParent';
 import LaptopsTable from './laptops/LaptopsTable';
 import ProgramsGrid from './programs/ProgramGrid';
 import UsersGrid from './users/UsersGrid';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import cookie from 'react-cookies';
 import SocketIO from './SocketIO';
 import StudentsTable from './students/StudentsTable';
+import { AuthContext } from '../context/SignInContext';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -123,6 +124,12 @@ const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
     marginBottom: '20px',
   },
+  redirectLink:{
+    color:"white",
+    '&:hover':{
+      color:"#541D2B"
+    }
+  }
 }));
 
 function Dashboard(props) {
@@ -181,11 +188,13 @@ function Dashboard(props) {
           >
             Laptoptory
           </Typography>
+          <Link to="/dashboard/users" className={classes.redirectLink}>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+            <Badge  badgeContent={context.numSinedUp>0?context.numSinedUp:0} color="secondary" >
+              <NotificationsIcon  onClick={()=>{context.setNumSigned(0)}} />
             </Badge>
           </IconButton>
+          </Link>
           <IconButton
             edge="end"
             aria-label="account of current user"
@@ -257,7 +266,7 @@ function Dashboard(props) {
               </Typography>
             ) : null}
           </Breadcrumbs>
-          {/* <SocketIO /> */}
+          <SocketIO />
           {/* <Route exact path="/" component={UsersGrid} /> */}
           {/* </Route> */}
           <Route exact path="/dashboard/charts">
