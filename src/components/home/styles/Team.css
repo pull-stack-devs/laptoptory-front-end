@@ -1,0 +1,26 @@
+.team-card-img{
+
+}
+.team-card-img img{
+    border-radius: 50%;
+    max-height: 150px;
+    margin-bottom: 20px;
+}
+
+.team-card-name h3{
+    text-align: center;
+    font-size: 20px;
+}
+
+.team-card-social ul{
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.team-card-social{
+    max-width: 200px;
+    margin: auto;
+    padding: 30px;
+}

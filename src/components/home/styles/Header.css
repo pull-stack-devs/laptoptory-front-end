@@ -1,0 +1,25 @@
+.beforeScroll nav {
+    background-color: transparent;
+}
+.afterScroll nav {
+    background-color: #fff;
+    box-shadow: 3px 0 7px 0 rgb(0 0 0 / 61%);
+    transition: 1s;
+}
+header nav {
+    transition: background-color 1s ease;
+}
+nav .navbar-brand {
+    max-width: 180px;
+    transition: opacity 1s ease-out-in;
+}
+header nav {
+    padding: 1rem 1rem 1.5rem!important;
+}
+
+.beforeScroll .nav-link {
+    color: #fff !important;
+}
+.afterScroll .nav-link {
+    color: #ff6869!important;
+}
