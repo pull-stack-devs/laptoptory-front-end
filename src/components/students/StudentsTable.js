@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import LaptopsRow from './StudentsRow';
 import { connect, useDispatch } from 'react-redux';
 import { getStudents, addStudent } from '../../rtk/StudentsSlicer';
@@ -21,6 +21,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function StudentsTable(props) {
+  const context = useContext(AuthContext);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -106,14 +109,16 @@ function StudentsTable(props) {
     <TableContainer>
       <Paper className={classes.root}>
         <LaptopsRow students={props.myStudents} />
-        <Fab
-          onClick={handleClickOpen}
-          color="primary"
-          aria-label="add"
-          className={classes.addBtn}
-        >
-          <AddIcon />
-        </Fab>
+        <Show condition={context.isValidAction('create')}>
+          <Fab
+            onClick={handleClickOpen}
+            color="primary"
+            aria-label="add"
+            className={classes.addBtn}
+          >
+            <AddIcon />
+          </Fab>
+        </Show>
 
         <Dialog
           open={open}

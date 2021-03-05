@@ -1,5 +1,5 @@
 import { updateReq } from "../../rtk/ProgramsSlicer"
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,6 +15,8 @@ import {
     Chip
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 const useStyles = makeStyles((theme) => ({
   chipsDiv: {
@@ -43,6 +45,7 @@ boxShadow:'none',
 }));
 
 function UpdateRequirment(props) {
+    const context = useContext(AuthContext)
     const classes = useStyles();
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
@@ -73,9 +76,13 @@ function UpdateRequirment(props) {
 
        </div>
 
-            <Typography paragraph><Button onClick={handleClickOpen} className={classes.button} variant="contained" >
-                Edit
-        </Button></Typography>
+            <Typography paragraph>
+                <Show condition={context.isValidAction('update')}>
+                    <Button onClick={handleClickOpen} className={classes.button} variant="contained" >
+                    Edit
+                    </Button>
+                </Show>
+            </Typography>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogContent>
@@ -83,8 +90,7 @@ function UpdateRequirment(props) {
 
                     <DialogContent>
                         <DialogContentText>
-                            To subscribe to this website, please enter your email address here. We will send updates
-                            occasionally.
+                            Update the program requirement:
                  </DialogContentText>
                         <TextField
                             autoFocus

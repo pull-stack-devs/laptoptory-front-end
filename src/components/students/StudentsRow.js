@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import GridTable from '@nadavshaar/react-grid-table';
 import { updatStudentData } from "../../rtk/StudentsSlicer";
 import { connect, useDispatch } from 'react-redux';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 const styles = {
   select: { margin: "0 20px" },
@@ -101,6 +103,7 @@ const SAVE_SVG = (
 
 
 export const MyAwesomeTable = (props) => {
+  const context = useContext(AuthContext);
   const dispatch = useDispatch();     
   useEffect(()=>{
   },[])
@@ -192,8 +195,6 @@ export const MyAwesomeTable = (props) => {
     },
     {
       id: "Button",
-      field: "button",
-      label: 'Edit',
       width: "max-content",
       pinned: true,
       sortable: false,
@@ -206,18 +207,20 @@ export const MyAwesomeTable = (props) => {
         colIndex,
         rowIndex
       }) => (
-        <div style={styles.buttonsCellContainer}>
-          <button
-            title="Edit"
-            style={styles.editButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              tableManager.rowEditApi.setEditRowId(data.id);
-            }}
-          >
-            {EDIT_SVG}
-          </button>
-        </div>
+        <Show condition={context.isValidAction('update')}>
+          <div style={styles.buttonsCellContainer}>
+            <button
+              title="Edit"
+              style={styles.editButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                tableManager.rowEditApi.setEditRowId(data.id);
+              }}
+            >
+              {EDIT_SVG}
+            </button>
+          </div>
+        </Show>
       ),
       editorCellRenderer: ({
         tableManager,

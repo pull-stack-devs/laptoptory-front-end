@@ -1,12 +1,23 @@
 import React from 'react';
-import Slider from './Slider';
+// import Slider from './Slider';
 import { Row, Col } from 'react-bootstrap';
 import SectionTitle from './SectionTitle';
 import Section from './Section';
 import avatar from '../../images/avatar.png';
 import './styles/Testimonials.css';
+import 'flickity/dist/flickity.min.css';
 import 'aos/dist/aos.css';
+import Flickity from "react-flickity-component";
+
 function Testimonials(props) {
+  const options = {
+    autoPlay: 4000,
+    pauseAutoPlayOnHover: true,
+    initialIndex: 2,
+    wrapAround: true,
+    adaptiveHeight: true,
+  };
+  
   return (
     <Section classes="testinmonails secondary-color" id="testimonials">
       <Row>
@@ -19,14 +30,12 @@ function Testimonials(props) {
           <div className="testimonials-cards" data-aos="fade-up" data-aos-duration="500">
             <Row>
               <Col xs={12}>
-                <Slider
-                  options={{
-                    autoPlay: 4000,
-                    pauseAutoPlayOnHover: true,
-                    initialIndex: 2,
-                    wrapAround: true,
-                    adaptiveHeight: true,
-                  }}
+              <Flickity
+                  className={'carousel'} // default ''
+                  elementType={'div'} // default 'div'
+                  options={options} // takes flickity options {}
+                  disableImagesLoaded={false} // default false
+                  reloadOnUpdate // default false
                 >
                   <Col xs={4}>
                     <div className="carousel-cell">
@@ -96,7 +105,7 @@ function Testimonials(props) {
                       </div>
                     </div>
                   </Col>
-                </Slider>
+                </Flickity>
               </Col>
             </Row>
           </div>

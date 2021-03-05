@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import GridTable from '@nadavshaar/react-grid-table';
 import {
     Fab,
@@ -23,6 +23,8 @@ import { grey } from '@material-ui/core/colors';
 import AddIcon from '@material-ui/icons/Add';
 import { fetchLaptops, addLaptops, assignLaptops, returnLaptops, updateLaptops } from "../../rtk/laptop.store";
 import {connect, useDispatch} from 'react-redux';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 const styles = {
     select: { margin: "0 20px" },
@@ -178,6 +180,7 @@ const useStyles = makeStyles((theme) => ({
   
 
 export const MyAwesomeTable = (props) => {
+    const context = useContext(AuthContext)
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [record, setRecord] = useState({});
@@ -498,18 +501,20 @@ export const MyAwesomeTable = (props) => {
             colIndex,
             rowIndex
           }) => (
-            <div style={styles.buttonsCellContainer}>
-              <button
-                title="Edit"
-                style={styles.editButton}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  tableManager.rowEditApi.setEditRowId(data.id);
-                }}
-              >
-                {EDIT_SVG}
-              </button>
-            </div>
+            <Show condition={context.isValidAction('update')}>
+              <div style={styles.buttonsCellContainer}>
+                <button
+                  title="Edit"
+                  style={styles.editButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    tableManager.rowEditApi.setEditRowId(data.id);
+                  }}
+                >
+                  {EDIT_SVG}
+                </button>
+              </div>
+            </Show>
           ),
           editorCellRenderer: ({
             tableManager,
@@ -520,6 +525,7 @@ export const MyAwesomeTable = (props) => {
             rowIndex,
             onChange
           }) => (
+            
             <div style={styles.buttonsCellEditorContainer}>
               <button
                 title="Cancel"
@@ -541,19 +547,20 @@ export const MyAwesomeTable = (props) => {
                     (r) => r.id === data.id
                   );
                   rowsClone[updatedRowIndex] = data;
-                  updateLaptopRow({
-                    'id': data.id,
-                    'serial_no':data.serial_no,
-                    'model':data.modal,
-                    'brand':data.brand,
-                    'cpu':data.cpu,
-                    'ram':data.ram,
-                    'storage':data.storage,
-                    'display_resolution':data.display_resolution,
-                    'storage_type':data.storage_type,
-                    'power_cable':false,
-                    'availability':data.availability,
-                })
+                  
+                      updateLaptopRow({
+                        'id': data.id,
+                        'serial_no':data.serial_no,
+                        'model':data.modal,
+                        'brand':data.brand,
+                        'cpu':data.cpu,
+                        'ram':data.ram,
+                        'storage':data.storage,
+                        'display_resolution':data.display_resolution,
+                        'storage_type':data.storage_type,
+                        'power_cable':false,
+                        'availability':data.availability,
+                    })
                   tableManager.rowEditApi.setEditRowId(null);
                 }}
               >
@@ -567,22 +574,24 @@ export const MyAwesomeTable = (props) => {
     return (
         <>
         <form className={classes.root} noValidate autoComplete="off">
-        <Grid item container xs={6} className={classes.item}>
-          <Grid item
-          className="animate__animated animate__fadeInUp" style={{marginRight: 10}}>
-            <Fab variant="extended" color='primary' onClick={handleClickOpenAssign}>
-              <AssignmentIndIcon className={classes.extendedIcon} />
-              Assign
-            </Fab>
+        <Show condition={context.isValidAction('create')}>
+          <Grid item container xs={6} className={classes.item}>
+            <Grid item
+            className="animate__animated animate__fadeInUp" style={{marginRight: 10}}>
+              <Fab variant="extended" color='primary' onClick={handleClickOpenAssign}>
+                <AssignmentIndIcon className={classes.extendedIcon} />
+                Assign
+              </Fab>
+            </Grid>
+            <Grid item
+            className="animate__animated animate__fadeInUp" >
+              <Fab variant="extended" color='secondary' onClick={handleClickOpenReturn}>
+                <AssignmentReturnIcon className={classes.extendedIcon} />
+                Return
+              </Fab>
+            </Grid>
           </Grid>
-          <Grid item
-          className="animate__animated animate__fadeInUp" >
-            <Fab variant="extended" color='secondary' onClick={handleClickOpenReturn}>
-              <AssignmentReturnIcon className={classes.extendedIcon} />
-              Return
-            </Fab>
-          </Grid>
-        </Grid>
+        </Show>
 
         <Dialog
         open={openAssign}
@@ -645,11 +654,13 @@ export const MyAwesomeTable = (props) => {
             className={`${classes.grid_table} animate__animated animate__fadeInUp`}
         />
         
-        <Fab color="primary" aria-label="add" className={classes.addBtn}>
-            <Button onClick={handleClickOpen}>
-              <AddIcon style={{ color: grey[50]}} />
-            </Button>
-        </Fab>
+        <Show condition={context.isValidAction('create')}>
+          <Fab color="primary" aria-label="add" className={classes.addBtn}>
+              <Button onClick={handleClickOpen}>
+                <AddIcon style={{ color: grey[50]}} />
+              </Button>
+          </Fab>
+        </Show>
         <Dialog
         open={open}
         TransitionComponent={Transition}

@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
-const api = 'http://pull-stack-laptoptory.herokuapp.com/programs';
+const api = 'https://pull-stack-laptoptory.herokuapp.com/programs';
 const reqApi =
-  'http://pull-stack-laptoptory.herokuapp.com/programs-requirements';
+  'https://pull-stack-laptoptory.herokuapp.com/programs-requirements';
 
 const programs = createSlice({
   name: 'programs',

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import cookie from "react-cookies";
 
+// https://604144755d3853007fac5bb4--distracted-hypatia-f693ac.netlify.app
 const api = 'https://pull-stack-laptoptory.herokuapp.com/studentLaptops';
 const studentApi = 'https://pull-stack-laptoptory.herokuapp.com/students';
 const laptopApi = 'https://pull-stack-laptoptory.herokuapp.com/laptops'

@@ -30,6 +30,7 @@ import UsersGrid from './users/UsersGrid';
 import { Route, Redirect, Link  } from 'react-router-dom';
 import SocketIO from './SocketIO';
 import StudentsTable from './students/StudentsTable';
+import Show from './Show'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -185,20 +186,22 @@ function Dashboard(props) {
           >
             Laptoptory
           </Typography>
-          <Link to="/dashboard/users" className={classes.redirectLink}>
-            <IconButton color="inherit">
-              <Badge
-                badgeContent={context.numSinedUp > 0 ? context.numSinedUp : 0}
-                color="secondary"
-              >
-                <NotificationsIcon
-                  onClick={() => {
-                    context.setNumSigned(0);
-                  }}
-                />
-              </Badge>
-            </IconButton>
-          </Link>
+          <Show condition={context.user.role_name === 'super-admin'}>
+            <Link to="/dashboard/users" className={classes.redirectLink}>
+              <IconButton color="inherit">
+                <Badge
+                  badgeContent={context.numSinedUp > 0 ? context.numSinedUp : 0}
+                  color="secondary"
+                >
+                  <NotificationsIcon
+                    onClick={() => {
+                      context.setNumSigned(0);
+                    }}
+                  />
+                </Badge>
+              </IconButton>
+            </Link>
+          </Show>
           <IconButton
             edge="end"
             aria-label="account of current user"

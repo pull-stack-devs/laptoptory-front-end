@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect, useDispatch } from 'react-redux';
@@ -28,6 +28,8 @@ import {
 import { red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -116,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProgramItems(props) {
+  const context = useContext(AuthContext)
   const dispatch = useDispatch();
   const classes = useStyles();
   const [record, setRecorrd] = useState(props.items);
@@ -163,13 +166,14 @@ function ProgramItems(props) {
             title="Edit a program requirements"
             onClick={handleClickOpen}
           >
-            <IconButton
-              className={classes.hoverEdit}
-              aria-label="add to favorites"
-            >
-              <EditIcon               fontSize="small"
-/>
-            </IconButton>
+            <Show condition={context.isValidAction('update')}>
+              <IconButton
+                className={classes.hoverEdit}
+                aria-label="add to favorites"
+              >
+                <EditIcon fontSize="small" />
+              </IconButton>
+            </Show>
           </Tooltip>
         </CardActions>
       </Box>

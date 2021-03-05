@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import ProgramItems from './ProgramItems';
 import { connect, useDispatch } from 'react-redux';
 import { getRemoteData, addProgram } from '../../rtk/ProgramsSlicer';
@@ -13,6 +13,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 const useStyles = makeStyles((theme) => ({
   addBtn: {
@@ -37,6 +39,7 @@ color: 'rgba(255, 255, 255, 0.4)'
 }));
 
 function ProgramCard(props) {
+  const context = useContext(AuthContext)
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -92,14 +95,16 @@ function ProgramCard(props) {
           </Grid>
         ))}
       </Grid>
-      <Fab
-        onClick={handleClickOpen}
-        color="primary"
-        aria-label="add"
-        className={classes.addBtn}
-      >
-        <AddIcon />
-      </Fab>
+      <Show condition={context.isValidAction('create')}>
+        <Fab
+          onClick={handleClickOpen}
+          color="primary"
+          aria-label="add"
+          className={classes.addBtn}
+        >
+          <AddIcon />
+        </Fab>
+      </Show>
 
       <Dialog
         open={open}

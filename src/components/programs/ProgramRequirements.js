@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   addReq,
@@ -17,6 +17,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import UpdateRequirements from './UpdateRequirements';
 import Show from '../Show';
+import { AuthContext } from "../../context/SignInContext";
 
 const useStyles = makeStyles((theme) => ({
   centerBottom: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProgramRequirements(props) {
+  const context = useContext(AuthContext)
   const classes = useStyles();
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
@@ -115,13 +117,15 @@ function ProgramRequirements(props) {
 
       <Show condition={flag === false}>
         <CardContent className={classes.cardContentPadding}>
-          <Button
-            onClick={handleClickOpen}
-            color="primary"
-            className={classes.marginCenter}
-          >
-            Add Requirments for this program
-          </Button>{' '}
+          <Show condition={context.isValidAction('create')}>
+            <Button
+              onClick={handleClickOpen}
+              color="primary"
+              className={classes.marginCenter}
+            >
+              Add Requirments for this program
+            </Button>{' '}
+          </Show>
           <Dialog
             open={open}
             onClose={handleClose}

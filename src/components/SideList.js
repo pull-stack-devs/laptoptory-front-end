@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import SideItem from './SideItem';
 import LaptopIcon from '@material-ui/icons/Laptop';
 import FaceIcon from '@material-ui/icons/Face';
@@ -8,6 +8,8 @@ import SchoolIcon from '@material-ui/icons/School';
 import HistoryIcon from '@material-ui/icons/History';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import Show from "./Show";
+import { AuthContext } from "../context/SignInContext";
 
 const useStyles = makeStyles((theme) => ({
   sideLink: {
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function SideList(props) {
+  const context = useContext(AuthContext);
   const classes = useStyles();
   const updateActivePage = (pageName) => {
     props.activePage(pageName);
@@ -25,6 +28,15 @@ function SideList(props) {
     <div>
        <Link
         to="/dashboard/charts"
+        className={classes.sideLink}
+        onClick={() => updateActivePage('Charts')}
+      >
+        <SideItem listItemName="Charts">
+          <DonutLargeIcon />
+        </SideItem>
+      </Link>
+      <Link
+        to="/team"
         className={classes.sideLink}
         onClick={() => updateActivePage('Charts')}
       >
@@ -59,24 +71,26 @@ function SideList(props) {
           <SchoolIcon />
         </SideItem>
       </Link>
-      <Link
-        to="/dashboard/users"
-        className={classes.sideLink}
-        onClick={() => updateActivePage('Users')}
-      >
-        <SideItem listItemName="Users">
-          <PeopleIcon />
-        </SideItem>
-      </Link>
-      <Link
-        to="/dashboard/logs"
-        className={classes.sideLink}
-        onClick={() => updateActivePage('Logs')}
-      >
-        <SideItem listItemName="Logs">
-          <HistoryIcon />
-        </SideItem>
-      </Link>
+      <Show condition={context.user.role_name === 'super-admin'}>
+        <Link
+          to="/dashboard/users"
+          className={classes.sideLink}
+          onClick={() => updateActivePage('Users')}
+        >
+          <SideItem listItemName="Users">
+            <PeopleIcon />
+          </SideItem>
+        </Link>
+        <Link
+          to="/dashboard/logs"
+          className={classes.sideLink}
+          onClick={() => updateActivePage('Logs')}
+        >
+          <SideItem listItemName="Logs">
+            <HistoryIcon />
+          </SideItem>
+        </Link>
+      </Show>
     </div>
   );
 }

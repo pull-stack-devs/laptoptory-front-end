@@ -27,6 +27,9 @@ export function UserGrid(props) {
     dispatch(fetchUsers());
   }, [dispatch]);
 
+  console.log('props users>>>>>>', props);
+  console.log('value', value);
+
   return (
     <>
       <Paper square className={classes.tabs}>
@@ -42,8 +45,8 @@ export function UserGrid(props) {
         </Tabs>
       </Paper>
       <Grid container xs={12} spacing={3}>
-        
-        {props.myUsers.users.forEach((item, index) => {
+        {/* Chart */}
+        {props.myUsers.users.map((item, index) => {
           if (value === 1) {
             if (!item.is_accepted) {
               return (

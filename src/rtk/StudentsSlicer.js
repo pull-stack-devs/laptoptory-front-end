@@ -3,7 +3,7 @@ import axios from "axios";
 import cookie from 'react-cookies';
 
 
-const api = 'http://pull-stack-laptoptory.herokuapp.com/students';
+const api = 'https://pull-stack-laptoptory.herokuapp.com/students';
 const stdApi = 'https://pull-stack-laptoptory.herokuapp.com/studentLaptops';
 
 const students = createSlice({

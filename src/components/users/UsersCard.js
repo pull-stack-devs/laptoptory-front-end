@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
+    // backgroundColor: red[500],
     padding: '16px',
   },
   formControl: {
@@ -113,6 +114,7 @@ export function UserCard(props) {
   useEffect(()=>{
     AOS.init()
   },[])
+  console.log('props users card>>>>>', props);
   const handleApprovalRoleChange = (event) => {
     setApprovalRole(event.target.value);
   };
@@ -135,6 +137,7 @@ export function UserCard(props) {
   };
 
   const updateAccepted = () => {
+    console.log('record>>>>', record);
     props.acceptUsers({ id: props.items.id, role_name: approvalRole });
   };
 
@@ -311,7 +314,6 @@ export function UserCard(props) {
               Role
             </InputLabel>
             <NativeSelect
-              value={false}
               inputProps={{
                 name: 'role_name',
                 id: 'role-native-helper',

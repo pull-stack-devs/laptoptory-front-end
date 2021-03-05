@@ -3,7 +3,7 @@ import base64 from 'base-64';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
 import axios from 'axios';
-const API = 'http://pull-stack-laptoptory.herokuapp.com';
+const API = 'https://pull-stack-laptoptory.herokuapp.com';
 
 
 export const AuthContext = React.createContext();
@@ -22,6 +22,7 @@ class AuthProvider extends React.Component {
       logout: this.logout,
       user: {},
       isValidAction: this.isValidAction,
+      permissions: []
     };
   }
   setNumSigned =(numSinedUp)=>{
@@ -38,6 +39,7 @@ class AuthProvider extends React.Component {
         'Authorization': `Basic ${encodedData}`,
       },
     });
+    this.setState({ permissions: result.data.permissions})
     this.validateToken(result.data.token);
   };
   signUp = async (object) => {
@@ -74,7 +76,8 @@ class AuthProvider extends React.Component {
   };
 
   isValidAction = (action) => {
-    return this.state.user.permissions.includes(action);
+    console.log('this.state.user.permissions>>>>>>',this.state.permissions)
+    return this.state.permissions.includes(action);
   };
 
   componentDidMount = () => {

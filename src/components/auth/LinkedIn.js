@@ -40,7 +40,7 @@ class LinkedInPage extends Component {
 
   oauth = async () => {
     let result = await axios(
-      `http://pull-stack-laptoptory.herokuapp.com/oauth?code=${this.state.code}`,
+      `https://pull-stack-laptoptory.herokuapp.com/oauth?code=${this.state.code}`,
       {
         method: 'get',
         headers: {
