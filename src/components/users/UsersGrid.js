@@ -64,7 +64,8 @@ export function UserGrid(props) {
                 </Grid>
               );
             }
-          }
+          } 
+          return null
         })}
       </Grid>
     </>
