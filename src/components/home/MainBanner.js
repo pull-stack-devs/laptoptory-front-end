@@ -12,7 +12,9 @@ function MainBanner(props) {
             <div className="banner-text">
               <h2>Better Solutions For Your Business</h2>
               <h4>We are team of talented dvelopers to easy your life</h4>
+              <div className="banner-btn">
               <Link to="/signin">Get Started</Link>
+                </div>
             </div>
           </Col>
         </Row>

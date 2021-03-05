@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '30px',
   },
   formBtn: {
-    maxWidth: '160px',
+    maxWidth: '340px',
     display: 'block',
     margin: '24px auto 16px',
   },
