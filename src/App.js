@@ -16,12 +16,12 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/team" component={AboutUs} />
-
-          {/* <Route exact path="/team">
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/team">
             <AboutUs />
-          </Route> */}
+          </Route>
           <Route path="/dashboard">
             {!context.loggedIn ? (
               <Redirect to="/signin" />

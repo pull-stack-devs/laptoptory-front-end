@@ -4,12 +4,12 @@ import { LinkedIn } from 'react-linkedin-login-oauth2';
 import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
-
+import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
-
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Show from '../Show';
 
 const styles = (theme) => ({
@@ -18,17 +18,30 @@ const styles = (theme) => ({
     width: '100%',
   },
   linkedIn: {
-      display: 'block',
-      maxWidth: '100%',
-      maxHeight: '30px',
-      margin: 'auto'
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '30px',
+    margin: 'auto',
   },
-  linkedInBtn:{
-      width: '100%',
-      display:'flex',
-      marginBottom: '10px'
-  }
+  linkedInBtn: {
+    width: '100%',
+    display: 'flex',
+    marginBottom: '10px',
+  },
+  formBtn: {
+    display: 'block',
+    width: '100%',
+  },
 });
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    backgroundColor: '#0F3057',
+    '&:hover': {
+      backgroundColor: '#0F3057',
+    },
+  },
+}))(Button);
 
 class LinkedInPage extends Component {
   static contextType = AuthContext;
@@ -79,7 +92,6 @@ class LinkedInPage extends Component {
     return (
       <div>
         <LinkedIn
-        className={classes.linkedInBtn}
           clientId="86pkfwm050vrw0"
           redirectUri={`${window.location.origin}/linkedin`}
           scope="r_liteprofile"
@@ -87,13 +99,23 @@ class LinkedInPage extends Component {
           onFailure={this.handleFailure}
           onSuccess={this.handleSuccess}
           redirectPath="/linkedin"
-        >‏
-          <img
+        >
+          <ColorButton
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={`${classes.formBtn} ${classes.submit}`}
+          >
+            Sign In via {' '} <LinkedInIcon />
+          </ColorButton>
+          ‏
+          {/* <img
             src={linkedin}
             alt="Log in with Linked In"
             className={classes.linkedIn}
             // style={{ maxWidth: '180px' }}
-          />
+          /> */}
         </LinkedIn>
         <Show condition={this.state.open}>
           <Collapse in={open}>

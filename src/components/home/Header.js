@@ -5,7 +5,7 @@ import whiteLogo from '../../images/whiteLogo.png';
 import coloredLogo from '../../images/coloredLogo.png';
 import coloredLogo2 from '../../images/coloredLogo2.png';
 import { HashLink } from 'react-router-hash-link';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header(props) {
   const [headerState, setHeaderState] = useState('beforeScroll');
@@ -83,12 +83,9 @@ function Header(props) {
               >
                 FAQ
               </HashLink>
-              <a
-                href="/team"
-                className="nav-link"
-              >
-                TEAM
-              </a>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/">Homepage</Link>
+              <Link to="/team">Team</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

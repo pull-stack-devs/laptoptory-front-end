@@ -7,6 +7,7 @@ import asiha from '../../images/aisha.jpg';
 import aseel from '../../images/aseel.jpg';
 import abdulrahman from '../../images/abdulrahman.png';
 import husam from '../../images/husam.JPG';
+import {Link} from 'react-router-dom';
 import './styles/Team.css';
 function Team(props) {
   return (
@@ -30,6 +31,11 @@ function Team(props) {
           </div>
         </Col>
       </Row>
+      <Link
+        to="/dashboard"
+      >
+       Dashboard
+       </Link>
     </Section>
   );
 }
