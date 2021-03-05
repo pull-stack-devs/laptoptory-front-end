@@ -76,7 +76,7 @@ class ChartCop extends Component {
   }
  
 
-componentDidMount=()=>{
+componentWillMount=()=>{
     setTimeout(() => {
         this.setState({
           series: [this.props.numbers.num1,this.props.numbers.num2],
@@ -86,13 +86,12 @@ componentDidMount=()=>{
       },3000)
 }
 
-
   render() {
     return (
-      <div data-aos="flip-right" className="donut" style={{width:"48%",height:"500px",marginLeft:"0px" , boxShadow: '5px 8px 10px 7px #BDC4C5',paddingTop:"5px",borderRadius:"15px",textAlign:"center"}}>
+      <div data-aos="flip-right" className="donut" style={{width:"45%",height:"500px",marginLeft:"0px" , boxShadow: '5px 8px 10px 7px #BDC4C5',paddingTop:"5px",borderRadius:"15px",textAlign:"center",position:"absolute",marginRight:"0px"}}>
           <h4>Laptops Statistics</h4>
           <hr style={{width:"50%",height:"2px",backgroundColor:"#6F5F95"}}></hr>
-        <Chart options={this.state.options} series={this.state.series} type="donut" width="100%" />
+        <Chart options={this.state.options} series={this.state.options.series} type="donut" width="75%" />
       </div>
     );
 
