@@ -228,7 +228,7 @@ export default function SignUp() {
               <Grid item xs={6}>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel htmlFor="outlined-age-native-simple">
-                    Age
+                    User's Role
                   </InputLabel>
                   <Select
                     native
@@ -242,7 +242,7 @@ export default function SignUp() {
                   >
                     <option aria-label="None" value="" />
                     <option value={'admin'}>Admin</option>
-                    <option value={'editor'}>Twenty</option>
+                    <option value={'editor'}>editor</option>
                     <option value={'user'}>User</option>
                   </Select>
                 </FormControl>
@@ -277,7 +277,7 @@ export default function SignUp() {
                   }
                 >
                   You Signed up successfuly wait for permission and{' '}
-                  <a href="/">Sign In</a>
+                  <a href="/signin">Sign In</a>
                 </Alert>
               </Collapse>
             </Show>

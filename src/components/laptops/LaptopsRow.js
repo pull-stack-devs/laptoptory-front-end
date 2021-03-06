@@ -162,7 +162,6 @@ const useStyles = makeStyles((theme) => ({
     },
     item: {
       position: 'relative',
-      marginBottom:'30px'
     },
     grid_table: {
       marginTop: 40,

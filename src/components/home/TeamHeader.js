@@ -22,7 +22,7 @@ function Header(props) {
                 Home
               </Link>
               <Link
-                to="/team"
+                to="/signin"
                 className="nav-link"
               >
                 Get Started

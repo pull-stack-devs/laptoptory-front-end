@@ -36,15 +36,6 @@ function SideList(props) {
         </SideItem>
       </Link>
       <Link
-        to="/team"
-        className={classes.sideLink}
-        onClick={() => updateActivePage('Charts')}
-      >
-        <SideItem listItemName="Charts">
-          <DonutLargeIcon />
-        </SideItem>
-      </Link>
-      <Link
         to="/dashboard/laptops"
         className={classes.sideLink}
         onClick={() => updateActivePage('Laptops')}
