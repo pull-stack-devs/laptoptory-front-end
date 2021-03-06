@@ -19,6 +19,9 @@ export function UserGrid(props) {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState(1);
   const classes = useStyles();
+  const userAccepted = []
+  const userNonAccepted = []
+  let item = props.myUsers.users;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -29,6 +32,17 @@ export function UserGrid(props) {
 
   console.log('props users>>>>>>', props);
   console.log('value', value);
+
+  
+    for (let i = 0; i < item.length; i++) {
+      if(!item[i].is_accepted) {
+        userAccepted.push(<UsersCard items={item[i]} key={i} accepted={1}/>)
+      }
+      if (item[i].is_accepted && item[i].role_name !== 'super-admin') {
+        userNonAccepted.push(<UsersCard items={item[i]} key={i} accepted={0}/>)
+      }
+    }
+  
 
   return (
     <>
@@ -46,7 +60,22 @@ export function UserGrid(props) {
       </Paper>
       <Grid container xs={12} spacing={3}>
         {/* Chart */}
-        {props.myUsers.users.map((item, index) => {
+        {value === 1 ?
+        userAccepted.map(user=>{
+          return (
+            <Grid item xs={12} md={4} lg={4}>
+              {user}
+            </Grid>
+          )
+        }) :
+        userNonAccepted.map(user =>{
+          return (
+            <Grid item xs={3} md={4} lg={4}>
+              {user}
+            </Grid>
+          )
+        })}
+        {/* {props.myUsers.users.forEach((item, index) => {
           if (value === 1) {
             if (!item.is_accepted) {
               return (
@@ -66,7 +95,7 @@ export function UserGrid(props) {
             }
           } 
           return null
-        })}
+        })} */}
       </Grid>
     </>
   );
