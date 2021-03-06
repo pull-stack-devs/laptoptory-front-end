@@ -314,10 +314,11 @@ export function UserCard(props) {
               Role
             </InputLabel>
             <NativeSelect
-              inputProps={{
-                name: 'role_name',
-                id: 'role-native-helper',
-              }}
+              // inputProps={{
+              //   name: 'role_name',
+              //   id: 'role-native-helper',
+              // }}
+              name="role_name"
               onChange={handleChange}
               defaultValue={props.items.role_name}
             >

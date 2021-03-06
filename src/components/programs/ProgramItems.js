@@ -164,12 +164,13 @@ function ProgramItems(props) {
           <Tooltip
           className={classes.iconEdit}
             title="Edit a program requirements"
-            onClick={handleClickOpen}
+            
           >
             <Show condition={context.isValidAction('update')}>
               <IconButton
                 className={classes.hoverEdit}
                 aria-label="add to favorites"
+                onClick={handleClickOpen}
               >
                 <EditIcon fontSize="small" />
               </IconButton>
@@ -276,11 +277,12 @@ function ProgramItems(props) {
               Program Status
             </InputLabel>
             <NativeSelect
-              value={false}
-              inputProps={{
-                name: 'is_active',
-                id: 'age-native-helper',
-              }}
+              // value={props.items.is_active}
+              // inputProps={{
+              //   name: 'is_active',
+              //   id: 'age-native-helper',
+              // }}
+              name="is_active"
               onChange={update}
             >
               {props.items.is_active ? (

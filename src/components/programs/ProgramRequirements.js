@@ -56,7 +56,7 @@ function ProgramRequirements(props) {
   };
 
   const handleClose = () => {
-    setOpen('');
+    setOpen(false);
   };
   const handleCpu = (e) => {
     setCpu(e.target.value);
@@ -75,8 +75,8 @@ function ProgramRequirements(props) {
   };
 
   const handleAddReq = (e) => {
-    if (false) {
-      setOpen('');
+    // if (false) {
+      setOpen(false);
       let object = {
         program_name: props.item.name,
         program_version: props.item.version,
@@ -87,9 +87,9 @@ function ProgramRequirements(props) {
         storage_type: type,
       };
       dispatch(addReq(object));
-    } else {
-      console.log('not full farm');
-    }
+    // } else {
+    //   console.log('not full farm');
+    // }
   };
 
   useEffect(() => {
@@ -163,7 +163,7 @@ function ProgramRequirements(props) {
                 autoFocus
                 margin="dense"
                 label="Storage Space"
-                type="number"
+                type="text"
                 min="1"
                 fullWidth
                 onChange={handleSpace}
@@ -173,7 +173,6 @@ function ProgramRequirements(props) {
                 margin="dense"
                 label="Storage Type"
                 type="text"
-                min="1"
                 fullWidth
                 onChange={handleType}
               />
