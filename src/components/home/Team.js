@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import asiha from '../../images/aisha.jpg';
 import aseel from '../../images/aseel.jpg';
 import abdulrahman from '../../images/abdulrahman.png';
-import husam from '../../images/husam1.png';
+import husam from '../../images/husam1.jpg';
 import './styles/Team.css';
 function Team(props) {
   return (
