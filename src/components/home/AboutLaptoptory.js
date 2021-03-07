@@ -11,7 +11,7 @@ function AboutLaptoptory(props) {
     <Section classes="about-laptoptory-section" id="aboutLaptoptory">
       <Row>
         <Col xs={12}>
-          <SectionTitle title="About Laptoptor" />
+          <SectionTitle title="About Laptoptory" />
         </Col>
       </Row>
       <Row>
