@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Laptoptory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+Laptoptory is an online inventory management system for tracking laptops (other assests as to be customized as per request) in an organiztion/company. Laptoptory is built using Node.js and React.js.
 
-In the project directory, you can run:
+## API Endpoints
 
-### `yarn start`
+[Main API URL](https://pull-stack-laptoptory.herokuapp.com)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* `GET` /
+* `POST` /signin
+* `POST` /signup
+* `GET` /signout
+* `GET` /users/approve/all
+* `POST` /users/approve/:id
+* `POST` /laptops
+* `GET` /laptops
+* `PUT` /laptops
+* `DELETE` /laptops
+* `POST` /programs
+* `GET` /log
+* `GET` /users
+* `POST` /users
+* `PUT`  /users
+* `DELETE` /users
+* `GET` /laptops/
+* `POST` /laptops/
+* `PUT` /laptops/
+* `DELETE` /laptops/
+* `GET` /laptops/search?brand=lenovo
+* `GET` /laptops/search?availability=true
+* `GET` /laptops/search?program=
+* `GET` /programs
+* `POST` /programs
+* `PUT` /programs
+* `DELETE` /programs
+* `GET` /programs-requirements
+* `POST` /programs-requirements
+* `PUT` /programs-requirements
+* `DELETE` /programs-requirements
+* `GET` /students
+* `POST` /students
+* `PUT` /students
+* `DELETE` /students
+* `GET` /students/search?nationality=
+* `GET` /students/search?status=
+* `GET` /students/search?program='id'
+* `GET` /studentsWithLaptops/search?studentId='value'
+* `GET` /studentsWithLaptops/search?laptopSerial='value'
+* `GET` /studentsWithLaptops/search?availability='value
+* `POST` students/assignLaptop
+* `POST` students/returnLaptop
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Team Members
 
-### `yarn test`
+* Abdulrahman Al-Janabi as Team Leader
+* Aseel Mesmar
+* Aisha Satouf
+* Husam Ajour
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Links
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* [GitHub](https://github.com/pull-stack-devs/laptoptory-react)
+* [Trello](https://trello.com/b/NQyKS4TG/laptoptory)
