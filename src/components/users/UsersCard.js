@@ -159,8 +159,7 @@ export function UserCard(props) {
             className={` ${classes.avatar} ${classes.middle}`}
           >
             <Avatar >
-              {props.items.name[0].toUpperCase() +
-                props.items.name[1].toUpperCase()}
+              {props.items.name[0].toUpperCase()}
             </Avatar>
           </AvatarGroup>
           <CardHeader
