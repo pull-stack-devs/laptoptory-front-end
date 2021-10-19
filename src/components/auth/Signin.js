@@ -1,27 +1,27 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/SignInContext';
+import styled from 'styled-components';
 import {
-  Avatar,
   Button,
-  CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
-  Paper,
   Grid,
   Typography,
+  Container,
+  Box,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import coloredLogo2 from '../../images/coloredLogo2.png';
+import LinkedInPage from './LinkedIn';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  main: {
     height: '100vh',
+    width: '100%',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage:
+      'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light'
@@ -30,8 +30,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
+  flexBox: {
+    height: '100vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
   paper: {
-    margin: theme.spacing(8, 4),
+    borderRadius: '25px',
+    boxSizing: 'border-box',
+    padding: ' 50px 30px',
+    margin: 'auto',
+    maxWidth: '400px',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -41,13 +53,56 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  logoImage: {
+    maxWidth: '200px',
+    margin: 'auto',
+    display: 'block',
+    marginBottom: '30px',
+  },
+  formBtn: {
+    display: 'block',
+    margin: '24px auto 16px',
+  },
+  coloredText:{
+    color: '#5D5C61',
+    '&:hover': {
+      color: '#0F3057',
+      textDecoration: 'none'
+    }
+  }
 }));
+
+const StyledTextField = styled(TextField)`
+  label.Mui-focused {
+    color: #0F3057;
+  }
+  .MuiOutlinedInput-root {
+    fieldset {
+      border-color: #5D5C61;
+    }
+    &:hover fieldset {
+      border-color: #5D5C61;
+    }
+    &.Mui-focused fieldset {
+      border-color: #0F3057;
+    }
+  }
+`;
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    backgroundColor: '#0F3057',
+    '&:hover': {
+      backgroundColor: '#0F3057',
+    },
+  },
+}))(Button);
 
 function SignInSide() {
   const context = useContext(AuthContext);
@@ -66,19 +121,16 @@ function SignInSide() {
     context.login(userName, password);
   };
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+    <Container maxWidth="xl" className={classes.image}>
+      <Box className={classes.flexBox}>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src={coloredLogo2} alt="logo" className={classes.logoImage} />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <TextField
+            <StyledTextField
+              claassName={classes.textField}
               onChange={handleChangeUserName}
               variant="outlined"
               margin="normal"
@@ -90,7 +142,7 @@ function SignInSide() {
               autoComplete="email"
               autoFocus
             />
-            <TextField
+            <StyledTextField
               onChange={handleChange}
               variant="outlined"
               margin="normal"
@@ -102,31 +154,26 @@ function SignInSide() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <LinkedInIcon />
-            <Button
+            <ColorButton
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={`${classes.formBtn} ${classes.submit}`}
             >
               Sign In
-            </Button>
+            </ColorButton>
+            <LinkedInPage />
             <Grid container>
               <Grid item>
-                <Link to="/signup">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+              Don't have an account?{' '}
+                <Link className={classes.coloredText} to="/signup">{"Sign Up"}</Link>
               </Grid>
             </Grid>
           </form>
         </div>
-      </Grid>
-    </Grid>
+      </Box>
+    </Container>
   );
 }
 

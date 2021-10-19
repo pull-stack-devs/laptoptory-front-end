@@ -1,0 +1,45 @@
+.tesimonial-avatar img{
+    border-radius: 50%;
+    max-height: 100px;
+    max-width: 100px;
+    margin-bottom: 30px;
+    margin-top: 52px;
+}
+
+.is-selected .tesimonial-avatar img{
+    max-height: 150px;
+    max-width: 150px;
+    margin-top: 0;
+}
+
+.tesimonial-text h3{
+    font-size: 22px;
+    text-align: center;
+}
+
+.tesimonial-text p{
+    text-align: center;
+    font-size: 14px;
+}
+.testimonials-cards{
+    margin-bottom: 40px;
+}
+
+.flickity-page-dots .dot.is-selected{
+    background-color: #ff6869;
+}
+.flickity-page-dots .dot{
+    background-color: #ff6869;
+}
+
+.flickity-button{
+    color: #0f3057;
+    background-color: transparent;
+}
+
+.flickity-prev-next-button.next{
+    right: -40px;
+}
+.flickity-prev-next-button.previous{
+    left: -40px;
+}
