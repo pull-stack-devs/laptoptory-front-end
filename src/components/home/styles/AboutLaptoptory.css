@@ -1,0 +1,9 @@
+.about-laptoptory-text {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* .why-us-text p{
+} */

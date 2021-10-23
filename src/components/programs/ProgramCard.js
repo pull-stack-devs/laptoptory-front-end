@@ -1,84 +1,192 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import ProgramItems from './ProgramItems';
+import { connect, useDispatch } from 'react-redux';
+import { getRemoteData, addProgram } from '../../rtk/ProgramsSlicer';
+import { Grid, NativeSelect, FormControl, InputLabel } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  IconButton,
-  Typography,
-  Tooltip,
-} from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import Show from "../Show";
+import { AuthContext } from "../../context/SignInContext";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 345,
+  addBtn: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+    backgroundColor: '#0F3057',
+    "&:hover":{
+      backgroundColor: '#0F3057',
+    }  },
+  formControl: {
+    margin: theme.spacing(1),
+    width: '45%',
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+  inputWidth: {
+    width: '45%',
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+  editIcon :{
+color: 'rgba(255, 255, 255, 0.4)'
   },
-  centerBottom: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
+ 
 }));
 
-export default function ProgramCard() {
+function ProgramCard(props) {
+  const context = useContext(AuthContext)
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [department, setDepartment] = useState('');
+  const [version, setVersion] = useState('');
+  const [is_active, setIs_active] = useState();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen('');
+  };
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleDepartmen = (e) => {
+    setDepartment(e.target.value);
+  };
+  const handleVersion = (e) => {
+    setVersion(e.target.value);
+  };
+
+  const handleSelect = (e) => {
+    setIs_active(e.target.value);
+  };
+  const handleAdd = (e) => {
+    setOpen('');
+    let object = {
+      name: name,
+      department: department,
+      version: version,
+      is_active: is_active,
+    };
+    dispatch(addProgram(object));
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(getRemoteData());
+    };
+    fetchData();
+  }, [dispatch]);
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Shrimp and Chorizo Paella"
-        // subheader="September 14, 2016"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing className={classes.centerBottom}>
-        <Tooltip title="Edit a laptop properties">
-          <IconButton aria-label="add to favorites">
-            <EditIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Delete a laptop">
-          <IconButton aria-label="share">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Assigne a laptop">
-          <IconButton aria-label="share">
-            <AssignmentIndIcon />
-          </IconButton>
-        </Tooltip>
-      </CardActions>
-    </Card>
+    <>
+      <Grid container xs={12} spacing={3}>
+        {props.myPrograms.map((item) => (
+          <Grid item xs={12} md={6} lg={4} className="animate__animated animate__fadeInUp">
+            <ProgramItems items={item} />
+          </Grid>
+        ))}
+      </Grid>
+      <Show condition={context.isValidAction('create')}>
+        <Fab
+          onClick={handleClickOpen}
+          color="primary"
+          aria-label="add"
+          className={classes.addBtn}
+        >
+          <AddIcon />
+        </Fab>
+      </Show>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add Program</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+          </DialogContentText>
+          <TextField
+            className={classes.inputWidth}
+            id="standard-full-width"
+            label="Program Name"
+            name="name"
+            style={{ margin: 8 }}
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleName}
+          />
+          <TextField
+            className={classes.inputWidth}
+            id="standard-full-width"
+            label="Program Department"
+            name="department"
+            style={{ margin: 8 }}
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleDepartmen}
+          />
+
+          <TextField
+            className={classes.inputWidth}
+            id="standard-full-width"
+            label="Program Version"
+            style={{ margin: 8 }}
+            name="version"
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            type="number"
+            min="1"
+            onChange={handleVersion}
+          />
+          <FormControl className={classes.formControl}>
+            <InputLabel shrink htmlFor="age-native-helper">
+              Age
+            </InputLabel>
+            <NativeSelect
+              inputProps={{
+                name: 'is_active',
+                id: 'age-native-helper',
+              }}
+              onChange={handleSelect}
+            >
+              <option defaultValue value={true}>
+                Active
+              </option>{' '}
+              <option value={false}>Inactive</option>
+            </NativeSelect>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+          <Button onClick={handleAdd} color="primary">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  myPrograms: state.programs.programs,
+});
+
+export default connect(mapStateToProps)(ProgramCard);

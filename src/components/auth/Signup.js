@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/SignInContext';
 import Show from '../Show';
+import styled from 'styled-components';
 import {
-  Avatar,
   Button,
-  CssBaseline,
+  Container,
+  Box,
   TextField,
   Grid,
   Typography,
   InputLabel,
-  MenuItem,
   FormControl,
   Select,
   IconButton,
@@ -17,31 +17,14 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
-
+import coloredLogo2 from '../../images/coloredLogo2.png';
+import LinkedInPage from './LinkedIn';
 const useStyles = makeStyles((theme) => ({
-  // paper: {
-  //     marginTop: theme.spacing(8),
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     alignItems: 'center',
-  // },
-  // avatar: {
-  //     margin: theme.spacing(1),
-  //     backgroundColor: theme.palette.secondary.main,
-  // },
-  // form: {
-  //     width: '100%', // Fix IE 11 issue.
-  //     marginTop: theme.spacing(3),
-  // },
-  // submit: {
-  //     margin: theme.spacing(3, 0, 2),
-  // },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+    width: '100%',
+    margin: '16px 0 8px',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -50,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage:
+      'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light'
@@ -59,8 +43,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
+  flexBox: {
+    minHeight: '100vh',
+    padding: '40px 0',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
   paper: {
-    margin: theme.spacing(8, 4),
+    borderRadius: '25px',
+    boxSizing: 'border-box',
+    padding: ' 50px 30px',
+    margin: 'auto',
+    maxWidth: '600px',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -70,13 +67,57 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  logoImage: {
+    maxWidth: '200px',
+    margin: 'auto',
+    display: 'block',
+    marginBottom: '30px',
+  },
+  formBtn: {
+    maxWidth: '340px',
+    display: 'block',
+    margin: '24px auto 16px',
+  },
+  coloredText: {
+    color: '#5D5C61',
+    '&:hover': {
+      color: '#0F3057',
+      textDecoration: 'none',
+    },
+  },
 }));
+
+const StyledTextField = styled(TextField)`
+  label.Mui-focused {
+    color: #0f3057;
+  }
+  .MuiOutlinedInput-root {
+    fieldset {
+      border-color: #5d5c61;
+    }
+    &:hover fieldset {
+      border-color: #5d5c61;
+    }
+    &.Mui-focused fieldset {
+      border-color: #0f3057;
+    }
+  }
+`;
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    backgroundColor: '#0F3057',
+    '&:hover': {
+      backgroundColor: '#0F3057',
+    },
+  },
+}))(Button);
 
 export default function SignUp() {
   const context = useContext(AuthContext);
@@ -93,7 +134,6 @@ export default function SignUp() {
     setRole(event.target.value);
   };
   const handleName = (e) => {
-    console.log('from sign up====>', e.target.name);
     setName(e.target.value);
   };
   const handleUserName = (e) => {
@@ -115,100 +155,111 @@ export default function SignUp() {
       email: email,
       name: name,
     };
-    console.log('from sign up====>', object);
     context.signUp(object);
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} elevation={6} square>
+    <Container maxWidth="xl" className={classes.image}>
+      <Box className={classes.flexBox}>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src={coloredLogo2} alt="logo" className={classes.logoImage} />
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <TextField
-              onChange={handleUserName}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Username"
-              name="username"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              onChange={handlePassword}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <TextField
-              onChange={handleName}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="name"
-              label="Name"
-              id="password"
-              autoComplete="name"
-            />
-            <TextField
-              onChange={handleEmail}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="email"
-              label="Email"
-              id="email"
-              autoComplete="current-email"
-            />
-
-            <Grid item xs={12}>
-              <FormControl className={classes.formControl} xs={12}>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={role}
-                  onChange={handleChangeradio}
-                >
-                  <MenuItem name="select" value="admin">
-                    Admin
-                  </MenuItem>
-                  <MenuItem name="select" value="editor">
-                    Editor
-                  </MenuItem>
-                  <MenuItem name="select" value="user">
-                    User
-                  </MenuItem>
-                </Select>
-              </FormControl>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                {' '}
+                <StyledTextField
+                  onChange={handleUserName}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Username"
+                  name="username"
+                  autoComplete="email"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={6}>
+                {' '}
+                <StyledTextField
+                  onChange={handlePassword}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <StyledTextField
+                  onChange={handleName}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="name"
+                  label="Name"
+                  id="password"
+                  autoComplete="name"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                {' '}
+                <StyledTextField
+                  onChange={handleEmail}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="email"
+                  label="Email"
+                  id="email"
+                  autoComplete="current-email"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel htmlFor="outlined-age-native-simple">
+                    User's Role
+                  </InputLabel>
+                  <Select
+                    native
+                    value={role}
+                    onChange={handleChangeradio}
+                    label="Age"
+                    inputProps={{
+                      name: 'age',
+                      id: 'outlined-age-native-simple',
+                    }}
+                  >
+                    <option aria-label="None" value="" />
+                    <option value={'admin'}>Admin</option>
+                    <option value={'editor'}>editor</option>
+                    <option value={'user'}>User</option>
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
-            <Button
+            <Grid item xs={12}>
+            </Grid>
+            <ColorButton
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={`${classes.formBtn} ${classes.submit}`}
             >
               Sign UP
-            </Button>
+            </ColorButton>
+            <LinkedInPage />
             <Show condition={context.signedUp}>
               <Collapse in={open}>
                 <Alert
@@ -226,18 +277,21 @@ export default function SignUp() {
                   }
                 >
                   You Signed up successfuly wait for permission and{' '}
-                  <a href="/">Sign In</a>
+                  <a href="/signin">Sign In</a>
                 </Alert>
               </Collapse>
             </Show>
             <Grid container>
               <Grid item>
-                <Link to="/signin">{'have an account? Sign In'}</Link>
+                Have an account already?{' '}
+                <Link className={classes.coloredText} to="/signin">
+                  {' Sign In'}
+                </Link>
               </Grid>
             </Grid>
           </form>
         </div>
-      </Grid>
-    </Grid>
+      </Box>
+    </Container>
   );
 }
